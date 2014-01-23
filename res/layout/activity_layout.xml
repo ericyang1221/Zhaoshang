@@ -38,9 +38,8 @@
             android:src="@drawable/btn_add" />
     </RelativeLayout>
 
-    <CalendarView
-        android:id="@+id/calendarView"
+    <fragment android:name="com.rugao.zhaoshang.calendar.CalendarView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="330dp" />
 
 </LinearLayout>
