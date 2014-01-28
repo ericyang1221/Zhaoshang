@@ -42,6 +42,26 @@
     <string name="project_investors">投资方：</string>
     <string name="project_contacts">投资方项目联系人：</string>
     <string name="please_choose">请选择</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="are_you_sure_delete">你确定要删除么？</string>
+    <string name="info">提示</string>
+    <string name="investor_name">名称：</string>
+    <string name="investor_address">地址：</string>
+    <string name="investor_status">行业内地为：</string>
+    <string name="investor_mainproduct">主要产品：</string>
+    <string name="investor_productmemo">近三年概况：</string>
+    <string name="contact_name">姓名：</string>
+    <string name="contact_role">职位：</string>
+    <string name="contact_telephone">手机：</string>
+    <string name="contact_phone">电话：</string>
+    <string name="contact_memo">公司名称：</string>
+    <string name="investor_list">投资方列表</string>
+    <string name="investor">投资方</string>
+    <string name="contact_list">联系人列表</string>
+    <string name="contact">联系人</string>
+    <string name="update_success">修改成功</string>
+    <string name="update_fail">修改失败</string>
     
     <string name="current_month_placeholder">January 1970</string>
     <string name="previous_month_placeholder">&lt;&lt;</string>

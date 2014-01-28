@@ -3,10 +3,10 @@ package com.rugao.zhaoshang;
 import java.util.List;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.rugao.zhaoshang.asynctask.ProjectTask;
 import com.rugao.zhaoshang.beans.DataBean;
+import com.rugao.zhaoshang.beans.Project;
 import com.rugao.zhaoshang.beans.ProjectBean;
-import com.rugao.zhaoshang.beans.ProjectBean.Project;
 import com.rugao.zhaoshang.beans.UserBean;
 import com.rugao.zhaoshang.utils.Constants;
 import com.rugao.zhaoshang.utils.URLGenerater;
@@ -37,6 +37,7 @@ public class ProjectFragment extends BaseFragment implements DataView {
 		lv = (ListView) projectLayout.findViewById(R.id.project_listview);
 		tv = (TextView) projectLayout.findViewById(R.id.project_msg);
 		pa = new ProjectListAdapter();
+		lv.setDividerHeight(0);
 		lv.setAdapter(pa);
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -44,6 +45,19 @@ public class ProjectFragment extends BaseFragment implements DataView {
 					long arg3) {
 				ProjectDetailFragment projectDetailFragment = new ProjectDetailFragment();
 				projectDetailFragment.setProjectBean(((ViewHolder) v.getTag()).project);
+				FragmentTransaction transaction = getFragmentManager()
+						.beginTransaction();
+				transaction.replace(R.id.content, projectDetailFragment);
+				transaction.addToBackStack(null);
+				transaction.commit();
+			}
+		});
+		
+		projectLayout.findViewById(R.id.tr).setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				ProjectDetailFragment projectDetailFragment = new ProjectDetailFragment();
+				projectDetailFragment.setProjectBean(new Project());
 				FragmentTransaction transaction = getFragmentManager()
 						.beginTransaction();
 				transaction.replace(R.id.content, projectDetailFragment);

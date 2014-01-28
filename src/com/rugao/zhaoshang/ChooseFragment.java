@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -33,6 +34,12 @@ public class ChooseFragment extends BaseFragment {
 				if (onFragmentItemClickListener != null) {
 					onFragmentItemClickListener.onItemClick(arg2);
 				}
+				getActivity().getSupportFragmentManager().popBackStack();
+			}
+		});
+		chooseLayout.findViewById(R.id.tl).setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
 				getActivity().getSupportFragmentManager().popBackStack();
 			}
 		});

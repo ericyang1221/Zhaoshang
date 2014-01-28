@@ -1,6 +1,5 @@
 package com.rugao.zhaoshang;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -14,44 +13,45 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.rugao.zhaoshang.beans.Contact;
 import com.rugao.zhaoshang.beans.Project;
-import com.rugao.zhaoshang.beans.ValueBean;
 
-public class DisplayFragment extends BaseFragment {
-	private List<String> data = new ArrayList<String>();
-	private CheckboxFragment cf;
+public class ContactDisplayFragment extends BaseFragment {
+	private LayoutInflater mInflater;
+	private ContactDetailFragment cdf;
 	private Project p;
-	private ArrayAdapter<String> adapter;
-	private List<String> wsdList;
+	private ContactListAdapter adapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		final View dLayout = inflater.inflate(R.layout.display_layout,
+		mInflater = inflater;
+		final View dLayout = inflater.inflate(R.layout.contact_display_layout,
 				container, false);
 		ListView lv = (ListView) dLayout.findViewById(R.id.display_listview);
-		adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.ax,
-				android.R.id.text1, data);
+		adapter = new ContactListAdapter(p.getContacts());
 		lv.setAdapter(adapter);
 		dLayout.findViewById(R.id.tr).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				FragmentTransaction t = getActivity()
 						.getSupportFragmentManager().beginTransaction();
-				if (cf == null) {
-					cf = new CheckboxFragment();
+				if (cdf == null) {
+					cdf = new ContactDetailFragment();
 				}
-				cf.setProject(p);
-				t.replace(R.id.content, cf);
+				cdf.setProject(p);
+				cdf.setIndex(-1);
+				t.replace(R.id.content, cdf);
 				t.addToBackStack(null);
 				t.commit();
 			}
 		});
-		final List<ValueBean> it = getMyApplication().getProjectPeople();
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
@@ -64,30 +64,6 @@ public class DisplayFragment extends BaseFragment {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								wsdList.remove(arg2);
-								StringBuffer sbd = new StringBuffer();
-								StringBuffer sb = new StringBuffer();
-								for (String s : wsdList) {
-									sbd.append(s).append(",");
-									for (ValueBean vb : it) {
-										if (vb.getValue().equals(s)) {
-											sb.append(vb.getKey()).append(",");
-											break;
-										}
-									}
-								}
-								if (sb.length() > 0) {
-									p.setWorkers(sb.substring(0,
-											sb.length() - 1));
-									if (sbd.length() > 0) {
-										p.setWorkersDisplay(sbd.substring(0,
-												sbd.length() - 1));
-									}
-								} else {
-									p.setWorkers("");
-									p.setWorkersDisplay("");
-								}
-								reflash();
 								dialog.dismiss();
 							}
 						});
@@ -101,6 +77,23 @@ public class DisplayFragment extends BaseFragment {
 						});
 				builder.create().show();
 				return false;
+			}
+		});
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				FragmentTransaction t = getActivity()
+						.getSupportFragmentManager().beginTransaction();
+				if (cdf == null) {
+					cdf = new ContactDetailFragment();
+				}
+				cdf.setProject(p);
+				cdf.setIndex(arg2);
+				t.replace(R.id.content, cdf);
+				t.addToBackStack(null);
+				t.commit();
 			}
 		});
 		dLayout.findViewById(R.id.tl).setOnClickListener(new OnClickListener() {
@@ -119,21 +112,70 @@ public class DisplayFragment extends BaseFragment {
 	}
 
 	private void reflash() {
-		String[] wsd = p.getWorkersDisplay().split(",");
-		if (wsdList == null) {
-			wsdList = new ArrayList<String>();
-		} else {
-			wsdList.clear();
-		}
-		adapter.clear();
-		for (String s : wsd) {
-			adapter.add(s);
-			wsdList.add(s);
-		}
+		adapter.setData(p.getContacts());
 		adapter.notifyDataSetChanged();
 	}
 
 	public void setProject(Project p) {
 		this.p = p;
+	}
+
+	class ContactListAdapter extends BaseAdapter {
+		List<Contact> data;
+
+		public void setData(List<Contact> data) {
+			this.data = data;
+		}
+
+		public ContactListAdapter(List<Contact> data) {
+			this.data = data;
+		}
+
+		@Override
+		public int getCount() {
+			if (data != null) {
+				return data.size();
+			} else {
+				return 0;
+			}
+		}
+
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			Contact c = data.get(position);
+			ViewHolder holder = null;
+			if (convertView == null) {
+				holder = new ViewHolder();
+				convertView = mInflater.inflate(R.layout.investor_list_item,
+						null);
+				holder.name = (TextView) convertView.findViewById(R.id.ii_name);
+				holder.role = (TextView) convertView
+						.findViewById(R.id.ii_address);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			holder.name.setText(c.getName());
+			holder.role.setText(c.getRole());
+			return convertView;
+		}
+
+	}
+
+	class ViewHolder {
+		public TextView name;
+		public TextView role;
 	}
 }

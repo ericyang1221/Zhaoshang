@@ -12,4 +12,6 @@ public class Constants {
 	public static final String PROJECT_GETENVIROMENT = "Project/GetEnviroment";
 	public static final String PROJECT_GETUNIT = "Project/GetUnit";
 	public static final String PROJECT_GETPEOPLEINFO = "Project/GetPeopleInfo?type=?&UserId=?&Memo=?";
+	public static final String PROJECT_CREATE = "project/create";
+	public static final String PROJECT_EDIT = "project/Edit";
 }

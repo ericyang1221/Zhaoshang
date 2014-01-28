@@ -15,7 +15,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.rugao.zhaoshang.beans.ProjectBean.Project;
+import com.rugao.zhaoshang.beans.Project;
 import com.rugao.zhaoshang.beans.ValueBean;
 
 public class CheckboxFragment extends BaseFragment {
@@ -24,6 +24,7 @@ public class CheckboxFragment extends BaseFragment {
 	private int wsSize;
 	private String[] ws;
 	private List<String> checked;
+	List<ValueBean> it;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,7 +33,7 @@ public class CheckboxFragment extends BaseFragment {
 		View dLayout = inflater.inflate(R.layout.checkbox_layout, container,
 				false);
 		ListView lv = (ListView) dLayout.findViewById(R.id.checkbox_listview);
-		final List<ValueBean> it = getMyApplication().getProjectPeople();
+		it = getMyApplication().getProjectPeople();
 		ws = p.getWorkers().split(",");
 		wsSize = ws.length;
 		checked = new ArrayList<String>();
@@ -62,14 +63,32 @@ public class CheckboxFragment extends BaseFragment {
 			public void onClick(View v) {
 				getActivity().getSupportFragmentManager().popBackStack();
 				StringBuffer sb = new StringBuffer();
+				StringBuffer sbw = new StringBuffer();
 				for (String s : checked) {
 					sb.append(s).append(",");
+					for (ValueBean vb : it) {
+						if (String.valueOf(vb.getKey()).equals(s)) {
+							sbw.append(vb.getValue()).append(",");
+							break;
+						}
+					}
 				}
 				if (sb.length() > 0) {
 					p.setWorkers(sb.substring(0, sb.length() - 1));
+					if (sbw.length() > 0) {
+						p.setWorkersDisplay(sbw.substring(0, sbw.length() - 1));
+					}
 				} else {
 					p.setWorkers("");
+					p.setWorkersDisplay("");
 				}
+			}
+		});
+
+		dLayout.findViewById(R.id.tl).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				getActivity().getSupportFragmentManager().popBackStack();
 			}
 		});
 		return dLayout;
@@ -118,9 +137,13 @@ public class CheckboxFragment extends BaseFragment {
 			}
 			holder.tv.setText(vb.getValue());
 			for (int i = 0; i < wsSize; i++) {
-				System.out.println("ws:" + ws[i]);
-				System.out.println("vb:" + vb.getKey());
-				if (vb.getKey() == Integer.valueOf(ws[i])) {
+				int checkedint = -1;
+				try {
+					checkedint = Integer.valueOf(ws[i]);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (vb.getKey() == checkedint) {
 					holder.cb.setChecked(true);
 					break;
 				}

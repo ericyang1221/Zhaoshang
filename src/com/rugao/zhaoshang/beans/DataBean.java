@@ -3,7 +3,7 @@ package com.rugao.zhaoshang.beans;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class DataBean {
+public class DataBean {
 	protected boolean result;
 	protected String resultMsg;
 	protected JSONObject resultData;

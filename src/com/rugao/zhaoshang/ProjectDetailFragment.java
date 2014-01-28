@@ -13,39 +13,45 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rugao.zhaoshang.ChooseFragment.OnFragmentItemClickListener;
+import com.rugao.zhaoshang.asynctask.CreateProjectTask;
 import com.rugao.zhaoshang.beans.DataBean;
-import com.rugao.zhaoshang.beans.ProjectBean.Project;
+import com.rugao.zhaoshang.beans.Project;
+import com.rugao.zhaoshang.beans.UserBean;
 import com.rugao.zhaoshang.beans.ValueBean;
+import com.rugao.zhaoshang.utils.Constants;
 
 public class ProjectDetailFragment extends BaseFragment implements DataView {
-	private Project project;
-	private EditText pn;
-	private TextView ps;
-	private TextView ppd;
-	private TextView pit;
-	private TextView pid;
-	private TextView pp;
-	private TextView pe;
-	private EditText pc;
-	private EditText pst;
-	private TextView psu;
-	private EditText pl;
-	private EditText pbt;
-	private EditText pta;
-	private EditText ptt;
-	private EditText ppp;
-	private TextView pri;
-	private EditText pcl;
-	private EditText ptl;
-	private EditText pr;
-	private TextView pw;
-	private EditText pi;
-	private EditText pcs;
+	protected Project project;
+	protected EditText pn;
+	protected TextView ps;
+	protected TextView ppd;
+	protected TextView pit;
+	protected TextView pid;
+	protected TextView pp;
+	protected TextView pe;
+	protected EditText pc;
+	protected EditText pst;
+	protected TextView psu;
+	protected EditText pl;
+	protected EditText pbt;
+	protected EditText pta;
+	protected EditText ptt;
+	protected EditText ppp;
+	protected TextView pri;
+	protected EditText pcl;
+	protected EditText ptl;
+	protected EditText pr;
+	protected TextView pw;
+	protected View pi;
+	protected View pcs;
 
-	private ChooseFragment cf;
-	private DisplayFragment df;
+	protected ChooseFragment cf;
+	protected DisplayFragment df;
+	protected InvestorDisplayFragment idf;
+	protected ContactDisplayFragment cdf;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,12 +89,38 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				.findViewById(R.id.project_town_leader);
 		pr = (EditText) projectDetailLayout.findViewById(R.id.project_referrer);
 		pw = (TextView) projectDetailLayout.findViewById(R.id.project_workers);
-		pi = (EditText) projectDetailLayout
-				.findViewById(R.id.project_investors);
-		pcs = (EditText) projectDetailLayout
-				.findViewById(R.id.project_contacts);
+		pi = projectDetailLayout.findViewById(R.id.project_investors);
+		pcs = projectDetailLayout.findViewById(R.id.project_contacts);
 		initListeners(projectDetailLayout);
+
+		projectDetailLayout.findViewById(R.id.tl).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						getActivity().getSupportFragmentManager()
+								.popBackStack();
+					}
+				});
+		projectDetailLayout.findViewById(R.id.tr).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						titleRightButtonAction();
+					}
+				});
 		return projectDetailLayout;
+	}
+
+	protected void titleRightButtonAction() {
+		UserBean ub = getMyApplication().getUserBean();
+		String url = Constants.DOMAIN + Constants.PROJECT_EDIT;
+		CreateProjectTask cpt = new CreateProjectTask(getActivity());
+		cpt.execute(
+				ProjectDetailFragment.this,
+				url,
+				project.getPostParams(String.valueOf(ub.getUserId()),
+						ub.getMemo(), false));
+		System.out.println(project.toString());
 	}
 
 	@Override
@@ -102,12 +134,15 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 		pp.setText(project.getPolicyDisplay());
 		pe.setText(project.getEnviromentDisplay());
 		pc.setText(project.getCase());
-		pst.setText(String.valueOf(project.getScale()));
+		pst.setText(String.valueOf(project.getScale() == 0 ? "" : project
+				.getScale()));
 		psu.setText(project.getScaleUnitDisplay());
 		pl.setText(project.getLandRequire());
 		pbt.setText(project.getBuildTime());
-		pta.setText(String.valueOf(project.getTotalAmount()));
-		ptt.setText(String.valueOf(project.getTotalTax()));
+		pta.setText(String.valueOf(project.getTotalAmount() == 0 ? "" : project
+				.getTotalAmount()));
+		ptt.setText(String.valueOf(project.getTotalTax() == 0 ? "" : project
+				.getTotalTax()));
 		ppp.setText(project.getProjectPlan());
 		pri.setText(project.getResponsibleIdDisplay());
 		pcl.setText(project.getCityLeader());
@@ -211,7 +246,8 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
-				final List<ValueBean> data = getMyApplication().getProjectPolicy();
+				final List<ValueBean> data = getMyApplication()
+						.getProjectPolicy();
 				cf.setData(data);
 				cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
 					@Override
@@ -239,7 +275,8 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
 					@Override
 					public void onItemClick(int position) {
-						project.setEnviromentDisplay(data.get(position).getValue());
+						project.setEnviromentDisplay(data.get(position)
+								.getValue());
 						project.setEnviroment(data.get(position).getKey());
 					}
 				});
@@ -256,13 +293,16 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
-				final List<ValueBean> data = getMyApplication().getProjectUnit();
+				final List<ValueBean> data = getMyApplication()
+						.getProjectUnit();
 				cf.setData(data);
 				cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
 					@Override
 					public void onItemClick(int position) {
-						project.setScaleUnitDisplay(data.get(position).getValue());
-						project.setScaleUnit(String.valueOf(data.get(position).getKey()));
+						project.setScaleUnitDisplay(data.get(position)
+								.getValue());
+						project.setScaleUnit(String.valueOf(data.get(position)
+								.getKey()));
 					}
 				});
 				t.replace(R.id.content, cf);
@@ -284,7 +324,8 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
 					@Override
 					public void onItemClick(int position) {
-						project.setResponsibleIdDisplay(data.get(position).getValue());
+						project.setResponsibleIdDisplay(data.get(position)
+								.getValue());
 						project.setResponsibleId(data.get(position).getKey());
 					}
 				});
@@ -307,10 +348,48 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				t.commit();
 			}
 		});
+
+		pi.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentTransaction t = getActivity()
+						.getSupportFragmentManager().beginTransaction();
+				if (idf == null) {
+					idf = new InvestorDisplayFragment();
+				}
+				idf.setProject(project);
+				t.replace(R.id.content, idf);
+				t.addToBackStack(null);
+				t.commit();
+			}
+		});
+		pcs.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentTransaction t = getActivity()
+						.getSupportFragmentManager().beginTransaction();
+				if (cdf == null) {
+					cdf = new ContactDisplayFragment();
+				}
+				cdf.setProject(project);
+				t.replace(R.id.content, cdf);
+				t.addToBackStack(null);
+				t.commit();
+			}
+		});
 	}
 
 	@Override
 	public void setData(DataBean db) {
+		if (db.getResult()) {
+			Toast.makeText(getActivity(), R.string.update_success,
+					Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(getActivity(), R.string.update_fail,
+					Toast.LENGTH_SHORT).show();
+		}
+		getActivity().getSupportFragmentManager().popBackStack();
+		System.out.println(db.getResultMsg());
 	}
 
 	public void setProjectBean(Project project) {

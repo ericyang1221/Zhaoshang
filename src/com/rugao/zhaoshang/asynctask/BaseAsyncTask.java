@@ -1,7 +1,9 @@
 package com.rugao.zhaoshang.asynctask;
 
 import java.io.IOException;
+import java.util.List;
 
+import org.apache.http.NameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,20 +21,28 @@ public abstract class BaseAsyncTask extends
 		AsyncTask<Object, Integer, JSONObject> {
 	protected Context context;
 	protected DataView dv;
+	protected boolean isPost = false;
 
 	public BaseAsyncTask(Context context) {
 		this.context = context;
+		setPost();
 	}
 
 	@Override
 	protected JSONObject doInBackground(Object... params) {
 		dv = (DataView) params[0];
-		String url = (String)params[1];
+		String url = (String) params[1];
 		HttpRequestHelper hrh = ((MyApplication) ((Activity) context)
 				.getApplication()).getHttpRequestHelper();
 		JSONObject json = null;
 		try {
-			json = hrh.sendRequestAndReturnJson(url);
+			if (isPost) {
+				@SuppressWarnings("unchecked")
+				List<NameValuePair> p = (List<NameValuePair>) params[2];
+				json = hrh.sendPostRequestAndReturnJson(url, p);
+			} else {
+				json = hrh.sendRequestAndReturnJson(url);
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -86,4 +96,8 @@ public abstract class BaseAsyncTask extends
 	}
 
 	protected abstract Integer getDialogId();
+
+	protected void setPost() {
+		isPost = false;
+	}
 }

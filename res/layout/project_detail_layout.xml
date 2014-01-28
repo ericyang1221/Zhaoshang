@@ -789,6 +789,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/project_contacts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -801,19 +802,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="@string/project_contacts"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:id="@+id/project_contacts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#ffffff"
-                    android:editable="false"
-                    android:gravity="right"
-                    android:singleLine="true"
+                    android:text="@string/project_contacts"
                     android:textColor="#000000"
                     android:textSize="20dp" />
 
@@ -827,6 +817,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/project_investors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -839,19 +830,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="@string/project_investors"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:id="@+id/project_investors"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#ffffff"
-                    android:editable="false"
-                    android:gravity="right"
-                    android:singleLine="true"
+                    android:text="@string/project_investors"
                     android:textColor="#000000"
                     android:textSize="20dp" />
 
