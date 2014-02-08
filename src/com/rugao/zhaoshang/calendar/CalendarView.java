@@ -1,7 +1,12 @@
 package com.rugao.zhaoshang.calendar;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -23,7 +28,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.rugao.zhaoshang.BaseActivity;
 import com.rugao.zhaoshang.R;
+import com.rugao.zhaoshang.beans.ActivityBean;
+import com.rugao.zhaoshang.beans.ActivityItem;
+import com.rugao.zhaoshang.beans.UserBean;
+import com.rugao.zhaoshang.utils.Constants;
+import com.rugao.zhaoshang.utils.URLGenerater;
 
 public class CalendarView extends Fragment {
 	protected final Calendar calendar;
@@ -77,8 +88,46 @@ public class CalendarView extends Fragment {
 		return calendarLayout;
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void updateCurrentMonth() {
-		calendarAdapter.refreshDays();
+		final BaseActivity ba = ((BaseActivity) getActivity());
+		ba.showDialog(BaseActivity.LOGIN_DIALOG);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				List<ActivityItem> aiList = null;
+				UserBean ub = ba.getMyApplication().getUserBean();
+				String url = URLGenerater
+						.makeUrl(
+								Constants.ACTIVITY_GET,
+								new String[] {
+										String.valueOf(ub.getUserId()),
+										ub.getMemo(),
+										String.valueOf(calendar
+												.get(Calendar.YEAR)),
+										String.valueOf(calendar
+												.get(Calendar.MONTH) + 1) });
+				try {
+					JSONObject jo = ba.getMyApplication()
+							.getHttpRequestHelper()
+							.sendRequestAndReturnJson(url);
+					ActivityBean ab = new ActivityBean(jo);
+					aiList = ab.getAiList();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				final List<ActivityItem> list = aiList;
+				ba.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						calendarAdapter.refreshDays(list);
+					}
+				});
+				ba.dismissDialogIfExist(BaseActivity.LOGIN_DIALOG);
+			}
+		}).start();
 		currentMonth.setText(String.format(locale, "%tB", calendar) + " "
 				+ calendar.get(Calendar.YEAR));
 	}

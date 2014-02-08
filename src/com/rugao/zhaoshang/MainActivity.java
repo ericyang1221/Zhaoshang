@@ -39,9 +39,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		setTabSelection(0);
 	}
 
-	/**
-	 * 在这里获取到每个需要用到的控件的实例，并给它们设置好必要的点击事件。
-	 */
 	private void initViews() {
 		tab1 = (ImageView) findViewById(R.id.tab1);
 		tab2 = (ImageView) findViewById(R.id.tab2);
