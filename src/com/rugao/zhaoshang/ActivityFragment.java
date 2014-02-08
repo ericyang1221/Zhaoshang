@@ -16,6 +16,7 @@ public class ActivityFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		View activityLayout = inflater.inflate(R.layout.activity_layout,
 				container, false);
+		ListView lv = (ListView) activityLayout.findViewById(R.id.cal_lv);
 		CalendarView cal = (CalendarView) this.getActivity()
 				.getSupportFragmentManager().findFragmentById(R.id.cal_cal);
 		cal.setOnCalendarDateClickListener(new OnCalendarDateClickListener() {
@@ -24,8 +25,6 @@ public class ActivityFragment extends BaseFragment {
 				System.out.println("hello world");
 			}
 		});
-		ListView lv = (ListView) activityLayout.findViewById(R.id.cal_lv);
-
 		return activityLayout;
 	}
 
