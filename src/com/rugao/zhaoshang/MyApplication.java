@@ -26,6 +26,7 @@ public class MyApplication extends Application {
 	private List<ValueBean> projectUnit;
 	private List<ValueBean> projectPeople;
 	private List<ValueBean> projectManager;
+	private List<ValueBean> activityProject;
 
 	@Override
 	public void onCreate() {
@@ -82,6 +83,22 @@ public class MyApplication extends Application {
 					projectManager = Utils.convertJAStr2SA(Utils
 							.getProjectManager(MyApplication.this));
 				}
+
+				try {
+					String url = URLGenerater.makeUrl(
+							Constants.ACTIVITY_GETPROJECT, new String[] {
+									String.valueOf(userBean.getUserId()),
+									userBean.getMemo() });
+					JSONObject jo = getHttpRequestHelper()
+							.sendRequestAndReturnJson(url);
+					JSONArray ja = jo.getJSONArray("ResultData");
+					Utils.putActivityProject(MyApplication.this, ja.toString());
+					activityProject = Utils.convertJA2SA(ja);
+				} catch (Exception e) {
+					e.printStackTrace();
+					activityProject = Utils.convertJAStr2SA(Utils
+							.getActivityProject(MyApplication.this));
+				}
 			}
 		}).start();
 	}
@@ -120,6 +137,10 @@ public class MyApplication extends Application {
 
 	public List<ValueBean> getProjectManager() {
 		return projectManager;
+	}
+
+	public List<ValueBean> getActivityProject() {
+		return activityProject;
 	}
 
 	private void initData() {

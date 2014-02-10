@@ -43,6 +43,7 @@ public class CalendarView extends Fragment {
 	private TextView currentMonth;
 	private CalendarAdapter calendarAdapter;
 	private OnCalendarDateClickListener onCalendarDateClickListener;
+	private List<ActivityItem> aiList;
 
 	public CalendarView() {
 		calendar = Calendar.getInstance();
@@ -91,11 +92,10 @@ public class CalendarView extends Fragment {
 	@SuppressWarnings("deprecation")
 	protected void updateCurrentMonth() {
 		final BaseActivity ba = ((BaseActivity) getActivity());
-		ba.showDialog(BaseActivity.LOGIN_DIALOG);
+		ba.showDialog(BaseActivity.LOADING_DIALOG);
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				List<ActivityItem> aiList = null;
 				UserBean ub = ba.getMyApplication().getUserBean();
 				String url = URLGenerater
 						.makeUrl(
@@ -118,14 +118,13 @@ public class CalendarView extends Fragment {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				final List<ActivityItem> list = aiList;
 				ba.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						calendarAdapter.refreshDays(list);
+						calendarAdapter.refreshDays(aiList);
 					}
 				});
-				ba.dismissDialogIfExist(BaseActivity.LOGIN_DIALOG);
+				ba.dismissDialogIfExist(BaseActivity.LOADING_DIALOG);
 			}
 		}).start();
 		currentMonth.setText(String.format(locale, "%tB", calendar) + " "
@@ -148,8 +147,7 @@ public class CalendarView extends Fragment {
 				cal.set(Calendar.MONTH, month);
 				cal.set(Calendar.DAY_OF_MONTH, day);
 				if (onCalendarDateClickListener != null) {
-					onCalendarDateClickListener.onCalendarDateClickListener(cal
-							.getTimeInMillis());
+					onCalendarDateClickListener.onCalendarDateClickListener(year,month,day);
 				}
 			}
 		}
@@ -219,12 +217,16 @@ public class CalendarView extends Fragment {
 	}
 
 	public interface OnCalendarDateClickListener {
-		void onCalendarDateClickListener(long timeInMillions);
+		void onCalendarDateClickListener(int year,int month,int day);
 	}
 
 	public void setOnCalendarDateClickListener(
 			OnCalendarDateClickListener onCalendarDateClickListener) {
 		this.onCalendarDateClickListener = onCalendarDateClickListener;
+	}
+
+	public List<ActivityItem> getAiList() {
+		return aiList;
 	}
 
 }

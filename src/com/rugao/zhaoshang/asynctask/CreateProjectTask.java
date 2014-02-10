@@ -21,7 +21,7 @@ public class CreateProjectTask extends BaseAsyncTask {
 
 	@Override
 	protected Integer getDialogId() {
-		return BaseActivity.LOGIN_DIALOG;
+		return BaseActivity.LOADING_DIALOG;
 	}
 
 	protected void setPost() {

@@ -62,6 +62,11 @@
     <string name="contact">联系人</string>
     <string name="update_success">修改成功</string>
     <string name="update_fail">修改失败</string>
+    <string name="activity_name">活动主题：</string>
+    <string name="activity_case">具体内容：</string>
+    <string name="image_upload">照片上传：</string>
+    <string name="choose_leaders">选择领导：</string>
+    <string name="request_content">请求内容：</string>
     
     <string name="current_month_placeholder">January 1970</string>
     <string name="previous_month_placeholder">&lt;&lt;</string>

@@ -15,4 +15,6 @@ public class Constants {
 	public static final String PROJECT_CREATE = "project/create";
 	public static final String PROJECT_EDIT = "project/Edit";
 	public static final String ACTIVITY_GET = "Activity/Get?UserId=?&Memo=?&year=?&month=?";
+	public static final String ACTIVITY_GETPROJECT = "Activity/getProject?UserId=?&Memo=?";
+	public static final String MESSAGE_GET = "Message/Get?UserId=?&Memo=?&pageIndex=0&pageSize=999999999";
 }

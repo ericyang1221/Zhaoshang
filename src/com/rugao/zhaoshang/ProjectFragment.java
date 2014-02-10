@@ -31,6 +31,7 @@ public class ProjectFragment extends BaseFragment implements DataView {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
 		mInflater = inflater;
 		View projectLayout = inflater.inflate(R.layout.project_layout,
 				container, false);

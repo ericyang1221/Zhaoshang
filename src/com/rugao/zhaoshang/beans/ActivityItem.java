@@ -20,6 +20,11 @@ public class ActivityItem {
 	private int year;
 	private int month;
 	private int day;
+	
+	public ActivityItem(){
+		leaderIds = "";
+		leaderIdsDisplay = "";
+	}
 
 	public int getActivityId() {
 		return activityId;
@@ -173,4 +178,8 @@ public class ActivityItem {
 		this.day = day;
 	}
 
+	@Override
+	public String toString() {
+		return activityIdDisplay;
+	}
 }

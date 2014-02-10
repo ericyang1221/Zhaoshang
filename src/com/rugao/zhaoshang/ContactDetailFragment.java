@@ -23,6 +23,7 @@ public class ContactDetailFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
 		View layout = inflater.inflate(R.layout.contact_detail_layout,
 				container, false);
 		name = (EditText) layout.findViewById(R.id.contact_name);

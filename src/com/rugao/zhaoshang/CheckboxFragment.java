@@ -15,26 +15,27 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.rugao.zhaoshang.beans.Project;
 import com.rugao.zhaoshang.beans.ValueBean;
 
 public class CheckboxFragment extends BaseFragment {
 	private LayoutInflater mInflater;
-	private Project p;
+	// private Project p;
 	private int wsSize;
 	private String[] ws;
 	private List<String> checked;
-	List<ValueBean> it;
+	private OnConfirmClickListener onConfirmClickListener;
+	private List<ValueBean> it;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
 		mInflater = inflater;
 		View dLayout = inflater.inflate(R.layout.checkbox_layout, container,
 				false);
 		ListView lv = (ListView) dLayout.findViewById(R.id.checkbox_listview);
-		it = getMyApplication().getProjectPeople();
-		ws = p.getWorkers().split(",");
+		// it = getMyApplication().getProjectPeople();
+		// ws = p.getWorkers().split(",");
 		wsSize = ws.length;
 		checked = new ArrayList<String>();
 		for (String s : ws) {
@@ -62,26 +63,29 @@ public class CheckboxFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				getActivity().getSupportFragmentManager().popBackStack();
-				StringBuffer sb = new StringBuffer();
-				StringBuffer sbw = new StringBuffer();
-				for (String s : checked) {
-					sb.append(s).append(",");
-					for (ValueBean vb : it) {
-						if (String.valueOf(vb.getKey()).equals(s)) {
-							sbw.append(vb.getValue()).append(",");
-							break;
-						}
-					}
+				if (onConfirmClickListener != null) {
+					onConfirmClickListener.onConfirmClick(checked, it);
 				}
-				if (sb.length() > 0) {
-					p.setWorkers(sb.substring(0, sb.length() - 1));
-					if (sbw.length() > 0) {
-						p.setWorkersDisplay(sbw.substring(0, sbw.length() - 1));
-					}
-				} else {
-					p.setWorkers("");
-					p.setWorkersDisplay("");
-				}
+				// StringBuffer sb = new StringBuffer();
+				// StringBuffer sbw = new StringBuffer();
+				// for (String s : checked) {
+				// sb.append(s).append(",");
+				// for (ValueBean vb : it) {
+				// if (String.valueOf(vb.getKey()).equals(s)) {
+				// sbw.append(vb.getValue()).append(",");
+				// break;
+				// }
+				// }
+				// }
+				// if (sb.length() > 0) {
+				// p.setWorkers(sb.substring(0, sb.length() - 1));
+				// if (sbw.length() > 0) {
+				// p.setWorkersDisplay(sbw.substring(0, sbw.length() - 1));
+				// }
+				// } else {
+				// p.setWorkers("");
+				// p.setWorkersDisplay("");
+				// }
 			}
 		});
 
@@ -158,7 +162,21 @@ public class CheckboxFragment extends BaseFragment {
 		public CheckBox cb;
 	}
 
-	public void setProject(Project p) {
-		this.p = p;
+	interface OnConfirmClickListener {
+		public void onConfirmClick(List<String> checked, List<ValueBean> all);
+	}
+
+	public void setData(String[] data, List<ValueBean> allData) {
+		this.ws = data;
+		this.it = allData;
+	}
+
+	public OnConfirmClickListener getOnConfirmClickListener() {
+		return onConfirmClickListener;
+	}
+
+	public void setOnConfirmClickListener(
+			OnConfirmClickListener onConfirmClickListener) {
+		this.onConfirmClickListener = onConfirmClickListener;
 	}
 }

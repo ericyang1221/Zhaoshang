@@ -21,6 +21,7 @@ public class ChooseFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
 		View chooseLayout = inflater.inflate(R.layout.choose_layout, container,
 				false);
 		ListView lv = (ListView) chooseLayout

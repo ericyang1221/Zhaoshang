@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rugao.zhaoshang.ChooseFragment.OnFragmentItemClickListener;
+import com.rugao.zhaoshang.DisplayFragment.DisplayFragmentListener;
 import com.rugao.zhaoshang.asynctask.CreateProjectTask;
 import com.rugao.zhaoshang.beans.DataBean;
 import com.rugao.zhaoshang.beans.Project;
@@ -56,6 +57,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
 		View projectDetailLayout = inflater.inflate(
 				R.layout.project_detail_layout, container, false);
 		pn = (EditText) projectDetailLayout.findViewById(R.id.project_name);
@@ -342,7 +344,67 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (df == null) {
 					df = new DisplayFragment();
 				}
-				df.setProject(project);
+				// df.setProject(project);
+				df.setData(project.getWorkersDisplay().split(","), project
+						.getWorkers().split(","));
+				df.setDisplayFragmentListener(new DisplayFragmentListener() {
+					@Override
+					public void onItemDelete(int position,
+							List<String> wsdList, List<ValueBean> it) {
+						wsdList.remove(position);
+						StringBuffer sbd = new StringBuffer();
+						StringBuffer sb = new StringBuffer();
+						for (String s : wsdList) {
+							sbd.append(s).append(",");
+							for (ValueBean vb : it) {
+								if (vb.getValue().equals(s)) {
+									sb.append(vb.getKey()).append(",");
+									break;
+								}
+							}
+						}
+						if (sb.length() > 0) {
+							project.setWorkers(sb.substring(0, sb.length() - 1));
+							if (sbd.length() > 0) {
+								project.setWorkersDisplay(sbd.substring(0,
+										sbd.length() - 1));
+							}
+						} else {
+							project.setWorkers("");
+							project.setWorkersDisplay("");
+						}
+						df.setData(project.getWorkersDisplay().split(","),
+								project.getWorkers().split(","));
+					}
+
+					@Override
+					public void onChooseConfirm(List<String> checked,
+							List<ValueBean> all) {
+						StringBuffer sb = new StringBuffer();
+						StringBuffer sbw = new StringBuffer();
+						for (String s : checked) {
+							sb.append(s).append(",");
+							for (ValueBean vb : all) {
+								if (String.valueOf(vb.getKey()).equals(s)) {
+									sbw.append(vb.getValue()).append(",");
+									break;
+								}
+							}
+						}
+						if (sb.length() > 0) {
+							project.setWorkers(sb.substring(0, sb.length() - 1));
+							if (sbw.length() > 0) {
+								project.setWorkersDisplay(sbw.substring(0,
+										sbw.length() - 1));
+							}
+						} else {
+							project.setWorkers("");
+							project.setWorkersDisplay("");
+						}
+						df.setData(project.getWorkersDisplay().split(","),
+								project.getWorkers().split(","));
+					}
+				});
 				t.replace(R.id.content, df);
 				t.addToBackStack(null);
 				t.commit();

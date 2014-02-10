@@ -7,17 +7,17 @@ import android.content.Context;
 
 import com.rugao.zhaoshang.BaseActivity;
 import com.rugao.zhaoshang.beans.DataBean;
-import com.rugao.zhaoshang.beans.ProjectBean;
+import com.rugao.zhaoshang.beans.MessageBean;
 
-public class ProjectTask extends BaseAsyncTask {
+public class MessageTask extends BaseAsyncTask {
 
-	public ProjectTask(Context context) {
+	public MessageTask(Context context) {
 		super(context);
 	}
 
 	@Override
 	protected DataBean processResult(JSONObject result) throws JSONException {
-		return new ProjectBean(result);
+		return new MessageBean(result);
 	}
 
 	@Override

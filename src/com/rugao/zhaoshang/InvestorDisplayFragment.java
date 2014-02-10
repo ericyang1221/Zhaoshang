@@ -31,6 +31,7 @@ public class InvestorDisplayFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
 		mInflater = inflater;
 		final View dLayout = inflater.inflate(R.layout.investor_display_layout,
 				container, false);

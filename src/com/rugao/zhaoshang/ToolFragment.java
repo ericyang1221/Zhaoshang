@@ -11,6 +11,7 @@ public class ToolFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
 		View toolLayout = inflater.inflate(R.layout.tool_layout,
 				container, false);
 		return toolLayout;

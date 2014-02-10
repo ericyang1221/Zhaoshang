@@ -18,19 +18,23 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.rugao.zhaoshang.beans.Project;
+import com.rugao.zhaoshang.CheckboxFragment.OnConfirmClickListener;
 import com.rugao.zhaoshang.beans.ValueBean;
 
 public class DisplayFragment extends BaseFragment {
 	private List<String> data = new ArrayList<String>();
 	private CheckboxFragment cf;
-	private Project p;
+	// private Project p;
+	private String[] ws;
+	private String[] wsd;
 	private ArrayAdapter<String> adapter;
 	private List<String> wsdList;
+	private DisplayFragmentListener displayFragmentListener;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
 		final View dLayout = inflater.inflate(R.layout.display_layout,
 				container, false);
 		ListView lv = (ListView) dLayout.findViewById(R.id.display_listview);
@@ -45,8 +49,20 @@ public class DisplayFragment extends BaseFragment {
 				if (cf == null) {
 					cf = new CheckboxFragment();
 				}
-				cf.setProject(p);
-				t.replace(R.id.content, cf);
+				// cf.setProject(p);
+				cf.setData(ws, getMyApplication().getProjectPeople());
+				cf.setOnConfirmClickListener(new OnConfirmClickListener() {
+					@Override
+					public void onConfirmClick(List<String> checked,
+							List<ValueBean> all) {
+						if (displayFragmentListener != null) {
+							displayFragmentListener.onChooseConfirm(checked,
+									all);
+							reflash();
+						}
+					}
+				});
+				t.add(R.id.content, cf);
 				t.addToBackStack(null);
 				t.commit();
 			}
@@ -64,28 +80,9 @@ public class DisplayFragment extends BaseFragment {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								wsdList.remove(arg2);
-								StringBuffer sbd = new StringBuffer();
-								StringBuffer sb = new StringBuffer();
-								for (String s : wsdList) {
-									sbd.append(s).append(",");
-									for (ValueBean vb : it) {
-										if (vb.getValue().equals(s)) {
-											sb.append(vb.getKey()).append(",");
-											break;
-										}
-									}
-								}
-								if (sb.length() > 0) {
-									p.setWorkers(sb.substring(0,
-											sb.length() - 1));
-									if (sbd.length() > 0) {
-										p.setWorkersDisplay(sbd.substring(0,
-												sbd.length() - 1));
-									}
-								} else {
-									p.setWorkers("");
-									p.setWorkersDisplay("");
+								if (displayFragmentListener != null) {
+									displayFragmentListener.onItemDelete(arg2,
+											wsdList, it);
 								}
 								reflash();
 								dialog.dismiss();
@@ -119,7 +116,6 @@ public class DisplayFragment extends BaseFragment {
 	}
 
 	private void reflash() {
-		String[] wsd = p.getWorkersDisplay().split(",");
 		if (wsdList == null) {
 			wsdList = new ArrayList<String>();
 		} else {
@@ -133,7 +129,24 @@ public class DisplayFragment extends BaseFragment {
 		adapter.notifyDataSetChanged();
 	}
 
-	public void setProject(Project p) {
-		this.p = p;
+	public void setData(String[] wsd, String[] ws) {
+		this.wsd = wsd;
+		this.ws = ws;
+	}
+
+	public DisplayFragmentListener getDisplayFragmentListener() {
+		return displayFragmentListener;
+	}
+
+	public void setDisplayFragmentListener(
+			DisplayFragmentListener displayFragmentListener) {
+		this.displayFragmentListener = displayFragmentListener;
+	}
+
+	interface DisplayFragmentListener {
+		public void onChooseConfirm(List<String> checked, List<ValueBean> all);
+
+		public void onItemDelete(int position, List<String> wsdList,
+				List<ValueBean> it);
 	}
 }

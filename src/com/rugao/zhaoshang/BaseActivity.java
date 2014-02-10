@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 public class BaseActivity extends FragmentActivity {
 	public static final int LOGIN_DIALOG = 1;
-	public static final int GETPROJECT_DIALOG = 2;
+	public static final int LOADING_DIALOG = 2;
 	private MyApplication myApp;
 
 	public void showDataBeanNullToast() {
@@ -39,7 +39,7 @@ public class BaseActivity extends FragmentActivity {
 			pd.setMessage(getString(R.string.login_loading));
 			pd.setCancelable(false);
 			return pd;
-		case GETPROJECT_DIALOG:
+		case LOADING_DIALOG:
 			pd = new ProgressDialog(this);
 			pd.setMessage(getString(R.string.loading));
 			pd.setCancelable(false);

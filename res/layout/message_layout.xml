@@ -1,22 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/navigationbar_bg" >
 
+        <ImageView
+            android:id="@+id/tl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:adjustViewBounds="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="10dp"
-            android:text="这是消息界面"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/my_message"
+            android:textColor="#ffffff"
+            android:textSize="22dp" />
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/tr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:adjustViewBounds="true"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/message_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/message_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/data_empty"
+        android:textSize="16dp"
+        android:visibility="gone" />
+
+</LinearLayout>

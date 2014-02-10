@@ -141,8 +141,18 @@ public class Utils {
 		editor.putString("PROJECT_MANAGER", str);
 		editor.commit();
 	}
-
+	
 	public static String getProjectManager(Context context) {
 		return getSharedPreferences(context).getString("PROJECT_MANAGER", null);
+	}
+	
+	public static void putActivityProject(Context context, String str) {
+		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+		editor.putString("ACTIVITY_PROJECT", str);
+		editor.commit();
+	}
+	
+	public static String getActivityProject(Context context) {
+		return getSharedPreferences(context).getString("ACTIVITY_PROJECT", null);
 	}
 }
