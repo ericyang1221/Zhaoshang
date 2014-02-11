@@ -7,6 +7,7 @@ public class DataBean {
 	protected boolean result;
 	protected String resultMsg;
 	protected JSONObject resultData;
+	private Object obj;
 
 	public boolean getResult() {
 		return result;
@@ -45,4 +46,13 @@ public class DataBean {
 			}
 		}
 	}
+
+	public Object getObj() {
+		return obj;
+	}
+
+	public void setObj(Object obj) {
+		this.obj = obj;
+	}
+	
 }

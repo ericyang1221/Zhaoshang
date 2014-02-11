@@ -63,7 +63,7 @@ public class MyApplication extends Application {
 					Utils.putProjectPeople(MyApplication.this, ja.toString());
 					projectPeople = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 					projectPeople = Utils.convertJAStr2SA(Utils
 							.getProjectPeople(MyApplication.this));
 				}
@@ -79,7 +79,7 @@ public class MyApplication extends Application {
 					Utils.putProjectManager(MyApplication.this, ja.toString());
 					projectManager = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 					projectManager = Utils.convertJAStr2SA(Utils
 							.getProjectManager(MyApplication.this));
 				}
@@ -95,7 +95,7 @@ public class MyApplication extends Application {
 					Utils.putActivityProject(MyApplication.this, ja.toString());
 					activityProject = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 					activityProject = Utils.convertJAStr2SA(Utils
 							.getActivityProject(MyApplication.this));
 				}
@@ -155,7 +155,7 @@ public class MyApplication extends Application {
 					Utils.putProjectStage(MyApplication.this, ja.toString());
 					projectStage = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 					projectStage = Utils.convertJAStr2SA(Utils
 							.getProjectStage(MyApplication.this));
 				}
@@ -169,7 +169,7 @@ public class MyApplication extends Application {
 							ja.toString());
 					projectIndustryType = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 					projectIndustryType = Utils.convertJAStr2SA(Utils
 							.getProjectIndustryType(MyApplication.this));
 				}
@@ -183,7 +183,7 @@ public class MyApplication extends Application {
 							ja.toString());
 					projectIndustryDetail = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 					projectIndustryDetail = Utils.convertJAStr2SA(Utils
 							.getProjectIndustryDetail(MyApplication.this));
 				}
@@ -196,7 +196,7 @@ public class MyApplication extends Application {
 					Utils.putProjectPosition(MyApplication.this, ja.toString());
 					projectPosition = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 					projectPosition = Utils.convertJAStr2SA(Utils
 							.getProjectPosition(MyApplication.this));
 				}
@@ -209,7 +209,7 @@ public class MyApplication extends Application {
 					Utils.putProjectPolicy(MyApplication.this, ja.toString());
 					projectPolicy = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 					projectPolicy = Utils.convertJAStr2SA(Utils
 							.getProjectPolicy(MyApplication.this));
 				}
@@ -223,7 +223,7 @@ public class MyApplication extends Application {
 							ja.toString());
 					projectEnviroment = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 					projectEnviroment = Utils.convertJAStr2SA(Utils
 							.getProjectEnviroment(MyApplication.this));
 				}
@@ -236,7 +236,7 @@ public class MyApplication extends Application {
 					Utils.putProjectUnit(MyApplication.this, ja.toString());
 					projectUnit = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 					projectUnit = Utils.convertJAStr2SA(Utils
 							.getProjectUnit(MyApplication.this));
 				}

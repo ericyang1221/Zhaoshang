@@ -99,7 +99,11 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
 					@Override
 					public void onItemClick(int position) {
-						activityItem.setStageId(data.get(position).getKey());
+						try{
+							activityItem.setStageId(Integer.valueOf(data.get(position).getKey()));
+						}catch(Exception e){
+							activityItem.setStageId(-1);
+						}
 						activityItem.setStageIdDisplay(data.get(position)
 								.getValue());
 						ActivityDetailFragment.this.onResume();
@@ -125,7 +129,11 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
 					@Override
 					public void onItemClick(int position) {
-						activityItem.setProjectId(data.get(position).getKey());
+						try{
+							activityItem.setProjectId(Integer.valueOf(data.get(position).getKey()));
+						}catch(Exception e){
+							activityItem.setProjectId(-1);
+						}
 						activityItem.setProjectIdDisplay(data.get(position)
 								.getValue());
 						ActivityDetailFragment.this.onResume();

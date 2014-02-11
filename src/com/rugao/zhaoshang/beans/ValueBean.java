@@ -1,22 +1,22 @@
 package com.rugao.zhaoshang.beans;
 
 public class ValueBean {
-	private int key;
+	private String key;
 	private String value;
 
 	public ValueBean() {
 	}
 
-	public ValueBean(int key, String value) {
+	public ValueBean(String key, String value) {
 		this.key = key;
 		this.value = value;
 	}
 
-	public int getKey() {
+	public String getKey() {
 		return key;
 	}
 
-	public void setKey(int key) {
+	public void setKey(String key) {
 		this.key = key;
 	}
 

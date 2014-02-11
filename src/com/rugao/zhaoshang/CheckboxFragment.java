@@ -39,7 +39,9 @@ public class CheckboxFragment extends BaseFragment {
 		wsSize = ws.length;
 		checked = new ArrayList<String>();
 		for (String s : ws) {
-			checked.add(s);
+			if (s.length() > 0) {
+				checked.add(s);
+			}
 		}
 		lv.setAdapter(new CheckboxAdapter(it));
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -147,7 +149,7 @@ public class CheckboxFragment extends BaseFragment {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				if (vb.getKey() == checkedint) {
+				if (vb.getKey().equals(String.valueOf(checkedint))) {
 					holder.cb.setChecked(true);
 					break;
 				}

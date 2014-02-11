@@ -18,9 +18,9 @@ public class Utils {
 			int size = ja.length();
 			ret = new ArrayList<ValueBean>();
 			for (int i = 0; i < size; i++) {
-				int key = -1;
+				String key = "";
 				try {
-					key = ja.getJSONObject(i).getInt("Key");
+					key = ja.getJSONObject(i).getString("Key");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

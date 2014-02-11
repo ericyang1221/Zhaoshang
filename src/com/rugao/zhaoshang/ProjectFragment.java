@@ -57,11 +57,11 @@ public class ProjectFragment extends BaseFragment implements DataView {
 		projectLayout.findViewById(R.id.tr).setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				ProjectDetailFragment projectDetailFragment = new ProjectDetailFragment();
-				projectDetailFragment.setProjectBean(new Project());
+				ProjectAddFragment projectAddFragment = new ProjectAddFragment();
+				projectAddFragment.setProjectBean(new Project());
 				FragmentTransaction transaction = getFragmentManager()
 						.beginTransaction();
-				transaction.replace(R.id.content, projectDetailFragment);
+				transaction.replace(R.id.content, projectAddFragment);
 				transaction.addToBackStack(null);
 				transaction.commit();
 			}

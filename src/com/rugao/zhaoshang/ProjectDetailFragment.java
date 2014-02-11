@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -122,7 +123,6 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				url,
 				project.getPostParams(String.valueOf(ub.getUserId()),
 						ub.getMemo(), false));
-		System.out.println(project.toString());
 	}
 
 	@Override
@@ -131,29 +131,122 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 		pn.setText(project.getProjectName());
 		ps.setText(project.getStageIdDisplay());
 		ppd.setText(project.getPlanningDate());
-		pit.setText(project.getIndustryType());
-		pid.setText(project.getIndustryDetail());
-		pp.setText(project.getPolicyDisplay());
-		pe.setText(project.getEnviromentDisplay());
-		pc.setText(project.getCase());
-		pst.setText(String.valueOf(project.getScale() == 0 ? "" : project
+		pit.setText(project.getIndustryType() == null ? "" : project
+				.getIndustryType());
+		pid.setText(project.getIndustryDetail() == null ? "" : project
+				.getIndustryDetail());
+		pp.setText(project.getPolicyDisplay() == null ? "" : project
+				.getPolicyDisplay());
+		pe.setText(project.getEnviromentDisplay() == null ? "" : project
+				.getEnviromentDisplay());
+		pc.setText(project.getCase() == null ? "" : project.getCase());
+		pst.setText(String.valueOf(project.getScale() == null ? "" : project
 				.getScale()));
 		psu.setText(project.getScaleUnitDisplay());
-		pl.setText(project.getLandRequire());
-		pbt.setText(project.getBuildTime());
-		pta.setText(String.valueOf(project.getTotalAmount() == 0 ? "" : project
+		pl.setText(project.getLandRequire() == null ? "" : project
+				.getLandRequire());
+		pbt.setText(project.getBuildTime() == null ? "" : project
+				.getBuildTime());
+		pta.setText(String.valueOf(project.getTotalAmount() == null
+				|| project.getTotalAmount() == -1 ? "" : project
 				.getTotalAmount()));
-		ptt.setText(String.valueOf(project.getTotalTax() == 0 ? "" : project
-				.getTotalTax()));
-		ppp.setText(project.getProjectPlan());
-		pri.setText(project.getResponsibleIdDisplay());
-		pcl.setText(project.getCityLeader());
-		ptl.setText(project.getTownLeader());
-		pr.setText(project.getReferrer());
+		ptt.setText(String.valueOf(project.getTotalTax() == null
+				|| project.getTotalTax() == -1 ? "" : project.getTotalTax()));
+		ppp.setText(project.getProjectPlan()==null?"":project.getProjectPlan());
+		pri.setText(project.getResponsibleIdDisplay()==null?"":project.getResponsibleIdDisplay());
+		pcl.setText(project.getCityLeader()==null?"":project.getCityLeader());
+		ptl.setText(project.getTownLeader()==null?"":project.getTownLeader());
+		pr.setText(project.getReferrer()==null?"":project.getReferrer());
 		pw.setText(project.getWorkersDisplay());
 	}
 
 	private void initListeners(View projectDetailLayout) {
+		pn.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				project.setProjectName(pn.getText().toString());
+			}
+		});
+		pc.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				project.setCase(pc.getText().toString());
+			}
+		});
+		pst.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				try {
+					project.setScale(Double.valueOf(pst.getText().toString()));
+				} catch (Exception e) {
+					// project.setScale(0);
+					// pst.setText(String.valueOf(0));
+					// getBaseActivity().showToast(R.string.pls_input_number);
+				}
+			}
+		});
+		pl.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				project.setLandRequire(pl.getText().toString());
+			}
+		});
+		pbt.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				project.setBuildTime(pbt.getText().toString());
+			}
+		});
+		pta.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				try {
+					project.setTotalAmount(Long.valueOf(pta.getText()
+							.toString()));
+				} catch (Exception e) {
+					// project.setTotalAmount(0);
+					// pta.setText(String.valueOf(0));
+					// getBaseActivity().showToast(R.string.pls_input_number);
+				}
+			}
+		});
+		ptt.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				try {
+					project.setTotalTax(Double
+							.valueOf(ptt.getText().toString()));
+				} catch (Exception e) {
+					// project.setTotalTax(0);
+					// ptt.setText(String.valueOf(0));
+					// getBaseActivity().showToast(R.string.pls_input_number);
+				}
+			}
+		});
+		ppp.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				project.setProjectPlan(ppp.getText().toString());
+			}
+		});
+		pcl.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				project.setCityLeader(pcl.getText().toString());
+			}
+		});
+		ptl.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				project.setTownLeader(ptl.getText().toString());
+			}
+		});
+		pr.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				project.setReferrer(pr.getText().toString());
+			}
+		});
 		ps.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -168,7 +261,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
 					@Override
 					public void onItemClick(int position) {
-						project.setStageId(data.get(position).getKey());
+						try {
+							project.setStageId(Integer.valueOf(data.get(
+									position).getKey()));
+						} catch (Exception e) {
+							project.setStageId(-1);
+						}
 						project.setStageIdDisplay(data.get(position).getValue());
 					}
 				});
@@ -255,7 +353,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 					@Override
 					public void onItemClick(int position) {
 						project.setPolicyDisplay(data.get(position).getValue());
-						project.setPolicy(data.get(position).getKey());
+						try {
+							project.setPolicy(Integer.valueOf(data
+									.get(position).getKey()));
+						} catch (Exception e) {
+							project.setPolicy(-1);
+						}
 					}
 				});
 				t.replace(R.id.content, cf);
@@ -279,7 +382,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 					public void onItemClick(int position) {
 						project.setEnviromentDisplay(data.get(position)
 								.getValue());
-						project.setEnviroment(data.get(position).getKey());
+						try {
+							project.setEnviroment(Integer.valueOf(data.get(
+									position).getKey()));
+						} catch (Exception e) {
+							project.setEnviroment(-1);
+						}
 					}
 				});
 				t.replace(R.id.content, cf);
@@ -328,7 +436,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 					public void onItemClick(int position) {
 						project.setResponsibleIdDisplay(data.get(position)
 								.getValue());
-						project.setResponsibleId(data.get(position).getKey());
+						try {
+							project.setResponsibleId(Integer.valueOf(data.get(
+									position).getKey()));
+						} catch (Exception e) {
+							project.setResponsibleId(-1);
+						}
 					}
 				});
 				t.replace(R.id.content, cf);

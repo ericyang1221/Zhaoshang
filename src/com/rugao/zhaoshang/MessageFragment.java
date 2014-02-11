@@ -13,12 +13,10 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.rugao.zhaoshang.ProjectFragment.ViewHolder;
 import com.rugao.zhaoshang.asynctask.MessageTask;
 import com.rugao.zhaoshang.beans.DataBean;
 import com.rugao.zhaoshang.beans.Message;
 import com.rugao.zhaoshang.beans.MessageBean;
-import com.rugao.zhaoshang.beans.Project;
 import com.rugao.zhaoshang.beans.UserBean;
 import com.rugao.zhaoshang.utils.Constants;
 import com.rugao.zhaoshang.utils.URLGenerater;
@@ -45,15 +43,15 @@ public class MessageFragment extends BaseFragment implements DataView {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int arg2,
 					long arg3) {
-				// ProjectDetailFragment projectDetailFragment = new
-				// ProjectDetailFragment();
-				// projectDetailFragment.setProjectBean(((ViewHolder)
-				// v.getTag()).project);
-				// FragmentTransaction transaction = getFragmentManager()
-				// .beginTransaction();
-				// transaction.replace(R.id.content, projectDetailFragment);
-				// transaction.addToBackStack(null);
-				// transaction.commit();
+				MessageListFragment messageListFragment = new MessageListFragment();
+				ViewHolder holder = (ViewHolder)v.getTag();
+				int activityId = holder.message.getActivityId();
+				messageListFragment.setActivityId(activityId);
+				FragmentTransaction transaction = getFragmentManager()
+						.beginTransaction();
+				transaction.replace(R.id.content, messageListFragment);
+				transaction.addToBackStack(null);
+				transaction.commit();
 			}
 		});
 		return messageLayout;
@@ -104,11 +102,13 @@ public class MessageFragment extends BaseFragment implements DataView {
 				holder.title = (TextView) convertView.findViewById(R.id.m_ps);
 				holder.subTitle = (TextView) convertView
 						.findViewById(R.id.m_pn);
+				holder.message = m;
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			holder.title.setText(m.getActivityIdDisplay() + " " + m.getCount());
+			holder.title.setText(m.getActivityIdDisplay() + "  ["
+					+ m.getCount() + "]");
 			holder.subTitle.setText(m.getProjectIdDisplay());
 			return convertView;
 		}
@@ -118,6 +118,7 @@ public class MessageFragment extends BaseFragment implements DataView {
 	class ViewHolder {
 		public TextView title;
 		public TextView subTitle;
+		public Message message;
 	}
 
 	@Override

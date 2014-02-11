@@ -1,6 +1,5 @@
 package com.rugao.zhaoshang.beans;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,50 +10,65 @@ import android.util.Log;
 
 public class Project {
 	private final String TAG = "Project";
-	
-	private int projectId;
+
+	private Integer projectId;
 	private String projectName;
 	private String planningDate;
-	private int stageId;
+	private Integer stageId;
 	private String stageIdDisplay;
 	private String industryType;
 	private String industryDetail;
-	private int policy;
+	private Integer policy;
 	private String policyDisplay;
-	private int enviroment;
+	private Integer enviroment;
 	private String enviromentDisplay;
-	private double scale;
+	private Double scale;
 	private String scaleUnit;
 	private String scaleUnitDisplay;
 	private String projectMemo;
 	private String landRequire;
 	private String workRequire;
 	private String buildTime;
-	private long totalAmount;
-	private double totalTax;
+	private Long totalAmount;
+	private Double totalTax;
 	private String projectPlan;
 	private String casse;
-	private int responsibleId;
+	private Integer responsibleId;
 	private String responsibleIdDisplay;
 	private String cityLeader;
 	private String townLeader;
 	private String referrer;
 	private String workers;
 	private String workersDisplay;
-	private int createdId;
+	private Integer createdId;
 	private String createIdDisplay;
 	private String createDate;
-	private int updateId;
+	private Integer updateId;
 	private String updateIdDisplay;
 	private String updateDate;
 	private List<Investor> investorList;
 	private List<Contact> contactList;
 
-	public int getProjectId() {
+	public Project() {
+		casse = "";
+		cityLeader = "";
+		industryDetail = "";
+		industryType = "";
+		projectName = "";
+		projectPlan = "";
+		referrer = "";
+		townLeader = "";
+		workers = "";
+		workersDisplay = "";
+		contactList = new ArrayList<Contact>();
+		investorList = new ArrayList<Investor>();
+	}
+
+	public Integer getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(int projectId) {
+	public void setProjectId(Integer projectId) {
 		this.projectId = projectId;
 	}
 
@@ -74,11 +88,11 @@ public class Project {
 		this.planningDate = planningDate;
 	}
 
-	public int getStageId() {
+	public Integer getStageId() {
 		return stageId;
 	}
 
-	public void setStageId(int stageId) {
+	public void setStageId(Integer stageId) {
 		this.stageId = stageId;
 	}
 
@@ -106,11 +120,11 @@ public class Project {
 		this.industryDetail = industryDetail;
 	}
 
-	public int getPolicy() {
+	public Integer getPolicy() {
 		return policy;
 	}
 
-	public void setPolicy(int policy) {
+	public void setPolicy(Integer policy) {
 		this.policy = policy;
 	}
 
@@ -150,19 +164,19 @@ public class Project {
 		this.buildTime = buildTime;
 	}
 
-	public long getTotalAmount() {
+	public Long getTotalAmount() {
 		return totalAmount;
 	}
 
-	public void setTotalAmount(long totalAmount) {
+	public void setTotalAmount(Long totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
-	public double getTotalTax() {
+	public Double getTotalTax() {
 		return totalTax;
 	}
 
-	public void setTotalTax(double totalTax) {
+	public void setTotalTax(Double totalTax) {
 		this.totalTax = totalTax;
 	}
 
@@ -182,11 +196,11 @@ public class Project {
 		this.casse = casse;
 	}
 
-	public int getResponsibleId() {
+	public Integer getResponsibleId() {
 		return responsibleId;
 	}
 
-	public void setResponsibleId(int responsibleId) {
+	public void setResponsibleId(Integer responsibleId) {
 		this.responsibleId = responsibleId;
 	}
 
@@ -202,11 +216,11 @@ public class Project {
 		this.policyDisplay = policyDisplay;
 	}
 
-	public int getEnviroment() {
+	public Integer getEnviroment() {
 		return enviroment;
 	}
 
-	public void setEnviroment(int enviroment) {
+	public void setEnviroment(Integer enviroment) {
 		this.enviroment = enviroment;
 	}
 
@@ -218,11 +232,11 @@ public class Project {
 		this.enviromentDisplay = enviromentDisplay;
 	}
 
-	public double getScale() {
+	public Double getScale() {
 		return scale;
 	}
 
-	public void setScale(double scale) {
+	public void setScale(Double scale) {
 		this.scale = scale;
 	}
 
@@ -282,11 +296,11 @@ public class Project {
 		this.workersDisplay = workersDisplay;
 	}
 
-	public int getCreatedId() {
+	public Integer getCreatedId() {
 		return createdId;
 	}
 
-	public void setCreatedId(int createdId) {
+	public void setCreatedId(Integer createdId) {
 		this.createdId = createdId;
 	}
 
@@ -306,11 +320,11 @@ public class Project {
 		this.createDate = createDate;
 	}
 
-	public int getUpdateId() {
+	public Integer getUpdateId() {
 		return updateId;
 	}
 
-	public void setUpdateId(int updateId) {
+	public void setUpdateId(Integer updateId) {
 		this.updateId = updateId;
 	}
 
@@ -346,38 +360,39 @@ public class Project {
 		this.contactList = contactList;
 	}
 
-	@SuppressWarnings("deprecation")
 	public List<NameValuePair> getPostParams(String userId, String memo,
 			boolean isAdd) {
 		List<NameValuePair> p = new ArrayList<NameValuePair>();
-		p.add(new BasicNameValuePair("UserId", String.valueOf(userId)));
 		p.add(new BasicNameValuePair("Memo", memo));
+		p.add(new BasicNameValuePair("UserId", String.valueOf(userId)));
 		if (isAdd) {
+			// p.add(new BasicNameValuePair("ProjectId",
+			// String.valueOf(projectId)));
+		} else {
 			p.add(new BasicNameValuePair("ProjectId", String.valueOf(projectId)));
 		}
 		Log.d(TAG, "UserId=" + userId + "  Memo=" + memo + "  ProjectId="
 				+ projectId);
-		p.add(new BasicNameValuePair("BuildTime", buildTime));
-		p.add(new BasicNameValuePair("Case", URLEncoder.encode(this.casse)));
-		p.add(new BasicNameValuePair("CityLeader", URLEncoder
-				.encode(this.cityLeader)));
-		p.add(new BasicNameValuePair("CreateDate", createDate));
-		p.add(new BasicNameValuePair("CreateId", String.valueOf(createdId)));
+		p.add(new BasicNameValuePair("BuildTime", buildTime == null ? ""
+				: buildTime));
+		p.add(new BasicNameValuePair("Case", this.casse));
+		p.add(new BasicNameValuePair("CityLeader", this.cityLeader));
+		// p.add(new BasicNameValuePair("CreateDate", createDate == null ? ""
+		// : createDate));
+		// p.add(new BasicNameValuePair("CreateId", String.valueOf(createdId)));
 		p.add(new BasicNameValuePair("Enviroment", String.valueOf(enviroment)));
-		p.add(new BasicNameValuePair("IndustryDetail", URLEncoder
-				.encode(this.industryDetail)));
-		p.add(new BasicNameValuePair("IndustryType", URLEncoder
-				.encode(this.industryType)));
-		p.add(new BasicNameValuePair("LandRequire", landRequire));
-		p.add(new BasicNameValuePair("PlanningDate", planningDate));
+		p.add(new BasicNameValuePair("IndustryDetail", this.industryDetail));
+		p.add(new BasicNameValuePair("IndustryType", this.industryType));
+		p.add(new BasicNameValuePair("LandRequire", landRequire == null ? ""
+				: landRequire));
+		p.add(new BasicNameValuePair("PlanningDate", planningDate == null ? ""
+				: planningDate));
 		p.add(new BasicNameValuePair("Policy", String.valueOf(policy)));
-		p.add(new BasicNameValuePair("PrjMemo", projectMemo));
-		p.add(new BasicNameValuePair("PrjName", URLEncoder
-				.encode(this.projectName)));
-		p.add(new BasicNameValuePair("PrjPlan", URLEncoder
-				.encode(this.projectPlan)));
-		p.add(new BasicNameValuePair("Referrer", URLEncoder
-				.encode(this.referrer)));
+		p.add(new BasicNameValuePair("PrjMemo", projectMemo == null ? ""
+				: projectMemo));
+		p.add(new BasicNameValuePair("PrjName", this.projectName));
+		p.add(new BasicNameValuePair("PrjPlan", this.projectPlan));
+		p.add(new BasicNameValuePair("Referrer", this.referrer));
 		p.add(new BasicNameValuePair("ResponsibleId", String
 				.valueOf(responsibleId)));
 		p.add(new BasicNameValuePair("Scale", String.valueOf(scale)));
@@ -385,91 +400,40 @@ public class Project {
 		p.add(new BasicNameValuePair("StageId", String.valueOf(stageId)));
 		p.add(new BasicNameValuePair("TotalAmount", String.valueOf(totalAmount)));
 		p.add(new BasicNameValuePair("TotalTax", String.valueOf(totalTax)));
-		p.add(new BasicNameValuePair("TownLeader", URLEncoder
-				.encode(this.townLeader)));
-		p.add(new BasicNameValuePair("UpdateDate", updateDate));
-		p.add(new BasicNameValuePair("UpdateId", String.valueOf(updateId)));
-		p.add(new BasicNameValuePair("Workers", workers));
-		p.add(new BasicNameValuePair("WorkersTable", workers));
+		p.add(new BasicNameValuePair("TownLeader", this.townLeader));
+		// p.add(new BasicNameValuePair("UpdateDate", updateDate == null ? ""
+		// : updateDate));
+		// p.add(new BasicNameValuePair("UpdateId", String.valueOf(updateId)));
+		p.add(new BasicNameValuePair("Workers", workers == null ? "" : workers));
+		p.add(new BasicNameValuePair("WorkersTable", workers == null ? ""
+				: workers));
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
-		for (int i = 0; i < contactList.size(); i++) {
-			if (i == contactList.size() - 1) {
-				sb.append(contactList.get(i).toJSONString());
-			} else {
-				sb.append(contactList.get(i).toJSONString()).append(",");
+		if (contactList != null) {
+			for (int i = 0; i < contactList.size(); i++) {
+				if (i == contactList.size() - 1) {
+					sb.append(contactList.get(i).toJSONString());
+				} else {
+					sb.append(contactList.get(i).toJSONString()).append(",");
+				}
 			}
 		}
 		sb.append("]");
 		p.add(new BasicNameValuePair("ContactsTable", sb.toString()));
 		sb.setLength(0);
 		sb.append("[");
-		for (int i = 0; i < this.investorList.size(); i++) {
-			if (i == investorList.size() - 1) {
-				sb.append(investorList.get(i).toJSONString());
-			} else {
-				sb.append(investorList.get(i).toJSONString()).append(",");
+		if (investorList != null) {
+			for (int i = 0; i < this.investorList.size(); i++) {
+				if (i == investorList.size() - 1) {
+					sb.append(investorList.get(i).toJSONString());
+				} else {
+					sb.append(investorList.get(i).toJSONString()).append(",");
+				}
 			}
 		}
 		sb.append("]");
 		p.add(new BasicNameValuePair("InvestorTable", sb.toString()));
+		System.out.println(p.toString());
 		return p;
-	}
-
-	@SuppressWarnings("deprecation")
-	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("BuildTime=").append(buildTime).append("&");
-		sb.append("Case=").append(URLEncoder.encode(this.casse)).append("&");
-		sb.append("CityLeader=").append(URLEncoder.encode(this.cityLeader))
-				.append("&");
-		sb.append("CreateDate=").append(this.createDate).append("&");
-		sb.append("CreateId=").append(this.createdId).append("&");
-		sb.append("Enviroment=").append(this.enviroment).append("&");
-		sb.append("IndustryDetail=")
-				.append(URLEncoder.encode(this.industryDetail)).append("&");
-		sb.append("IndustryType=").append(URLEncoder.encode(this.industryType))
-				.append("&");
-		sb.append("LandRequire=").append(this.landRequire).append("&");
-		sb.append("PlanningDate=").append(this.planningDate).append("&");
-		sb.append("Policy=").append(this.policy).append("&");
-		sb.append("PrjMemo=").append(this.projectMemo).append("&");
-		sb.append("PrjName=").append(URLEncoder.encode(this.projectName))
-				.append("&");
-		sb.append("PrjPlan=").append(URLEncoder.encode(this.projectPlan))
-				.append("&");
-		sb.append("Referrer=").append(URLEncoder.encode(this.referrer))
-				.append("&");
-		sb.append("ResponsibleId=").append(this.responsibleId).append("&");
-		sb.append("Scale=").append(this.scale).append("&");
-		sb.append("ScaleUnit=").append(this.scaleUnit).append("&");
-		sb.append("StageId=").append(this.stageId).append("&");
-		sb.append("TotalAmount=").append(this.totalAmount).append("&");
-		sb.append("TotalTax=").append(this.totalTax).append("&");
-		sb.append("TownLeader=").append(URLEncoder.encode(this.townLeader))
-				.append("&");
-		sb.append("UpdateDate=").append(this.updateDate).append("&");
-		sb.append("UpdateId=").append(this.updateId).append("&");
-		sb.append("Workers=").append(this.workers).append("&");
-		sb.append("WorkersTable=").append(this.workers).append("&");
-		sb.append("ContactsTable=").append("[");
-		for (int i = 0; i < contactList.size(); i++) {
-			if (i == contactList.size() - 1) {
-				sb.append(contactList.get(i).toJSONString());
-			} else {
-				sb.append(contactList.get(i).toJSONString()).append(",");
-			}
-		}
-		sb.append("]").append("&");
-		sb.append("InvestorTable=").append("[");
-		for (int i = 0; i < this.investorList.size(); i++) {
-			if (i == investorList.size() - 1) {
-				sb.append(investorList.get(i).toJSONString());
-			} else {
-				sb.append(investorList.get(i).toJSONString()).append(",");
-			}
-		}
-		sb.append("]");
-		return sb.toString();
 	}
 }

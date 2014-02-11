@@ -361,8 +361,9 @@
 
                 <EditText
                     android:id="@+id/project_scale"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
                     android:layout_weight="1"
                     android:background="#ffffff"
                     android:gravity="right"
@@ -513,7 +514,8 @@
 
                 <EditText
                     android:id="@+id/project_total_amount"
-                    android:layout_width="match_parent"
+                    android:inputType="numberDecimal"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#ffffff"
@@ -551,7 +553,8 @@
 
                 <EditText
                     android:id="@+id/project_total_tax"
-                    android:layout_width="match_parent"
+                    android:inputType="numberDecimal"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#ffffff"

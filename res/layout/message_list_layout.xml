@@ -16,7 +16,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+            android:src="@drawable/btn_back" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,24 +35,39 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true" />
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/message_listview"
+        android:id="@+id/message_list_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:listSelector="@android:color/transparent" />
 
-    <TextView
-        android:id="@+id/message_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/data_empty"
-        android:textSize="16dp"
-        android:visibility="gone" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_message_s" >
+
+        <EditText
+            android:id="@+id/msg_input"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#88ff0000"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textSize="14dp"
+            android:singleLine="true" />
+
+        <View
+            android:id="@+id/msg_send"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#88000000" />
+    </LinearLayout>
 
 </LinearLayout>
