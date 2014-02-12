@@ -20,4 +20,6 @@ public class Constants {
 	public static final String MESSAGE_GETLIST = "Message/GetList?UserId=?&Memo=?&ActivityId=?";
 	public static final String MESSAGE_REVIEW = "Message/Review?UserId=?&Memo=?&ActivityId=?";
 	public static final String MESSAGE_REPLY = "Message/Reply?UserId=?&Memo=?&ActivityId=?&Content=?";
+	public static final String ACTIVITY_CREATE = "Activity/create";
+	public static final String ACTIVITY_EDIT = "Activity/edit";
 }

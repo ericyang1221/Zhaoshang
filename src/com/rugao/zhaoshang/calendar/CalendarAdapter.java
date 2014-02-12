@@ -136,10 +136,21 @@ public class CalendarAdapter extends BaseAdapter {
 			this.id = Long.valueOf(year + "" + month + "" + day);
 			if (aiList != null) {
 				for (ActivityItem ai : aiList) {
-					if (ai.getYear() == year && ai.getMonth() == month + 1
-							&& ai.getDay() == day) {
-						hasActivity = true;
-						break;
+					String date = ai.getDate();
+					if (date != null && date.length() > 0) {
+						String[] d = date.split("-");
+						if (d.length == 3) {
+							try {
+								int yy = Integer.valueOf(d[0]);
+								int mm = Integer.valueOf(d[1]);
+								int dd = Integer.valueOf(d[2]);
+								if (yy == year && mm == month + 1 && dd == day) {
+									hasActivity = true;
+									break;
+								}
+							} catch (Exception e) {
+							}
+						}
 					}
 				}
 			}

@@ -155,4 +155,14 @@ public class Utils {
 	public static String getActivityProject(Context context) {
 		return getSharedPreferences(context).getString("ACTIVITY_PROJECT", null);
 	}
+	
+	public static void putUsername(Context context, String str) {
+		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+		editor.putString("USER_NAME", str);
+		editor.commit();
+	}
+	
+	public static String getUsername(Context context) {
+		return getSharedPreferences(context).getString("USER_NAME", null);
+	}
 }

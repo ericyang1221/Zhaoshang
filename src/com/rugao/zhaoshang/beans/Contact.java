@@ -1,7 +1,5 @@
 package com.rugao.zhaoshang.beans;
 
-import java.net.URLEncoder;
-
 public class Contact {
 
 	private int contactId;
@@ -68,21 +66,17 @@ public class Contact {
 		this.memo = memo;
 	}
 
-	@SuppressWarnings("deprecation")
 	public String toJSONString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
 		sb.append("\"Telephone\":").append("\"").append(this.telephone)
 				.append("\",");
-		sb.append("\"Memo\":").append("\"")
-				.append(URLEncoder.encode(this.memo)).append("\",");
-		sb.append("\"Role\":").append("\"")
-				.append(URLEncoder.encode(this.role)).append("\",");
+		sb.append("\"Memo\":").append("\"").append(this.memo).append("\",");
+		sb.append("\"Role\":").append("\"").append(this.role).append("\",");
 		sb.append("\"Phone\":").append("\"").append(this.phone).append("\",");
 		sb.append("\"ProjectId\":").append("\"").append(this.projectId)
 				.append("\",");
-		sb.append("\"Name\":").append("\"")
-				.append(URLEncoder.encode(this.name)).append("\",");
+		sb.append("\"Name\":").append("\"").append(this.name).append("\",");
 		sb.append("\"ContactId\":").append(this.contactId);
 		sb.append("}");
 		return sb.toString();

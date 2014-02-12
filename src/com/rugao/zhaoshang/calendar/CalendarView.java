@@ -90,7 +90,7 @@ public class CalendarView extends Fragment {
 	}
 
 	@SuppressWarnings("deprecation")
-	protected void updateCurrentMonth() {
+	public void updateCurrentMonth() {
 		final BaseActivity ba = ((BaseActivity) getActivity());
 		ba.showDialog(BaseActivity.LOADING_DIALOG);
 		new Thread(new Runnable() {
@@ -147,7 +147,8 @@ public class CalendarView extends Fragment {
 				cal.set(Calendar.MONTH, month);
 				cal.set(Calendar.DAY_OF_MONTH, day);
 				if (onCalendarDateClickListener != null) {
-					onCalendarDateClickListener.onCalendarDateClickListener(year,month,day);
+					onCalendarDateClickListener.onCalendarDateClickListener(
+							year, month, day);
 				}
 			}
 		}
@@ -217,7 +218,7 @@ public class CalendarView extends Fragment {
 	}
 
 	public interface OnCalendarDateClickListener {
-		void onCalendarDateClickListener(int year,int month,int day);
+		void onCalendarDateClickListener(int year, int month, int day);
 	}
 
 	public void setOnCalendarDateClickListener(
@@ -228,5 +229,4 @@ public class CalendarView extends Fragment {
 	public List<ActivityItem> getAiList() {
 		return aiList;
 	}
-
 }

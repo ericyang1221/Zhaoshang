@@ -1,7 +1,5 @@
 package com.rugao.zhaoshang.beans;
 
-import java.net.URLEncoder;
-
 public class Investor {
 
 	private int investorId;
@@ -77,24 +75,21 @@ public class Investor {
 		this.memo = memo;
 	}
 
-	@SuppressWarnings("deprecation")
 	public String toJSONString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
-		sb.append("\"Status\":").append("\"")
-				.append(URLEncoder.encode(this.status)).append("\",");
-		sb.append("\"InvestorName\":").append("\"")
-				.append(URLEncoder.encode(this.investorName)).append("\",");
+		sb.append("\"Status\":").append("\"").append(this.status).append("\",");
+		sb.append("\"InvestorName\":").append("\"").append(this.investorName)
+				.append("\",");
 		sb.append("\"ProjectId\":").append("\"").append(this.projectId)
 				.append("\",");
-		sb.append("\"MainProduct\":").append("\"")
-				.append(URLEncoder.encode(this.mainProduct)).append("\",");
-		sb.append("\"Address\":").append("\"")
-				.append(URLEncoder.encode(this.address)).append("\",");
-		sb.append("\"ProductMemo\":").append("\"")
-				.append(URLEncoder.encode(this.productMemo)).append("\",");
-		sb.append("\"InvestorId\":").append(this.investorId)
-				.append("}");
+		sb.append("\"MainProduct\":").append("\"").append(this.mainProduct)
+				.append("\",");
+		sb.append("\"Address\":").append("\"").append(this.address)
+				.append("\",");
+		sb.append("\"ProductMemo\":").append("\"").append(this.productMemo)
+				.append("\",");
+		sb.append("\"InvestorId\":").append(this.investorId).append("}");
 		return sb.toString();
 	}
 }

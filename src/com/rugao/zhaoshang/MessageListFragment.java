@@ -103,6 +103,14 @@ public class MessageListFragment extends BaseFragment implements DataView {
 						}
 					}
 				});
+		messageLayout.findViewById(R.id.tl).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						getActivity().getSupportFragmentManager()
+								.popBackStack();
+					}
+				});
 		return messageLayout;
 	}
 

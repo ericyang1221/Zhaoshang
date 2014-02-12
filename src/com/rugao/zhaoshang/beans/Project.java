@@ -6,11 +6,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.util.Log;
-
 public class Project {
-	private final String TAG = "Project";
-
 	private Integer projectId;
 	private String projectName;
 	private String planningDate;
@@ -371,8 +367,6 @@ public class Project {
 		} else {
 			p.add(new BasicNameValuePair("ProjectId", String.valueOf(projectId)));
 		}
-		Log.d(TAG, "UserId=" + userId + "  Memo=" + memo + "  ProjectId="
-				+ projectId);
 		p.add(new BasicNameValuePair("BuildTime", buildTime == null ? ""
 				: buildTime));
 		p.add(new BasicNameValuePair("Case", this.casse));

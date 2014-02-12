@@ -14,9 +14,12 @@ import android.widget.Toast;
 
 import com.rugao.zhaoshang.ChooseFragment.OnFragmentItemClickListener;
 import com.rugao.zhaoshang.DisplayFragment.DisplayFragmentListener;
+import com.rugao.zhaoshang.asynctask.CreateActivityTask;
 import com.rugao.zhaoshang.beans.ActivityItem;
 import com.rugao.zhaoshang.beans.DataBean;
+import com.rugao.zhaoshang.beans.UserBean;
 import com.rugao.zhaoshang.beans.ValueBean;
+import com.rugao.zhaoshang.utils.Constants;
 
 public class ActivityDetailFragment extends BaseFragment implements DataView {
 	protected ActivityItem activityItem;
@@ -26,6 +29,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 	protected EditText ac;
 	protected TextView cl;
 	protected EditText rc;
+	protected String selectedDate;
 
 	protected ChooseFragment cf;
 	protected DisplayFragment df;
@@ -56,22 +60,34 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 		layout.findViewById(R.id.tr).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				String activityName = an.getText().toString();
+				if (activityName == null || activityName.length() < 1) {
+					getBaseActivity().showToast(R.string.pls_input_activity_name);
+					return;
+				} else {
+					activityItem.setActivityIdDisplay(activityName);
+				}
+				activityItem.setDate(selectedDate);
+				activityItem.setActiMemo(ac.getText().toString());
+				activityItem.setProblems(rc.getText().toString());
+				
 				titleRightButtonAction();
 			}
 		});
+		
+		disableEditView();
 		return layout;
 	}
 
 	protected void titleRightButtonAction() {
-		// UserBean ub = getMyApplication().getUserBean();
-		// String url = Constants.DOMAIN + Constants.PROJECT_EDIT;
-		// CreateProjectTask cpt = new CreateProjectTask(getActivity());
-		// cpt.execute(
-		// ActivityDetailFragment.this,
-		// url,
-		// project.getPostParams(String.valueOf(ub.getUserId()),
-		// ub.getMemo(), false));
-		// System.out.println(project.toString());
+		UserBean ub = getMyApplication().getUserBean();
+		String url = Constants.DOMAIN + Constants.ACTIVITY_EDIT;
+		CreateActivityTask cat = new CreateActivityTask(getActivity());
+		cat.execute(
+				ActivityDetailFragment.this,
+				url,
+				activityItem.getPostParams(String.valueOf(ub.getUserId()),
+						ub.getMemo(), false));
 	}
 
 	@Override
@@ -82,12 +98,20 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 		ps.setText(activityItem.getStageIdDisplay());
 		ac.setText(activityItem.getActiMemo());
 		rc.setText(activityItem.getProblems());
+		cl.setText(activityItem.getLeaderIdsDisplay());
+	}
+
+	private void save() {
+		activityItem.setActivityIdDisplay(an.getText().toString());
+		activityItem.setActiMemo(ac.getText().toString());
+		activityItem.setProblems(rc.getText().toString());
 	}
 
 	private void initListeners(View projectDetailLayout) {
 		ps.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				save();
 				FragmentTransaction t = getActivity()
 						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
@@ -99,9 +123,10 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
 					@Override
 					public void onItemClick(int position) {
-						try{
-							activityItem.setStageId(Integer.valueOf(data.get(position).getKey()));
-						}catch(Exception e){
+						try {
+							activityItem.setStageId(Integer.valueOf(data.get(
+									position).getKey()));
+						} catch (Exception e) {
 							activityItem.setStageId(-1);
 						}
 						activityItem.setStageIdDisplay(data.get(position)
@@ -118,6 +143,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 		pn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				save();
 				FragmentTransaction t = getActivity()
 						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
@@ -129,9 +155,10 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
 					@Override
 					public void onItemClick(int position) {
-						try{
-							activityItem.setProjectId(Integer.valueOf(data.get(position).getKey()));
-						}catch(Exception e){
+						try {
+							activityItem.setProjectId(Integer.valueOf(data.get(
+									position).getKey()));
+						} catch (Exception e) {
 							activityItem.setProjectId(-1);
 						}
 						activityItem.setProjectIdDisplay(data.get(position)
@@ -148,6 +175,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 		cl.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				save();
 				FragmentTransaction t = getActivity()
 						.getSupportFragmentManager().beginTransaction();
 				if (df == null) {
@@ -184,6 +212,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 						df.setData(activityItem.getLeaderIdsDisplay()
 								.split(","),
 								activityItem.getLeaderIds().split(","));
+						cl.setText(activityItem.getLeaderIdsDisplay());
 					}
 
 					@Override
@@ -215,6 +244,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 						df.setData(activityItem.getLeaderIdsDisplay()
 								.split(","),
 								activityItem.getLeaderIds().split(","));
+						cl.setText(activityItem.getLeaderIdsDisplay());
 					}
 				});
 				t.add(R.id.content, df);
@@ -235,10 +265,18 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 					Toast.LENGTH_SHORT).show();
 		}
 		getActivity().getSupportFragmentManager().popBackStack();
-		System.out.println(db.getResultMsg());
+	}
+
+	public void setSelectedDate(String selectedDate) {
+		this.selectedDate = selectedDate;
 	}
 
 	public void setActivityItem(ActivityItem activityItem) {
 		this.activityItem = activityItem;
+	}
+	
+	protected void disableEditView(){
+		rc.setEnabled(false);
+		cl.setEnabled(false);
 	}
 }

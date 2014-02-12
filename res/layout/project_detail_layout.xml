@@ -57,8 +57,8 @@
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_name"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_name"
@@ -77,7 +77,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -95,8 +95,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_stage"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/project_stage"
@@ -115,7 +115,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -132,8 +132,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_planning_date"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/project_planning_date"
@@ -152,7 +152,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -169,8 +169,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_industry_type"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/project_industry_type"
@@ -189,7 +189,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -206,8 +206,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -215,7 +215,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_industry_detail"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/project_industry_detail"
@@ -226,7 +226,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -243,8 +243,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -252,7 +252,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_policy"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/project_policy"
@@ -264,7 +264,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -281,8 +281,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -290,7 +290,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_enviroment"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/project_enviroment"
@@ -302,7 +302,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -319,8 +319,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:orientation="vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -328,7 +328,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_case"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_case"
@@ -348,8 +348,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -357,7 +357,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_scale"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_scale"
@@ -369,7 +369,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -387,8 +387,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -396,7 +396,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_scale_unit"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/project_scale_unit"
@@ -408,7 +408,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -425,8 +425,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -434,7 +434,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_land"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_land"
@@ -445,7 +445,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -463,8 +463,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -472,7 +472,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_build_time"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_build_time"
@@ -483,7 +483,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -501,8 +501,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -510,7 +510,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_total_amount"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_total_amount"
@@ -522,7 +522,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -540,8 +540,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -549,7 +549,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_total_tax"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_total_tax"
@@ -561,7 +561,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -579,8 +579,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:orientation="vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -588,7 +588,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_prjplan"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_prjplan"
@@ -608,8 +608,8 @@
                 android:layout_marginTop="20dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -617,7 +617,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_responsible_id"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/project_responsible_id"
@@ -628,7 +628,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -645,8 +645,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -654,7 +654,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_city_leader"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_city_leader"
@@ -665,7 +665,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -683,8 +683,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -692,7 +692,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_town_leader"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_town_leader"
@@ -703,7 +703,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -721,8 +721,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -730,7 +730,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_referrer"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <EditText
                     android:id="@+id/project_referrer"
@@ -741,7 +741,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -759,8 +759,8 @@
                 android:layout_marginTop="2dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -768,7 +768,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/project_workers"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/project_workers"
@@ -780,7 +780,7 @@
                     android:gravity="right"
                     android:singleLine="true"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -798,8 +798,8 @@
                 android:layout_marginTop="20dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -808,7 +808,7 @@
                     android:layout_weight="1"
                     android:text="@string/project_contacts"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -826,8 +826,8 @@
                 android:layout_marginTop="20dp"
                 android:background="#ffffff"
                 android:gravity="center_vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp" >
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -836,7 +836,7 @@
                     android:layout_weight="1"
                     android:text="@string/project_investors"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <ImageView
                     android:layout_width="20dp"

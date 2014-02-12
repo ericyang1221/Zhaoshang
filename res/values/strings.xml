@@ -7,6 +7,7 @@
     <string name="my_activity">我的活动</string>
     <string name="my_message">我的消息</string>
     <string name="my_tool">我的工具</string>
+    <string name="remember_me">记住我</string>
     <string name="project_listview_item_respeople">负责人：</string>
     <string name="project_listview_item_projectlevel">项目阶段：</string>
     <string name="project_listview_item_releasetime">投产日期：</string>
@@ -72,6 +73,7 @@
     <string name="pls_input_number">请输入数字</string>
     <string name="pls_input_msg">请填写消息内容</string>
     <string name="msg_send_failed">消息发送失败，请稍后再试。</string>
+    <string name="pls_input_activity_name">请输入活动主题。</string>
     
     <string name="current_month_placeholder">January 1970</string>
     <string name="previous_month_placeholder">&lt;&lt;</string>

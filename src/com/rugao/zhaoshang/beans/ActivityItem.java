@@ -1,11 +1,17 @@
 package com.rugao.zhaoshang.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 public class ActivityItem {
 	private int activityId;
 	private String activityIdDisplay;
-	private int projectId;
+	private Integer projectId;
 	private String projectIdDisplay;
-	private int stageId;
+	private Integer stageId;
 	private String stageIdDisplay;
 	private String date;
 	private String address;
@@ -20,8 +26,8 @@ public class ActivityItem {
 	private int year;
 	private int month;
 	private int day;
-	
-	public ActivityItem(){
+
+	public ActivityItem() {
 		leaderIds = "";
 		leaderIdsDisplay = "";
 	}
@@ -42,11 +48,11 @@ public class ActivityItem {
 		this.activityIdDisplay = activityIdDisplay;
 	}
 
-	public int getProjectId() {
+	public Integer getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(int projectId) {
+	public void setProjectId(Integer projectId) {
 		this.projectId = projectId;
 	}
 
@@ -58,11 +64,11 @@ public class ActivityItem {
 		this.projectIdDisplay = projectIdDisplay;
 	}
 
-	public int getStageId() {
+	public Integer getStageId() {
 		return stageId;
 	}
 
-	public void setStageId(int stageId) {
+	public void setStageId(Integer stageId) {
 		this.stageId = stageId;
 	}
 
@@ -181,5 +187,30 @@ public class ActivityItem {
 	@Override
 	public String toString() {
 		return activityIdDisplay;
+	}
+
+	public List<NameValuePair> getPostParams(String userId, String memo,
+			boolean isAdd) {
+		List<NameValuePair> p = new ArrayList<NameValuePair>();
+		p.add(new BasicNameValuePair("Memo", memo));
+		p.add(new BasicNameValuePair("UserId", String.valueOf(userId)));
+		if (isAdd) {
+			if (problems != null && problems.length() > 0 && leaderIds != null
+					&& leaderIds.length() > 2) {
+				p.add(new BasicNameValuePair("Problems", problems));
+				p.add(new BasicNameValuePair("LeaderIds", leaderIds));
+			}
+		} else {
+			p.add(new BasicNameValuePair("ActivityId", String
+					.valueOf(activityId)));
+		}
+		p.add(new BasicNameValuePair("ProjectId", projectId==null?null:String.valueOf(projectId)));
+		p.add(new BasicNameValuePair("StageId", stageId==null?null:String.valueOf(stageId)));
+		p.add(new BasicNameValuePair("Address", address));
+		p.add(new BasicNameValuePair("ActivityName", activityIdDisplay));
+		p.add(new BasicNameValuePair("actiMemo", actiMemo));
+		p.add(new BasicNameValuePair("Date", date));
+		System.out.println(p.toString());
+		return p;
 	}
 }
