@@ -31,9 +31,11 @@ public class LoginActivity extends BaseActivity implements DataView {
 		String un = Utils.getUsername(this);
 		if (un == null) {
 			cb.setChecked(false);
+			isRemember = false;
 		} else {
 			cb.setChecked(true);
 			name.setText(un);
+			isRemember = true;
 		}
 		cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
@@ -47,6 +49,7 @@ public class LoginActivity extends BaseActivity implements DataView {
 					@Override
 					public void onClick(View v) {
 						String n = name.getText().toString();
+						n = "yanghui";
 						if (n.length() < 1) {
 							Toast.makeText(
 									LoginActivity.this,
@@ -55,6 +58,7 @@ public class LoginActivity extends BaseActivity implements DataView {
 							return;
 						}
 						String p = pwd.getText().toString();
+						p = "yanghui";
 						if (p.length() < 1) {
 							Toast.makeText(LoginActivity.this,
 									getString(R.string.pwd_cannot_be_empty),

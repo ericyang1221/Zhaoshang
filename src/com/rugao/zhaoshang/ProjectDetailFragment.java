@@ -111,19 +111,22 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						project.setProjectName(pn.getText().toString());
 						project.setCase(pc.getText().toString());
 						try {
-							project.setScale(Double.valueOf(pst.getText().toString()));
+							project.setScale(Double.valueOf(pst.getText()
+									.toString()));
 						} catch (Exception e) {
 							project.setScale(null);
 						}
 						project.setLandRequire(pl.getText().toString());
 						project.setBuildTime(pbt.getText().toString());
 						try {
-							project.setTotalAmount(Long.valueOf(pta.getText().toString()));
+							project.setTotalAmount(Long.valueOf(pta.getText()
+									.toString()));
 						} catch (Exception e) {
 							project.setTotalAmount(null);
 						}
 						try {
-							project.setTotalTax(Double.valueOf(ptt.getText().toString()));
+							project.setTotalTax(Double.valueOf(ptt.getText()
+									.toString()));
 						} catch (Exception e) {
 							project.setTotalTax(null);
 						}
@@ -131,7 +134,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						project.setCityLeader(pcl.getText().toString());
 						project.setTownLeader(ptl.getText().toString());
 						project.setReferrer(pr.getText().toString());
-						
+
 						titleRightButtonAction();
 					}
 				});
@@ -176,11 +179,15 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				.getTotalAmount()));
 		ptt.setText(String.valueOf(project.getTotalTax() == null
 				|| project.getTotalTax() == -1 ? "" : project.getTotalTax()));
-		ppp.setText(project.getProjectPlan()==null?"":project.getProjectPlan());
-		pri.setText(project.getResponsibleIdDisplay()==null?"":project.getResponsibleIdDisplay());
-		pcl.setText(project.getCityLeader()==null?"":project.getCityLeader());
-		ptl.setText(project.getTownLeader()==null?"":project.getTownLeader());
-		pr.setText(project.getReferrer()==null?"":project.getReferrer());
+		ppp.setText(project.getProjectPlan() == null ? "" : project
+				.getProjectPlan());
+		pri.setText(project.getResponsibleIdDisplay() == null ? "" : project
+				.getResponsibleIdDisplay());
+		pcl.setText(project.getCityLeader() == null ? "" : project
+				.getCityLeader());
+		ptl.setText(project.getTownLeader() == null ? "" : project
+				.getTownLeader());
+		pr.setText(project.getReferrer() == null ? "" : project.getReferrer());
 		pw.setText(project.getWorkersDisplay());
 	}
 
@@ -292,11 +299,16 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 							project.setStageId(-1);
 						}
 						project.setStageIdDisplay(data.get(position).getValue());
+						ps.setText(project.getStageIdDisplay());
 					}
 				});
-				t.replace(R.id.content, cf);
-				t.addToBackStack(null);
-				t.commit();
+				if (cf.isAdded()) {
+					t.show(cf);
+				} else {
+					t.add(R.id.content, cf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 		final DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
@@ -333,11 +345,17 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 					@Override
 					public void onItemClick(int position) {
 						project.setIndustryType(data.get(position).getValue());
+						pit.setText(project.getIndustryType() == null ? ""
+								: project.getIndustryType());
 					}
 				});
-				t.replace(R.id.content, cf);
-				t.addToBackStack(null);
-				t.commit();
+				if (cf.isAdded()) {
+					t.show(cf);
+				} else {
+					t.add(R.id.content, cf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 		pid.setOnClickListener(new OnClickListener() {
@@ -355,11 +373,17 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 					@Override
 					public void onItemClick(int position) {
 						project.setIndustryDetail(data.get(position).getValue());
+						pid.setText(project.getIndustryDetail() == null ? ""
+								: project.getIndustryDetail());
 					}
 				});
-				t.replace(R.id.content, cf);
-				t.addToBackStack(null);
-				t.commit();
+				if (cf.isAdded()) {
+					t.show(cf);
+				} else {
+					t.add(R.id.content, cf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 		pp.setOnClickListener(new OnClickListener() {
@@ -383,11 +407,17 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						} catch (Exception e) {
 							project.setPolicy(-1);
 						}
+						pp.setText(project.getPolicyDisplay() == null ? ""
+								: project.getPolicyDisplay());
 					}
 				});
-				t.replace(R.id.content, cf);
-				t.addToBackStack(null);
-				t.commit();
+				if (cf.isAdded()) {
+					t.show(cf);
+				} else {
+					t.add(R.id.content, cf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 		pe.setOnClickListener(new OnClickListener() {
@@ -412,11 +442,17 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						} catch (Exception e) {
 							project.setEnviroment(-1);
 						}
+						pe.setText(project.getEnviromentDisplay() == null ? ""
+								: project.getEnviromentDisplay());
 					}
 				});
-				t.replace(R.id.content, cf);
-				t.addToBackStack(null);
-				t.commit();
+				if (cf.isAdded()) {
+					t.show(cf);
+				} else {
+					t.add(R.id.content, cf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 		psu.setOnClickListener(new OnClickListener() {
@@ -437,11 +473,16 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 								.getValue());
 						project.setScaleUnit(String.valueOf(data.get(position)
 								.getKey()));
+						psu.setText(project.getScaleUnitDisplay());
 					}
 				});
-				t.replace(R.id.content, cf);
-				t.addToBackStack(null);
-				t.commit();
+				if (cf.isAdded()) {
+					t.show(cf);
+				} else {
+					t.add(R.id.content, cf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 		pri.setOnClickListener(new OnClickListener() {
@@ -466,11 +507,17 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						} catch (Exception e) {
 							project.setResponsibleId(-1);
 						}
+						pri.setText(project.getResponsibleIdDisplay() == null ? ""
+								: project.getResponsibleIdDisplay());
 					}
 				});
-				t.replace(R.id.content, cf);
-				t.addToBackStack(null);
-				t.commit();
+				if (cf.isAdded()) {
+					t.show(cf);
+				} else {
+					t.add(R.id.content, cf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 		pw.setOnClickListener(new OnClickListener() {
@@ -512,6 +559,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						}
 						df.setData(project.getWorkersDisplay().split(","),
 								project.getWorkers().split(","));
+						pw.setText(project.getWorkersDisplay());
 					}
 
 					@Override
@@ -540,11 +588,16 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						}
 						df.setData(project.getWorkersDisplay().split(","),
 								project.getWorkers().split(","));
+						pw.setText(project.getWorkersDisplay());
 					}
 				});
-				t.replace(R.id.content, df);
-				t.addToBackStack(null);
-				t.commit();
+				if (df.isAdded()) {
+					t.show(df);
+				} else {
+					t.add(R.id.content, df);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 
@@ -557,9 +610,13 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 					idf = new InvestorDisplayFragment();
 				}
 				idf.setProject(project);
-				t.replace(R.id.content, idf);
-				t.addToBackStack(null);
-				t.commit();
+				if (idf.isAdded()) {
+					t.show(idf);
+				} else {
+					t.add(R.id.content, idf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 		pcs.setOnClickListener(new OnClickListener() {
@@ -571,9 +628,13 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 					cdf = new ContactDisplayFragment();
 				}
 				cdf.setProject(project);
-				t.replace(R.id.content, cdf);
-				t.addToBackStack(null);
-				t.commit();
+				if (cdf.isAdded()) {
+					t.show(cdf);
+				} else {
+					t.add(R.id.content, cdf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 	}

@@ -24,10 +24,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.rugao.zhaoshang.ActivityFragment;
 import com.rugao.zhaoshang.BaseActivity;
 import com.rugao.zhaoshang.R;
 import com.rugao.zhaoshang.beans.ActivityBean;
@@ -44,10 +46,15 @@ public class CalendarView extends Fragment {
 	private CalendarAdapter calendarAdapter;
 	private OnCalendarDateClickListener onCalendarDateClickListener;
 	private List<ActivityItem> aiList;
+	private ActivityFragment af;
 
 	public CalendarView() {
 		calendar = Calendar.getInstance();
 		locale = Locale.getDefault();
+	}
+
+	public void setActivityFragment(ActivityFragment af) {
+		this.af = af;
 	}
 
 	@Override
@@ -68,10 +75,13 @@ public class CalendarView extends Fragment {
 		calendarAdapter = new CalendarAdapter(getActivity(), calendar);
 		updateCurrentMonth();
 
-		final TextView nextMonth = (TextView) calendarLayout
+		calendarGrid.setHorizontalSpacing(0);
+		calendarGrid.setVerticalSpacing(0);
+
+		final ImageView nextMonth = (ImageView) calendarLayout
 				.findViewById(R.id.next_month);
 		nextMonth.setOnClickListener(new NextMonthClickListener());
-		final TextView prevMonth = (TextView) calendarLayout
+		final ImageView prevMonth = (ImageView) calendarLayout
 				.findViewById(R.id.previous_month);
 		prevMonth.setOnClickListener(new PreviousMonthClickListener());
 		calendarGrid.setOnItemClickListener(new DayItemClickListener());
@@ -122,6 +132,7 @@ public class CalendarView extends Fragment {
 					@Override
 					public void run() {
 						calendarAdapter.refreshDays(aiList);
+						af.updateSelectdateList(af.getSelectedDate());
 					}
 				});
 				ba.dismissDialogIfExist(BaseActivity.LOADING_DIALOG);
@@ -135,20 +146,23 @@ public class CalendarView extends Fragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			final TextView dayView = (TextView) view.findViewById(R.id.date);
-			final CharSequence text = dayView.getText();
-			if (text != null && !"".equals(text)) {
-				int year = calendar.get(Calendar.YEAR);
-				int month = calendar.get(Calendar.MONTH);
-				int day = Integer.valueOf(String.valueOf(text));
-				calendarAdapter.setSelected(year, month, day);
-				Calendar cal = Calendar.getInstance();
-				cal.set(Calendar.YEAR, year);
-				cal.set(Calendar.MONTH, month);
-				cal.set(Calendar.DAY_OF_MONTH, day);
-				if (onCalendarDateClickListener != null) {
-					onCalendarDateClickListener.onCalendarDateClickListener(
-							year, month, day);
+			if (view.isEnabled()) {
+				final TextView dayView = (TextView) view
+						.findViewById(R.id.date);
+				final CharSequence text = dayView.getText();
+				if (text != null && !"".equals(text)) {
+					int year = calendar.get(Calendar.YEAR);
+					int month = calendar.get(Calendar.MONTH);
+					int day = Integer.valueOf(String.valueOf(text));
+					calendarAdapter.setSelected(year, month, day);
+					Calendar cal = Calendar.getInstance();
+					cal.set(Calendar.YEAR, year);
+					cal.set(Calendar.MONTH, month);
+					cal.set(Calendar.DAY_OF_MONTH, day);
+					if (onCalendarDateClickListener != null) {
+						onCalendarDateClickListener
+								.onCalendarDateClickListener(year, month, day);
+					}
 				}
 			}
 		}

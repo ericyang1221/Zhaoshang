@@ -70,11 +70,11 @@
 
                 <EditText
                     android:id="@+id/project_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -108,11 +108,11 @@
 
                 <TextView
                     android:id="@+id/project_stage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -145,11 +145,11 @@
 
                 <TextView
                     android:id="@+id/project_planning_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -182,11 +182,11 @@
 
                 <TextView
                     android:id="@+id/project_industry_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -219,11 +219,11 @@
 
                 <TextView
                     android:id="@+id/project_industry_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -256,12 +256,11 @@
 
                 <TextView
                     android:id="@+id/project_policy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:editable="false"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -294,12 +293,11 @@
 
                 <TextView
                     android:id="@+id/project_enviroment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:editable="false"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -362,11 +360,11 @@
                 <EditText
                     android:id="@+id/project_scale"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:inputType="numberDecimal"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -400,12 +398,11 @@
 
                 <TextView
                     android:id="@+id/project_scale_unit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:editable="false"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -438,11 +435,11 @@
 
                 <EditText
                     android:id="@+id/project_land"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -476,11 +473,11 @@
 
                 <EditText
                     android:id="@+id/project_build_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -516,10 +513,10 @@
                     android:id="@+id/project_total_amount"
                     android:inputType="numberDecimal"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -555,10 +552,10 @@
                     android:id="@+id/project_total_tax"
                     android:inputType="numberDecimal"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -621,11 +618,11 @@
 
                 <TextView
                     android:id="@+id/project_responsible_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -658,11 +655,11 @@
 
                 <EditText
                     android:id="@+id/project_city_leader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -696,11 +693,11 @@
 
                 <EditText
                     android:id="@+id/project_town_leader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -734,11 +731,11 @@
 
                 <EditText
                     android:id="@+id/project_referrer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -772,12 +769,11 @@
 
                 <TextView
                     android:id="@+id/project_workers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
-                    android:editable="false"
-                    android:gravity="right"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -802,7 +798,7 @@
                 android:paddingTop="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
@@ -830,7 +826,7 @@
                 android:paddingTop="15dp" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"

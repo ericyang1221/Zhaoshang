@@ -62,11 +62,11 @@
             <EditText
                 android:id="@+id/investor_name"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:background="#ffffff"
-                android:gravity="right"
+                android:gravity="center_vertical|right"
                 android:singleLine="true" />
         </LinearLayout>
 
@@ -93,11 +93,11 @@
             <EditText
                 android:id="@+id/investor_address"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:background="#ffffff"
-                android:gravity="right"
+                android:gravity="center_vertical|right"
                 android:singleLine="true" />
         </LinearLayout>
 
@@ -124,11 +124,11 @@
             <EditText
                 android:id="@+id/investor_status"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:background="#ffffff"
-                android:gravity="right"
+                android:gravity="center_vertical|right"
                 android:singleLine="true" />
         </LinearLayout>
 
@@ -155,11 +155,11 @@
             <EditText
                 android:id="@+id/investor_mainproduct"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:background="#ffffff"
-                android:gravity="right"
+                android:gravity="center_vertical|right"
                 android:singleLine="true" />
         </LinearLayout>
 
@@ -186,11 +186,11 @@
             <EditText
                 android:id="@+id/investor_productmemo"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:background="#ffffff"
-                android:gravity="right"
+                android:gravity="center_vertical|right"
                 android:singleLine="true" />
         </LinearLayout>
 

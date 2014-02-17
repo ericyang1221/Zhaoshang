@@ -21,29 +21,12 @@ public class MessageListTask extends BaseAsyncTask {
 	}
 
 	@Override
-	protected void onPostExecute(JSONObject result) {
-		super.onPostExecute(result);
+	protected DataBean processResult(JSONObject result) throws JSONException {
 		Object obj = null;
 		DataBean db = null;
-		try {
-			obj = new MessagePieceBean(result);
-			db = new DataBean(null);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		obj = new MessagePieceBean(result);
+		db = new DataBean(null);
 		db.setObj(obj);
-		dv.setData(db);
-		Integer dialogId = getDialogId();
-		if (dialogId != null) {
-			BaseActivity ba = getBaseActivity();
-			if (ba != null) {
-				ba.dismissDialogIfExist(dialogId);
-			}
-		}
-	}
-
-	@Override
-	protected DataBean processResult(JSONObject result) throws JSONException {
-		return null;
+		return db;
 	}
 }

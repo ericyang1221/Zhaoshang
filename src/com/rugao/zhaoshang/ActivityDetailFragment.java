@@ -36,6 +36,8 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 	protected InvestorDisplayFragment idf;
 	protected ContactDisplayFragment cdf;
 
+	protected boolean isClEnable;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -62,7 +64,8 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 			public void onClick(View v) {
 				String activityName = an.getText().toString();
 				if (activityName == null || activityName.length() < 1) {
-					getBaseActivity().showToast(R.string.pls_input_activity_name);
+					getBaseActivity().showToast(
+							R.string.pls_input_activity_name);
 					return;
 				} else {
 					activityItem.setActivityIdDisplay(activityName);
@@ -70,11 +73,11 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				activityItem.setDate(selectedDate);
 				activityItem.setActiMemo(ac.getText().toString());
 				activityItem.setProblems(rc.getText().toString());
-				
+
 				titleRightButtonAction();
 			}
 		});
-		
+
 		disableEditView();
 		return layout;
 	}
@@ -134,9 +137,13 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 						ActivityDetailFragment.this.onResume();
 					}
 				});
-				t.add(R.id.content, cf);
-				t.addToBackStack(null);
-				t.commit();
+				if (cf.isAdded()) {
+					t.show(cf);
+				} else {
+					t.add(R.id.content, cf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 
@@ -166,9 +173,13 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 						ActivityDetailFragment.this.onResume();
 					}
 				});
-				t.add(R.id.content, cf);
-				t.addToBackStack(null);
-				t.commit();
+				if (cf.isAdded()) {
+					t.show(cf);
+				} else {
+					t.add(R.id.content, cf);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 
@@ -181,6 +192,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				if (df == null) {
 					df = new DisplayFragment();
 				}
+				df.isEditable(isClEnable);
 				df.setData(activityItem.getLeaderIdsDisplay().split(","),
 						activityItem.getLeaderIds().split(","));
 				df.setDisplayFragmentListener(new DisplayFragmentListener() {
@@ -247,9 +259,13 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 						cl.setText(activityItem.getLeaderIdsDisplay());
 					}
 				});
-				t.add(R.id.content, df);
-				t.addToBackStack(null);
-				t.commit();
+				if (df.isAdded()) {
+					t.show(df);
+				} else {
+					t.add(R.id.content, df);
+					t.addToBackStack(null);
+					t.commit();
+				}
 			}
 		});
 
@@ -274,9 +290,9 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 	public void setActivityItem(ActivityItem activityItem) {
 		this.activityItem = activityItem;
 	}
-	
-	protected void disableEditView(){
+
+	protected void disableEditView() {
 		rc.setEnabled(false);
-		cl.setEnabled(false);
+		isClEnable = false;
 	}
 }

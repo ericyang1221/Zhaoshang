@@ -71,7 +71,7 @@ public class MessageListFragment extends BaseFragment implements DataView {
 															.getUserId()),
 													ub.getMemo(),
 													String.valueOf(activityId),
-													msg });
+													msg.trim() });
 									try {
 										JSONObject jo = getMyApplication()
 												.getHttpRequestHelper()

@@ -42,5 +42,7 @@ public class ActivityAddFragment extends ActivityDetailFragment {
 
 	@Override
 	protected void disableEditView() {
+		rc.setEnabled(true);
+		isClEnable = true;
 	}
 }

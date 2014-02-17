@@ -71,7 +71,6 @@ public abstract class BaseAsyncTask extends
 		try {
 			db = processResult(result);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		dv.setData(db);

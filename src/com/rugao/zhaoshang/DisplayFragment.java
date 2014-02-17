@@ -30,6 +30,7 @@ public class DisplayFragment extends BaseFragment {
 	private ArrayAdapter<String> adapter;
 	private List<String> wsdList;
 	private DisplayFragmentListener displayFragmentListener;
+	private boolean isEditable = true;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,62 +45,71 @@ public class DisplayFragment extends BaseFragment {
 		dLayout.findViewById(R.id.tr).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
-				if (cf == null) {
-					cf = new CheckboxFragment();
-				}
-				// cf.setProject(p);
-				cf.setData(ws, getMyApplication().getProjectPeople());
-				cf.setOnConfirmClickListener(new OnConfirmClickListener() {
-					@Override
-					public void onConfirmClick(List<String> checked,
-							List<ValueBean> all) {
-						if (displayFragmentListener != null) {
-							displayFragmentListener.onChooseConfirm(checked,
-									all);
-							reflash();
-						}
+				if (isEditable) {
+					FragmentTransaction t = getActivity()
+							.getSupportFragmentManager().beginTransaction();
+					if (cf == null) {
+						cf = new CheckboxFragment();
 					}
-				});
-				t.add(R.id.content, cf);
-				t.addToBackStack(null);
-				t.commit();
+					// cf.setProject(p);
+					cf.setData(ws, getMyApplication().getProjectPeople());
+					cf.setOnConfirmClickListener(new OnConfirmClickListener() {
+						@Override
+						public void onConfirmClick(List<String> checked,
+								List<ValueBean> all) {
+							if (displayFragmentListener != null) {
+								displayFragmentListener.onChooseConfirm(
+										checked, all);
+								reflash();
+							}
+						}
+					});
+					if (cf.isAdded()) {
+						t.show(cf);
+					} else {
+						t.add(R.id.content, cf);
+						t.addToBackStack(null);
+						t.commit();
+					}
+				}
 			}
 		});
 		final List<ValueBean> it = getMyApplication().getProjectPeople();
-		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					final int arg2, long arg3) {
-				AlertDialog.Builder builder = new Builder(dLayout.getContext());
-				builder.setMessage(getString(R.string.are_you_sure_delete));
-				builder.setTitle(getString(R.string.info));
-				builder.setPositiveButton(getString(R.string.confirm),
-						new Dialog.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								if (displayFragmentListener != null) {
-									displayFragmentListener.onItemDelete(arg2,
-											wsdList, it);
+		if (isEditable) {
+			lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+				@Override
+				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+						final int arg2, long arg3) {
+					AlertDialog.Builder builder = new Builder(dLayout
+							.getContext());
+					builder.setMessage(getString(R.string.are_you_sure_delete));
+					builder.setTitle(getString(R.string.info));
+					builder.setPositiveButton(getString(R.string.confirm),
+							new Dialog.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									if (displayFragmentListener != null) {
+										displayFragmentListener.onItemDelete(
+												arg2, wsdList, it);
+									}
+									reflash();
+									dialog.dismiss();
 								}
-								reflash();
-								dialog.dismiss();
-							}
-						});
-				builder.setNegativeButton(getString(R.string.cancel),
-						new Dialog.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								dialog.dismiss();
-							}
-						});
-				builder.create().show();
-				return false;
-			}
-		});
+							});
+					builder.setNegativeButton(getString(R.string.cancel),
+							new Dialog.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+							});
+					builder.create().show();
+					return false;
+				}
+			});
+		}
 		dLayout.findViewById(R.id.tl).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -148,5 +158,9 @@ public class DisplayFragment extends BaseFragment {
 
 		public void onItemDelete(int position, List<String> wsdList,
 				List<ValueBean> it);
+	}
+
+	public void isEditable(boolean isEditable) {
+		this.isEditable = isEditable;
 	}
 }

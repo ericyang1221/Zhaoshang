@@ -22,6 +22,7 @@ import com.rugao.zhaoshang.calendar.CalendarView.OnCalendarDateClickListener;
 public class ActivityFragment extends BaseFragment {
 	private String selectedDate;
 	private CalendarView cal;
+	private ListView lv;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,8 +30,9 @@ public class ActivityFragment extends BaseFragment {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View activityLayout = inflater.inflate(R.layout.activity_layout,
 				container, false);
-		final ListView lv = (ListView) activityLayout.findViewById(R.id.cal_lv);
+		lv = (ListView) activityLayout.findViewById(R.id.cal_lv);
 		cal = new CalendarView();
+		cal.setActivityFragment(this);
 		FragmentTransaction transaction = getChildFragmentManager()
 				.beginTransaction();
 		transaction.add(R.id.cal_cal, cal).commit();
@@ -40,34 +42,10 @@ public class ActivityFragment extends BaseFragment {
 			public void onCalendarDateClickListener(int year, int month, int day) {
 				selectedDate = year + "-" + (month + 1) + "-" + day;
 				System.out.println(selectedDate);
-				int tureMonth = month + 1;
-				List<ActivityItem> aiList = cal.getAiList();
-				List<ActivityItem> aiListOfCurrentMonth = new ArrayList<ActivityItem>();
-				if (aiList != null) {
-					for (ActivityItem ai : aiList) {
-						String date = ai.getDate();
-						if (date != null && date.length() > 0) {
-							String[] d = date.split("-");
-							if (d.length == 3) {
-								try {
-									int yy = Integer.valueOf(d[0]);
-									int mm = Integer.valueOf(d[1]);
-									int dd = Integer.valueOf(d[2]);
-									if (yy == year && mm == tureMonth
-											&& dd == day) {
-										aiListOfCurrentMonth.add(ai);
-									}
-								} catch (Exception e) {
-								}
-							}
-						}
-					}
-					lv.setAdapter(new ArrayAdapter<ActivityItem>(getActivity(),
-							R.layout.activity_list_item, android.R.id.text1,
-							aiListOfCurrentMonth));
-				}
+				updateSelectdateList(selectedDate);
 			}
 		});
+
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -78,9 +56,13 @@ public class ActivityFragment extends BaseFragment {
 				activityDetailFragment.setSelectedDate(selectedDate);
 				FragmentTransaction transaction = getFragmentManager()
 						.beginTransaction();
-				transaction.add(R.id.content, activityDetailFragment);
-				transaction.addToBackStack(null);
-				transaction.commit();
+				if (activityDetailFragment.isAdded()) {
+					transaction.show(activityDetailFragment);
+				} else {
+					transaction.add(R.id.content, activityDetailFragment);
+					transaction.addToBackStack(null);
+					transaction.commit();
+				}
 			}
 		});
 
@@ -98,11 +80,61 @@ public class ActivityFragment extends BaseFragment {
 						activityAddFragment.setCalendarView(cal);
 						FragmentTransaction transaction = getFragmentManager()
 								.beginTransaction();
-						transaction.add(R.id.content, activityAddFragment);
-						transaction.addToBackStack(null);
-						transaction.commit();
+						if (activityAddFragment.isAdded()) {
+							transaction.show(activityAddFragment);
+						} else {
+							transaction.add(R.id.content, activityAddFragment);
+							transaction.addToBackStack(null);
+							transaction.commit();
+						}
 					}
 				});
+
 		return activityLayout;
+	}
+
+	public void updateSelectdateList(String selectedDate) {
+		if (selectedDate != null && selectedDate.length() > 0) {
+			String[] s = selectedDate.split("-");
+			if (s != null && s.length == 3) {
+				int year, month, day;
+				try {
+					year = Integer.valueOf(s[0]);
+					month = Integer.valueOf(s[1]);
+					day = Integer.valueOf(s[2]);
+				} catch (Exception e) {
+					return;
+				}
+				List<ActivityItem> aiList = cal.getAiList();
+				List<ActivityItem> aiListOfCurrentMonth = new ArrayList<ActivityItem>();
+				if (aiList != null) {
+					for (ActivityItem ai : aiList) {
+						String date = ai.getDate();
+						if (date != null && date.length() > 0) {
+							String[] d = date.split("-");
+							if (d.length == 3) {
+								try {
+									int yy = Integer.valueOf(d[0]);
+									int mm = Integer.valueOf(d[1]);
+									int dd = Integer.valueOf(d[2]);
+									if (yy == year && mm == month && dd == day) {
+										aiListOfCurrentMonth.add(ai);
+									}
+								} catch (Exception e) {
+								}
+							}
+						}
+					}
+					ArrayAdapter<ActivityItem> adapter = new ArrayAdapter<ActivityItem>(
+							getActivity(), R.layout.activity_list_item,
+							android.R.id.text1, aiListOfCurrentMonth);
+					lv.setAdapter(adapter);
+				}
+			}
+		}
+	}
+
+	public String getSelectedDate() {
+		return selectedDate;
 	}
 }

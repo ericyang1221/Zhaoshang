@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,16 +68,31 @@ public class CalendarAdapter extends BaseAdapter {
 		} else {
 			if (currentItem.equals(today)) {
 				view.setBackgroundResource(R.drawable.today_background);
+				dayView.setTextColor(Color.WHITE);
+				dot.setBackgroundColor(Color.WHITE);
 			} else if (currentItem.equals(selected)) {
 				view.setBackgroundResource(R.drawable.selected_background);
+				dayView.setTextColor(Color.WHITE);
+				dot.setBackgroundColor(Color.WHITE);
 			} else {
 				view.setBackgroundResource(R.drawable.normal_background);
+				dayView.setTextColor(Color.BLACK);
+				dot.setBackgroundColor(Color.BLACK);
+			}
+			if (currentItem.monthType != 0) {
+				view.setEnabled(false);
+				dayView.setTextColor(Color.GRAY);
+				dot.setBackgroundColor(Color.GRAY);
+			} else {
+				view.setEnabled(true);
+				dayView.setTextColor(Color.BLACK);
+				dot.setBackgroundColor(Color.BLACK);
 			}
 			dayView.setText(currentItem.text);
 			if (currentItem.hasActivity) {
 				dot.setVisibility(View.VISIBLE);
 			} else {
-				dot.setVisibility(View.GONE);
+				dot.setVisibility(View.INVISIBLE);
 			}
 		}
 		return view;
@@ -96,6 +112,7 @@ public class CalendarAdapter extends BaseAdapter {
 		final int firstDayOfMonth = calendar.get(Calendar.DAY_OF_WEEK);
 		final int lastDayOfMonth = calendar
 				.getActualMaximum(Calendar.DAY_OF_MONTH);
+
 		final int blankies;
 		final CalendarItem[] days;
 		if (firstDayOfMonth == FIRST_DAY_OF_WEEK) {
@@ -105,10 +122,29 @@ public class CalendarAdapter extends BaseAdapter {
 		} else {
 			blankies = firstDayOfMonth - FIRST_DAY_OF_WEEK;
 		}
-		days = new CalendarItem[lastDayOfMonth + blankies];
 
-		for (int day = 1, position = blankies; position < days.length; position++) {
-			days[position] = new CalendarItem(year, month, day++);
+		Calendar c = (Calendar) calendar.clone();
+		c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+		int maxDayInWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
+		c.add(Calendar.MONDAY, -1);
+		int lastY = c.get(Calendar.YEAR);
+		int lastM = c.get(Calendar.MONTH);
+		int lastMonthMaxDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+		c.add(Calendar.MONDAY, 2);
+		int nextY = c.get(Calendar.YEAR);
+		int nextM = c.get(Calendar.MONTH);
+
+		int acturalDay = lastDayOfMonth + blankies;
+		days = new CalendarItem[acturalDay + 7 - maxDayInWeek];
+
+		for (int day = lastMonthMaxDay, position = blankies; position >= 0; position--) {
+			days[position] = new CalendarItem(lastY, lastM, day--, -1);
+		}
+		for (int day = 1, position = blankies; position < acturalDay; position++) {
+			days[position] = new CalendarItem(year, month, day++, 0);
+		}
+		for (int day = 1, position = acturalDay; position < days.length; position++) {
+			days[position] = new CalendarItem(nextY, nextM, day++, 1);
 		}
 
 		CalendarAdapter.this.days = days;
@@ -122,16 +158,18 @@ public class CalendarAdapter extends BaseAdapter {
 		public String text;
 		public long id;
 		public boolean hasActivity = false;
+		public int monthType;
 
 		public CalendarItem(Calendar calendar) {
 			this(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-					calendar.get(Calendar.DAY_OF_MONTH));
+					calendar.get(Calendar.DAY_OF_MONTH), 0);
 		}
 
-		public CalendarItem(int year, int month, int day) {
+		public CalendarItem(int year, int month, int day, int monthType) {
 			this.year = year;
 			this.month = month;
 			this.day = day;
+			this.monthType = monthType;
 			this.text = String.valueOf(day);
 			this.id = Long.valueOf(year + "" + month + "" + day);
 			if (aiList != null) {
