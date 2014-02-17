@@ -1,5 +1,6 @@
 package com.rugao.zhaoshang;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -11,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rugao.zhaoshang.asynctask.ProjectTask;
@@ -21,11 +21,17 @@ import com.rugao.zhaoshang.beans.ProjectBean;
 import com.rugao.zhaoshang.beans.UserBean;
 import com.rugao.zhaoshang.utils.Constants;
 import com.rugao.zhaoshang.utils.URLGenerater;
+import com.rugao.zhaoshang.views.XListView;
+import com.rugao.zhaoshang.views.XListView.IXListViewListener;
 
-public class ProjectFragment extends BaseFragment implements DataView {
+public class ProjectFragment extends BaseFragment implements DataView,
+		IXListViewListener {
+	private final int PAGE_SIZE = 20;
+	private int pageIndex = 0;
+	private UserBean ub;
 	private LayoutInflater mInflater;
 	private ProjectListAdapter pa;
-	private ListView lv;
+	private XListView lv;
 	private TextView tv;
 
 	@Override
@@ -33,13 +39,16 @@ public class ProjectFragment extends BaseFragment implements DataView {
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		mInflater = inflater;
+		ub = getMyApplication().getUserBean();
 		View projectLayout = inflater.inflate(R.layout.project_layout,
 				container, false);
-		lv = (ListView) projectLayout.findViewById(R.id.project_listview);
+		lv = (XListView) projectLayout.findViewById(R.id.project_listview);
 		tv = (TextView) projectLayout.findViewById(R.id.project_msg);
 		pa = new ProjectListAdapter();
 		lv.setDividerHeight(0);
+		lv.setPullLoadEnable(true);
 		lv.setAdapter(pa);
+		lv.setXListViewListener(this);
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int arg2,
@@ -53,38 +62,43 @@ public class ProjectFragment extends BaseFragment implements DataView {
 				transaction.commit();
 			}
 		});
-		
-		projectLayout.findViewById(R.id.tr).setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				ProjectAddFragment projectAddFragment = new ProjectAddFragment();
-				projectAddFragment.setProjectBean(new Project());
-				FragmentTransaction transaction = getFragmentManager()
-						.beginTransaction();
-				transaction.replace(R.id.content, projectAddFragment);
-				transaction.addToBackStack(null);
-				transaction.commit();
-			}
-		});
+
+		projectLayout.findViewById(R.id.tr).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						ProjectAddFragment projectAddFragment = new ProjectAddFragment();
+						projectAddFragment.setProjectBean(new Project());
+						FragmentTransaction transaction = getFragmentManager()
+								.beginTransaction();
+						transaction.replace(R.id.content, projectAddFragment);
+						transaction.addToBackStack(null);
+						transaction.commit();
+					}
+				});
 		return projectLayout;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		MyApplication myApp = getMyApplication();
-		UserBean ub = myApp.getUserBean();
-		new ProjectTask(this.getActivity()).execute(
-				this,
-				URLGenerater.makeUrl(Constants.API_GET_PROJECTS, new String[] {
-						String.valueOf(ub.getUserId()), ub.getMemo() }));
+		onRefresh();
 	}
 
 	class ProjectListAdapter extends BaseAdapter {
 		List<Project> pList;
 
+		public ProjectListAdapter() {
+			this.pList = new ArrayList<Project>();
+		}
+
 		public void update(List<Project> pList) {
 			this.pList = pList;
+			this.notifyDataSetChanged();
+		}
+
+		public void add(List<Project> pList) {
+			this.pList.addAll(pList);
 			this.notifyDataSetChanged();
 		}
 
@@ -150,7 +164,17 @@ public class ProjectFragment extends BaseFragment implements DataView {
 		if (db != null) {
 			ProjectBean pb = (ProjectBean) db;
 			if (pb.getResult()) {
-				pa.update(pb.getProjects());
+				List<Project> pList = pb.getProjects();
+				if (pageIndex == 0) {
+					pa.update(pList);
+				} else {
+					pa.add(pList);
+				}
+				if (pList.size() < PAGE_SIZE) {
+					lv.setPullLoadEnable(false);
+				} else {
+					pageIndex++;
+				}
 				lv.setVisibility(View.VISIBLE);
 				tv.setVisibility(View.GONE);
 			} else {
@@ -161,5 +185,32 @@ public class ProjectFragment extends BaseFragment implements DataView {
 		} else {
 			getBaseActivity().showDataBeanNullToast();
 		}
+		onLoad();
+	}
+
+	@Override
+	public void onRefresh() {
+		pageIndex = 0;
+		lv.setPullLoadEnable(true);
+		new ProjectTask(this.getActivity()).execute(
+				this,
+				URLGenerater.makeUrl(Constants.API_GET_PROJECTS, new String[] {
+						String.valueOf(pageIndex), String.valueOf(PAGE_SIZE),
+						String.valueOf(ub.getUserId()), ub.getMemo() }));
+	}
+
+	@Override
+	public void onLoadMore() {
+		new ProjectTask(this.getActivity()).execute(
+				this,
+				URLGenerater.makeUrl(Constants.API_GET_PROJECTS, new String[] {
+						String.valueOf(pageIndex), String.valueOf(PAGE_SIZE),
+						String.valueOf(ub.getUserId()), ub.getMemo() }));
+	}
+
+	private void onLoad() {
+		lv.stopRefresh();
+		lv.stopLoadMore();
+		lv.setRefreshTime(getActivity().getString(R.string.just_now));
 	}
 }

@@ -51,6 +51,7 @@ public class CalendarAdapter extends BaseAdapter {
 		return -1;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
 		if (view == null) {
@@ -85,8 +86,6 @@ public class CalendarAdapter extends BaseAdapter {
 				dot.setBackgroundColor(Color.GRAY);
 			} else {
 				view.setEnabled(true);
-				dayView.setTextColor(Color.BLACK);
-				dot.setBackgroundColor(Color.BLACK);
 			}
 			dayView.setText(currentItem.text);
 			if (currentItem.hasActivity) {
