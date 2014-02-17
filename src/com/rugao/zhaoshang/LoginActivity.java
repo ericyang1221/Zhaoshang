@@ -49,7 +49,7 @@ public class LoginActivity extends BaseActivity implements DataView {
 					@Override
 					public void onClick(View v) {
 						String n = name.getText().toString();
-						n = "yanghui";
+//						n = "yanghui";
 						if (n.length() < 1) {
 							Toast.makeText(
 									LoginActivity.this,
@@ -58,7 +58,7 @@ public class LoginActivity extends BaseActivity implements DataView {
 							return;
 						}
 						String p = pwd.getText().toString();
-						p = "yanghui";
+//						p = "yanghui";
 						if (p.length() < 1) {
 							Toast.makeText(LoginActivity.this,
 									getString(R.string.pwd_cannot_be_empty),
