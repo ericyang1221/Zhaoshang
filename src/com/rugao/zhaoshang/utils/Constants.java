@@ -1,8 +1,8 @@
 package com.rugao.zhaoshang.utils;
 
 public class Constants {
-//	public static final String DOMAIN = "http://rugao.sapb1ec.com:30000/Api/";
-	public static final String DOMAIN = "http://rugao.sapb1ec.com/api/";
+	public static final String DOMAIN = "http://rugao.sapb1ec.com:30000/Api/";
+//	public static final String DOMAIN = "http://rugao.sapb1ec.com/api/";
 	public static final String API_LOGIN = "Home/Login?username=?&password=?";
 	public static final String API_GET_PROJECTS = "project/Get?pageIndex=?&pageSize=?&UserId=?&Memo=?";
 	public static final String PROJECT_GETSTAGE = "Project/GetStage";
