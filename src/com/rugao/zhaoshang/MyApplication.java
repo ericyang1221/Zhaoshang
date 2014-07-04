@@ -31,6 +31,7 @@ public class MyApplication extends Application {
 	private List<ValueBean> activityLeader;
 	private List<ValueBean> activityProject;
 	private List<ValueBean> projectWorker;
+	private String newNotice;
 
 	@Override
 	public void onCreate() {
@@ -102,6 +103,18 @@ public class MyApplication extends Application {
 					activityProject = Utils.convertJAStr2SA(Utils
 							.getActivityProject(MyApplication.this));
 				}
+				
+				try {
+					JSONObject jo = getHttpRequestHelper()
+							.sendRequestAndReturnJson(
+									Constants.DOMAIN
+											+ Constants.NEW_NOTICE_GET);
+					if (jo != null) {
+						newNotice = jo.optString("ResultData");
+					}
+				} catch (Exception e) {
+					Log.e(TAG, e.toString());
+				}
 			}
 		}).start();
 	}
@@ -152,6 +165,14 @@ public class MyApplication extends Application {
 
 	public List<ValueBean> getProjectStatus() {
 		return projectStatus;
+	}
+
+	public String getNewNotice() {
+		return newNotice;
+	}
+
+	public void setNewNotice(String newNotice) {
+		this.newNotice = newNotice;
 	}
 
 	private void initData() {
@@ -263,6 +284,7 @@ public class MyApplication extends Application {
 					projectType = Utils.convertJAStr2SA(Utils
 							.getProjectType(MyApplication.this));
 				}
+				
 				try {
 					JSONArray ja = getHttpRequestHelper()
 							.sendRequestAndReturnJsonArray(

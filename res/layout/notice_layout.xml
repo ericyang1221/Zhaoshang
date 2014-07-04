@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="@string/my_tool"
+            android:text="@string/my_notice"
             android:textColor="#ffffff"
             android:textSize="22dp" />
 
@@ -34,29 +34,24 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/logout" />
+            android:adjustViewBounds="true"/>
     </RelativeLayout>
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/notice_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:orientation="vertical" >
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:listSelector="@android:color/transparent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="通讯录"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="10dp"
-            android:background="#999999" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/notice_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/data_empty"
+        android:textSize="16dp"
+        android:visibility="gone" />
 
 </LinearLayout>

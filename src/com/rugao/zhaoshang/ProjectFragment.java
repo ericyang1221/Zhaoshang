@@ -119,6 +119,12 @@ public class ProjectFragment extends BaseFragment implements DataView,
 				onRefresh();
 			}
 		});
+
+		String newNotice = getMyApplication().getNewNotice();
+		if (newNotice != null && newNotice.length() > 0) {
+
+			getMyApplication().setNewNotice(null);
+		}
 		return projectLayout;
 	}
 
@@ -208,7 +214,8 @@ public class ProjectFragment extends BaseFragment implements DataView,
 						projectEavlateFragment.setProjectBean(p);
 						FragmentTransaction transaction = getFragmentManager()
 								.beginTransaction();
-						transaction.replace(R.id.content, projectEavlateFragment);
+						transaction.replace(R.id.content,
+								projectEavlateFragment);
 						transaction.addToBackStack(null);
 						transaction.commit();
 					}

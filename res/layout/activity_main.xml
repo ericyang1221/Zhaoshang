@@ -142,7 +142,7 @@
                     android:layout_marginBottom="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/my_tool"
+                    android:text="@string/my_notice"
                     android:textColor="#ffffff"
                     android:textSize="12dp" />
             </LinearLayout>

@@ -29,6 +29,8 @@ public class Constants {
 	public static final String MESSAGE_REPLY = "Message/Reply?UserId=?&Memo=?&ActivityId=?&Content=?";
 	public static final String ACTIVITY_CREATE = "Activity/create";
 	public static final String ACTIVITY_EDIT = "Activity/edit";
-
+	public static final String NOTICE_GET = "notice/get?userid=?&memo=?&pageIndex=0&pageSize=999999999";
+	public static final String NEW_NOTICE_GET = "notice/getnotice";
+	
 	public static String DOMAIN = DOMAIN_RELEASE;
 }

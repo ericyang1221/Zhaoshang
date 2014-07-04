@@ -15,7 +15,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private MessageFragment messageFragment;
 	private ProjectFragment projectFragment;
 	private ActivityFragment activityFragment;
-	private ToolFragment toolFragment;
+	private NoticeFragment toolFragment;
 
 	private ImageView tab1;
 	private ImageView tab2;
@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			tab4.setImageResource(R.drawable.tabbaritem_4_selected);
 			tv4.setTextColor(Color.rgb(41, 158, 241));
 			// if (toolFragment == null) {
-			toolFragment = new ToolFragment();
+			toolFragment = new NoticeFragment();
 			// transaction.add(R.id.content, toolFragment);
 			// } else {
 			// transaction.show(toolFragment);
