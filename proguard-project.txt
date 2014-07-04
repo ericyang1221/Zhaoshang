@@ -11,6 +11,12 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+-libraryjars   libs/android-support-v4.jar
+-dontwarn android.support.v4.**    
+-keep class android.support.v4.** { *; }  
+-keep interface android.support.v4.app.** { *; }  
+-keep public class * extends android.support.v4.**  
+-keep public class * extends android.app.Fragmen
 
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface

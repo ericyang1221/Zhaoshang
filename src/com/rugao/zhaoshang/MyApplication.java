@@ -72,15 +72,16 @@ public class MyApplication extends Application {
 					activityLeader = Utils.convertJAStr2SA(Utils
 							.getActivityLeaders(MyApplication.this));
 				}
-				
+
 				try {
 					String url = URLGenerater.makeUrl(
-							Constants.PROJECT_GETWORKERS, new String[] {
+							Constants.PROJECT_GETWORKERS,
+							new String[] {
 									String.valueOf(userBean.getUserId()),
 									userBean.getMemo() });
 					JSONObject jo = getHttpRequestHelper()
 							.sendRequestAndReturnJson(url);
-					Log.d(TAG, "PROJECT_GETWORKERS: "+jo.toString());
+					Log.d(TAG, "PROJECT_GETWORKERS: " + jo.toString());
 					JSONArray ja = jo.getJSONArray("ResultData");
 					Utils.putProjectWorker(MyApplication.this, ja.toString());
 					projectWorker = Utils.convertJA2SA(ja);
@@ -103,12 +104,14 @@ public class MyApplication extends Application {
 					activityProject = Utils.convertJAStr2SA(Utils
 							.getActivityProject(MyApplication.this));
 				}
-				
+
 				try {
+					String url = URLGenerater.makeUrl(Constants.NEW_NOTICE_GET,
+							new String[] {
+									String.valueOf(userBean.getUserId()),
+									userBean.getMemo() });
 					JSONObject jo = getHttpRequestHelper()
-							.sendRequestAndReturnJson(
-									Constants.DOMAIN
-											+ Constants.NEW_NOTICE_GET);
+							.sendRequestAndReturnJson(url);
 					if (jo != null) {
 						newNotice = jo.optString("ResultData");
 					}
@@ -272,7 +275,7 @@ public class MyApplication extends Application {
 					projectUnit = Utils.convertJAStr2SA(Utils
 							.getProjectUnit(MyApplication.this));
 				}
-				
+
 				try {
 					JSONArray ja = getHttpRequestHelper()
 							.sendRequestAndReturnJsonArray(
@@ -284,7 +287,7 @@ public class MyApplication extends Application {
 					projectType = Utils.convertJAStr2SA(Utils
 							.getProjectType(MyApplication.this));
 				}
-				
+
 				try {
 					JSONArray ja = getHttpRequestHelper()
 							.sendRequestAndReturnJsonArray(

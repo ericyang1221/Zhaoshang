@@ -121,8 +121,13 @@ public class ProjectFragment extends BaseFragment implements DataView,
 		});
 
 		String newNotice = getMyApplication().getNewNotice();
-		if (newNotice != null && newNotice.length() > 0) {
-
+		if (newNotice != null && newNotice.length() > 0
+				&& !"null".equals(newNotice.trim())) {
+			// use search dialog style. not mistake.
+			NewNoticeDialog dialog = new NewNoticeDialog(getActivity(),
+					R.style.SearchDialog);
+			dialog.setContent(newNotice);
+			dialog.show();
 			getMyApplication().setNewNotice(null);
 		}
 		return projectLayout;
