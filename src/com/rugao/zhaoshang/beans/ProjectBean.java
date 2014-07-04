@@ -51,11 +51,13 @@ public class ProjectBean extends DataBean {
 						}
 						if (jo.has("PrjName")) {
 							String prjName = jo.getString("PrjName");
-							p.setProjectName(prjName==null||prjName.equals("null")?null:prjName);
+							p.setProjectName(prjName == null
+									|| prjName.equals("null") ? null : prjName);
 						}
 						if (jo.has("PlanningDate")) {
 							String pd = jo.getString("PlanningDate");
-							p.setPlanningDate(pd==null||pd.equals("null")?null:pd);
+							p.setPlanningDate(pd == null || pd.equals("null") ? null
+									: pd);
 						}
 						if (jo.has("StageId")) {
 							Integer sid = null;
@@ -68,15 +70,18 @@ public class ProjectBean extends DataBean {
 						}
 						if (jo.has("StageId_display")) {
 							String sd = jo.getString("StageId_display");
-							p.setStageIdDisplay(sd==null||sd.equals("null")?null:sd);
+							p.setStageIdDisplay(sd == null || sd.equals("null") ? null
+									: sd);
 						}
 						if (jo.has("IndustryType")) {
 							String it = jo.getString("IndustryType");
-							p.setIndustryType(it==null||it.equals("null")?null:it);
+							p.setIndustryType(it == null || it.equals("null") ? null
+									: it);
 						}
 						if (jo.has("IndustryDetail")) {
 							String id = jo.getString("IndustryDetail");
-							p.setIndustryDetail(id==null||id.equals("null")?null:id);
+							p.setIndustryDetail(id == null || id.equals("null") ? null
+									: id);
 						}
 						if (jo.has("Policy")) {
 							Integer pid = null;
@@ -89,7 +94,8 @@ public class ProjectBean extends DataBean {
 						}
 						if (jo.has("Policy_display")) {
 							String pd = jo.getString("Policy_display");
-							p.setPolicyDisplay(pd==null||pd.equals("null")?null:pd);
+							p.setPolicyDisplay(pd == null || pd.equals("null") ? null
+									: pd);
 						}
 						if (jo.has("Enviroment")) {
 							Integer eid = null;
@@ -101,9 +107,9 @@ public class ProjectBean extends DataBean {
 							p.setEnviroment(eid);
 						}
 						if (jo.has("Enviroment_display")) {
-							String ed = jo
-									.getString("Enviroment_display");
-							p.setEnviromentDisplay(ed==null||ed.equals("null")?null:ed);
+							String ed = jo.getString("Enviroment_display");
+							p.setEnviromentDisplay(ed == null
+									|| ed.equals("null") ? null : ed);
 						}
 						if (jo.has("Scale")) {
 							Double sc = null;
@@ -116,28 +122,33 @@ public class ProjectBean extends DataBean {
 						}
 						if (jo.has("ScaleUnit")) {
 							String su = jo.getString("ScaleUnit");
-							p.setScaleUnit(su==null||su.equals("null")?null:su);
+							p.setScaleUnit(su == null || su.equals("null") ? null
+									: su);
 						}
 						if (jo.has("ScaleUnit_display")) {
-							String sd = jo
-									.getString("ScaleUnit_display");
-							p.setScaleUnitDisplay(sd==null||sd.equals("null")?null:sd);
+							String sd = jo.getString("ScaleUnit_display");
+							p.setScaleUnitDisplay(sd == null
+									|| sd.equals("null") ? null : sd);
 						}
 						if (jo.has("PrjMemo")) {
 							String pm = jo.getString("PrjMemo");
-							p.setProjectMemo(pm==null||pm.equals("null")?null:pm);
+							p.setProjectMemo(pm == null || pm.equals("null") ? null
+									: pm);
 						}
 						if (jo.has("LandRequire")) {
 							String lr = jo.getString("LandRequire");
-							p.setLandRequire(lr==null||lr.equals("null")?null:lr);
+							p.setLandRequire(lr == null || lr.equals("null") ? null
+									: lr);
 						}
 						if (jo.has("WorkRequire")) {
 							String wr = jo.getString("WorkRequire");
-							p.setWorkRequire(wr==null||wr.equals("null")?null:wr);
+							p.setWorkRequire(wr == null || wr.equals("null") ? null
+									: wr);
 						}
 						if (jo.has("BuildTime")) {
 							String bt = jo.getString("BuildTime");
-							p.setBuildTime(bt==null||bt.equals("null")?null:bt);
+							p.setBuildTime(bt == null || bt.equals("null") ? null
+									: bt);
 						}
 						if (jo.has("TotalAmount")) {
 							Long ta = null;
@@ -159,45 +170,42 @@ public class ProjectBean extends DataBean {
 						}
 						if (jo.has("PrjPlan")) {
 							String pp = jo.getString("PrjPlan");
-							p.setProjectPlan(pp==null||pp.equals("null")?null:pp);
+							p.setProjectPlan(pp == null || pp.equals("null") ? null
+									: pp);
 						}
 						if (jo.has("Case")) {
 							String c = jo.getString("Case");
-							p.setCase(c==null||c.equals("null")?null:c);
+							p.setCase(c == null || c.equals("null") ? null : c);
 						}
-						if (jo.has("ResponsibleId")) {
-							Integer rid = null;
-							try {
-								rid = jo.getInt("ResponsibleId");
-							} catch (Exception e) {
-								// e.printStackTrace();
-							}
-							p.setResponsibleId(rid);
-						}
-						if (jo.has("ResponsibleId_display")) {
-							String rd = jo
-									.getString("ResponsibleId_display");
-							p.setResponsibleIdDisplay(rd==null||rd.equals("null")?null:rd);
+						if (jo.has("Responsibler")) {
+							String rd = jo.getString("Responsibler");
+							p.setResponsibler(rd == null || rd.equals("null") ? null
+									: rd);
 						}
 						if (jo.has("CityLeader")) {
 							String cl = jo.getString("CityLeader");
-							p.setCityLeader(cl==null||cl.equals("null")?null:cl);
+							p.setCityLeader(cl == null || cl.equals("null") ? null
+									: cl);
 						}
 						if (jo.has("TownLeader")) {
 							String tl = jo.getString("TownLeader");
-							p.setTownLeader(tl==null||tl.equals("null")?null:tl);
+							p.setTownLeader(tl == null || tl.equals("null") ? null
+									: tl);
 						}
 						if (jo.has("Referrer")) {
 							String r = jo.getString("Referrer");
-							p.setReferrer(r==null||r.equals("null")?null:r);
+							p.setReferrer(r == null || r.equals("null") ? null
+									: r);
 						}
 						if (jo.has("Workers")) {
 							String w = jo.getString("Workers");
-							p.setWorkers(w==null||w.equals("null")?null:w);
+							p.setWorkers(w == null || w.equals("null") ? null
+									: w);
 						}
 						if (jo.has("Workers_display")) {
 							String wd = jo.getString("Workers_display");
-							p.setWorkersDisplay(wd==null||wd.equals("null")?null:wd);
+							p.setWorkersDisplay(wd == null || wd.equals("null") ? null
+									: wd);
 						}
 						if (jo.has("CreateId")) {
 							Integer cid = null;
@@ -209,13 +217,14 @@ public class ProjectBean extends DataBean {
 							p.setCreatedId(cid);
 						}
 						if (jo.has("CreateId_display")) {
-							String cd = jo
-									.getString("CreateId_display");
-							p.setCreateIdDisplay(cd==null||cd.equals("null")?null:cd);
+							String cd = jo.getString("CreateId_display");
+							p.setCreateIdDisplay(cd == null
+									|| cd.equals("null") ? null : cd);
 						}
 						if (jo.has("CreateDate")) {
 							String cd = jo.getString("CreateDate");
-							p.setCreateDate(cd==null||cd.equals("null")?null:cd);
+							p.setCreateDate(cd == null || cd.equals("null") ? null
+									: cd);
 						}
 						if (jo.has("UpdateId")) {
 							Integer uid = null;
@@ -227,14 +236,22 @@ public class ProjectBean extends DataBean {
 							p.setUpdateId(uid);
 						}
 						if (jo.has("UpdateId_display")) {
-							String ud = jo
-									.getString("UpdateId_display");
-							p.setUpdateIdDisplay(ud==null||ud.equals("null")?null:ud);
+							String ud = jo.getString("UpdateId_display");
+							p.setUpdateIdDisplay(ud == null
+									|| ud.equals("null") ? null : ud);
 						}
 						if (jo.has("UpdateDate")) {
 							String ud = jo.getString("UpdateDate");
-							p.setUpdateDate(ud==null||ud.equals("null")?null:ud);
+							p.setUpdateDate(ud == null || ud.equals("null") ? null
+									: ud);
 						}
+						p.setType(jo.optInt("Type"));
+						p.setTypeDisplay(jo.optString("Type_display"));
+						p.setStatus(jo.optInt("Status"));
+						p.setStatusDisplay(jo.optString("Status_display"));
+						p.setEvaluater(jo.optString("Evaluater"));
+						p.setHasEvaluatRole(jo.optBoolean("isHasEvaluatRole"));
+
 						if (jo.has("Investor")) {
 							List<Investor> investorList = new ArrayList<Investor>();
 							JSONArray jai = jo.getJSONArray("Investor");

@@ -125,15 +125,45 @@ public class Utils {
 	public static String getProjectUnit(Context context) {
 		return getSharedPreferences(context).getString("PROJECT_UNIT", null);
 	}
-
-	public static void putProjectPeople(Context context, String str) {
+	
+	public static void putProjectType(Context context, String str) {
 		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-		editor.putString("PROJECT_PEOPLE", str);
+		editor.putString("PROJECT_TYPE", str);
 		editor.commit();
 	}
 
-	public static String getProjectPeople(Context context) {
-		return getSharedPreferences(context).getString("PROJECT_PEOPLE", null);
+	public static String getProjectType(Context context) {
+		return getSharedPreferences(context).getString("PROJECT_TYPE", null);
+	}
+	
+	public static void putProjectStatus(Context context, String str) {
+		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+		editor.putString("PROJECT_STATUS", str);
+		editor.commit();
+	}
+
+	public static String getProjectStatus(Context context) {
+		return getSharedPreferences(context).getString("PROJECT_STATUS", null);
+	}
+
+	public static void putProjectWorker(Context context, String str) {
+		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+		editor.putString("PROJECT_WORKER", str);
+		editor.commit();
+	}
+	
+	public static String getProjectWorker(Context context) {
+		return getSharedPreferences(context).getString("PROJECT_WORKER", null);
+	}
+	
+	public static void putActivityLeaders(Context context, String str) {
+		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+		editor.putString("ACTIVITY_LEADERS", str);
+		editor.commit();
+	}
+	
+	public static String getActivityLeaders(Context context) {
+		return getSharedPreferences(context).getString("ACTIVITY_LEADERS", null);
 	}
 
 	public static void putProjectManager(Context context, String str) {
@@ -164,5 +194,15 @@ public class Utils {
 	
 	public static String getUsername(Context context) {
 		return getSharedPreferences(context).getString("USER_NAME", null);
+	}
+	
+	public static void putIsDemo(Context context, boolean isDemo) {
+		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+		editor.putBoolean("ISDEMO", isDemo);
+		editor.commit();
+	}
+	
+	public static boolean getIsDemo(Context context) {
+		return getSharedPreferences(context).getBoolean("ISDEMO", false);
 	}
 }

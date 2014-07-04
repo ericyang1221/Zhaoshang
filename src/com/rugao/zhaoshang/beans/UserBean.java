@@ -3,7 +3,10 @@ package com.rugao.zhaoshang.beans;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 public class UserBean extends DataBean {
+	private final String TAG = "UserBean";
 	private int userId;
 	private String loginName;
 	private String fullName;
@@ -50,14 +53,14 @@ public class UserBean extends DataBean {
 				try {
 					positionId = resultData.getInt("PositionId");
 				} catch (Exception e) {
-					e.printStackTrace();
+					Log.e(TAG, e.toString());
 				}
 			}
 			if (resultData.has("DeptId")) {
 				try {
 					deptId = resultData.getInt("DeptId");
 				} catch (Exception e) {
-					e.printStackTrace();
+					Log.e(TAG, e.toString());
 				}
 			}
 		}

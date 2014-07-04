@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.rugao.zhaoshang.beans.UserBean;
 import com.rugao.zhaoshang.beans.ValueBean;
@@ -15,6 +16,7 @@ import com.rugao.zhaoshang.utils.URLGenerater;
 import com.rugao.zhaoshang.utils.Utils;
 
 public class MyApplication extends Application {
+	private final String TAG = "MyApplication";
 	private UserBean userBean;
 	private HttpRequestHelper hrh;
 	private List<ValueBean> projectStage;
@@ -24,9 +26,11 @@ public class MyApplication extends Application {
 	private List<ValueBean> projectPolicy;
 	private List<ValueBean> projectEnviroment;
 	private List<ValueBean> projectUnit;
-	private List<ValueBean> projectPeople;
-	private List<ValueBean> projectManager;
+	private List<ValueBean> projectType;
+	private List<ValueBean> projectStatus;
+	private List<ValueBean> activityLeader;
 	private List<ValueBean> activityProject;
+	private List<ValueBean> projectWorker;
 
 	@Override
 	public void onCreate() {
@@ -52,36 +56,36 @@ public class MyApplication extends Application {
 
 			@Override
 			public void run() {
-				try {
-					String url = URLGenerater.makeUrl(
-							Constants.PROJECT_GETPEOPLEINFO, new String[] {
-									"1", String.valueOf(userBean.getUserId()),
-									userBean.getMemo() });
-					JSONObject jo = getHttpRequestHelper()
-							.sendRequestAndReturnJson(url);
-					JSONArray ja = jo.getJSONArray("ResultData");
-					Utils.putProjectPeople(MyApplication.this, ja.toString());
-					projectPeople = Utils.convertJA2SA(ja);
-				} catch (Exception e) {
-					// e.printStackTrace();
-					projectPeople = Utils.convertJAStr2SA(Utils
-							.getProjectPeople(MyApplication.this));
-				}
 
 				try {
 					String url = URLGenerater.makeUrl(
-							Constants.PROJECT_GETPEOPLEINFO, new String[] {
-									"2", String.valueOf(userBean.getUserId()),
+							Constants.ACTIVITY_GETLEADERS, new String[] {
+									String.valueOf(userBean.getUserId()),
 									userBean.getMemo() });
 					JSONObject jo = getHttpRequestHelper()
 							.sendRequestAndReturnJson(url);
 					JSONArray ja = jo.getJSONArray("ResultData");
-					Utils.putProjectManager(MyApplication.this, ja.toString());
-					projectManager = Utils.convertJA2SA(ja);
+					Utils.putActivityLeaders(MyApplication.this, ja.toString());
+					activityLeader = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					// e.printStackTrace();
-					projectManager = Utils.convertJAStr2SA(Utils
-							.getProjectManager(MyApplication.this));
+					activityLeader = Utils.convertJAStr2SA(Utils
+							.getActivityLeaders(MyApplication.this));
+				}
+				
+				try {
+					String url = URLGenerater.makeUrl(
+							Constants.PROJECT_GETWORKERS, new String[] {
+									String.valueOf(userBean.getUserId()),
+									userBean.getMemo() });
+					JSONObject jo = getHttpRequestHelper()
+							.sendRequestAndReturnJson(url);
+					Log.d(TAG, "PROJECT_GETWORKERS: "+jo.toString());
+					JSONArray ja = jo.getJSONArray("ResultData");
+					Utils.putProjectWorker(MyApplication.this, ja.toString());
+					projectWorker = Utils.convertJA2SA(ja);
+				} catch (Exception e) {
+					projectWorker = Utils.convertJAStr2SA(Utils
+							.getProjectWorker(MyApplication.this));
 				}
 
 				try {
@@ -95,7 +99,6 @@ public class MyApplication extends Application {
 					Utils.putActivityProject(MyApplication.this, ja.toString());
 					activityProject = Utils.convertJA2SA(ja);
 				} catch (Exception e) {
-					// e.printStackTrace();
 					activityProject = Utils.convertJAStr2SA(Utils
 							.getActivityProject(MyApplication.this));
 				}
@@ -131,16 +134,24 @@ public class MyApplication extends Application {
 		return projectUnit;
 	}
 
-	public List<ValueBean> getProjectPeople() {
-		return projectPeople;
+	public List<ValueBean> getProjectWorker() {
+		return projectWorker;
 	}
 
-	public List<ValueBean> getProjectManager() {
-		return projectManager;
+	public List<ValueBean> getActivityLeader() {
+		return activityLeader;
 	}
 
 	public List<ValueBean> getActivityProject() {
 		return activityProject;
+	}
+
+	public List<ValueBean> getProjectType() {
+		return projectType;
+	}
+
+	public List<ValueBean> getProjectStatus() {
+		return projectStatus;
 	}
 
 	private void initData() {
@@ -239,6 +250,29 @@ public class MyApplication extends Application {
 					// e.printStackTrace();
 					projectUnit = Utils.convertJAStr2SA(Utils
 							.getProjectUnit(MyApplication.this));
+				}
+				
+				try {
+					JSONArray ja = getHttpRequestHelper()
+							.sendRequestAndReturnJsonArray(
+									Constants.DOMAIN
+											+ Constants.PROJECT_GETTYPE);
+					Utils.putProjectType(MyApplication.this, ja.toString());
+					projectType = Utils.convertJA2SA(ja);
+				} catch (Exception e) {
+					projectType = Utils.convertJAStr2SA(Utils
+							.getProjectType(MyApplication.this));
+				}
+				try {
+					JSONArray ja = getHttpRequestHelper()
+							.sendRequestAndReturnJsonArray(
+									Constants.DOMAIN
+											+ Constants.PROJECT_GETSTATUS);
+					Utils.putProjectStatus(MyApplication.this, ja.toString());
+					projectStatus = Utils.convertJA2SA(ja);
+				} catch (Exception e) {
+					projectStatus = Utils.convertJAStr2SA(Utils
+							.getProjectStatus(MyApplication.this));
 				}
 			}
 		}).start();

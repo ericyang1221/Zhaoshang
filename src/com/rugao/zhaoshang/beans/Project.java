@@ -29,8 +29,7 @@ public class Project {
 	private Double totalTax;
 	private String projectPlan;
 	private String casse;
-	private Integer responsibleId;
-	private String responsibleIdDisplay;
+	private String responsibler;
 	private String cityLeader;
 	private String townLeader;
 	private String referrer;
@@ -42,6 +41,12 @@ public class Project {
 	private Integer updateId;
 	private String updateIdDisplay;
 	private String updateDate;
+	private int type;
+	private String typeDisplay;
+	private int status;
+	private String statusDisplay;
+	private String evaluater;
+	private boolean isHasEvaluatRole;
 	private List<Investor> investorList;
 	private List<Contact> contactList;
 
@@ -192,20 +197,12 @@ public class Project {
 		this.casse = casse;
 	}
 
-	public Integer getResponsibleId() {
-		return responsibleId;
+	public String getResponsibler() {
+		return responsibler;
 	}
 
-	public void setResponsibleId(Integer responsibleId) {
-		this.responsibleId = responsibleId;
-	}
-
-	public String getResponsibleIdDisplay() {
-		return responsibleIdDisplay;
-	}
-
-	public void setResponsibleIdDisplay(String responsibleIdDisplay) {
-		this.responsibleIdDisplay = responsibleIdDisplay;
+	public void setResponsibler(String responsibler) {
+		this.responsibler = responsibler;
 	}
 
 	public void setPolicyDisplay(String policyDisplay) {
@@ -356,6 +353,80 @@ public class Project {
 		this.contactList = contactList;
 	}
 
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public String getTypeDisplay() {
+		return typeDisplay;
+	}
+
+	public void setTypeDisplay(String typeDisplay) {
+		this.typeDisplay = typeDisplay;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getStatusDisplay() {
+		return statusDisplay;
+	}
+
+	public void setStatusDisplay(String statusDisplay) {
+		this.statusDisplay = statusDisplay;
+	}
+
+	public String getEvaluater() {
+		return evaluater;
+	}
+
+	public void setEvaluater(String evaluater) {
+		this.evaluater = evaluater;
+	}
+
+	public boolean isHasEvaluatRole() {
+		return isHasEvaluatRole;
+	}
+
+	public void setHasEvaluatRole(boolean isHasEvaluatRole) {
+		this.isHasEvaluatRole = isHasEvaluatRole;
+	}
+
+	public String getInvestorsDisplay() {
+		StringBuffer sb = new StringBuffer();
+		if (investorList != null) {
+			for (Investor i : investorList) {
+				sb.append(i.getInvestorName()).append(",");
+			}
+			if (sb.length() > 0) {
+				sb.deleteCharAt(sb.length() - 1);
+			}
+		}
+		return sb.toString();
+	}
+
+	public String getContactsDisplay() {
+		StringBuffer sb = new StringBuffer();
+		if (contactList != null) {
+			for (Contact c : contactList) {
+				sb.append(c.getName()).append(",");
+			}
+			if (sb.length() > 0) {
+				sb.deleteCharAt(sb.length() - 1);
+			}
+		}
+		return sb.toString();
+	}
+
 	public List<NameValuePair> getPostParams(String userId, String memo,
 			boolean isAdd) {
 		List<NameValuePair> p = new ArrayList<NameValuePair>();
@@ -387,8 +458,7 @@ public class Project {
 		p.add(new BasicNameValuePair("PrjName", this.projectName));
 		p.add(new BasicNameValuePair("PrjPlan", this.projectPlan));
 		p.add(new BasicNameValuePair("Referrer", this.referrer));
-		p.add(new BasicNameValuePair("ResponsibleId", String
-				.valueOf(responsibleId)));
+		p.add(new BasicNameValuePair("Responsibler", this.responsibler));
 		p.add(new BasicNameValuePair("Scale", String.valueOf(scale)));
 		p.add(new BasicNameValuePair("ScaleUnit", String.valueOf(scaleUnit)));
 		p.add(new BasicNameValuePair("StageId", String.valueOf(stageId)));

@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,19 +14,23 @@ import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rugao.zhaoshang.ChooseFragment.OnFragmentItemClickListener;
 import com.rugao.zhaoshang.DisplayFragment.DisplayFragmentListener;
 import com.rugao.zhaoshang.asynctask.CreateProjectTask;
+import com.rugao.zhaoshang.beans.Contact;
 import com.rugao.zhaoshang.beans.DataBean;
+import com.rugao.zhaoshang.beans.Investor;
 import com.rugao.zhaoshang.beans.Project;
 import com.rugao.zhaoshang.beans.UserBean;
 import com.rugao.zhaoshang.beans.ValueBean;
 import com.rugao.zhaoshang.utils.Constants;
 
 public class ProjectDetailFragment extends BaseFragment implements DataView {
+	private final String TAG = "ProjectDetailFragment";
 	protected Project project;
 	protected EditText pn;
 	protected TextView ps;
@@ -49,11 +54,16 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 	protected TextView pw;
 	protected View pi;
 	protected View pcs;
+	protected TextView piText;
+	protected TextView pcsText;
 
 	protected ChooseFragment cf;
 	protected DisplayFragment df;
 	protected InvestorDisplayFragment idf;
 	protected ContactDisplayFragment cdf;
+
+	protected ScrollView sv;
+	protected int index = 0;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +71,8 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View projectDetailLayout = inflater.inflate(
 				R.layout.project_detail_layout, container, false);
+		sv = (ScrollView) projectDetailLayout
+				.findViewById(R.id.project_detail_sv);
 		pn = (EditText) projectDetailLayout.findViewById(R.id.project_name);
 		ps = (TextView) projectDetailLayout.findViewById(R.id.project_stage);
 		ppd = (TextView) projectDetailLayout
@@ -94,6 +106,10 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 		pw = (TextView) projectDetailLayout.findViewById(R.id.project_workers);
 		pi = projectDetailLayout.findViewById(R.id.project_investors);
 		pcs = projectDetailLayout.findViewById(R.id.project_contacts);
+		piText = (TextView) projectDetailLayout
+				.findViewById(R.id.project_investors_text);
+		pcsText = (TextView) projectDetailLayout
+				.findViewById(R.id.project_contacts_text);
 		initListeners(projectDetailLayout);
 
 		projectDetailLayout.findViewById(R.id.tl).setOnClickListener(
@@ -108,32 +124,170 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						project.setProjectName(pn.getText().toString());
-						project.setCase(pc.getText().toString());
+						String projectName = pn.getText().toString();
+						String projectStage = ps.getText().toString();
+						String projectPlanningDate = ppd.getText().toString();
+						String projectIndustryType = pit.getText().toString();
+						String projectIndustryDetail = pid.getText().toString();
+						String projectPolicy = pp.getText().toString();
+						String projectEnviroment = pe.getText().toString();
+						String projectCase = pc.getText().toString();
+						String projectScale = pst.getText().toString();
+						String projectScaleUnit = psu.getText().toString();
+						String projectLand = pl.getText().toString();
+						String projectBuildTime = pbt.getText().toString();
+						String projectTotalAmount = pta.getText().toString();
+						String projectTotalTax = ptt.getText().toString();
+						String projectPrjplan = ppp.getText().toString();
+						String projectResponsibler = pri.getText().toString();
+						String projectCityLeader = pcl.getText().toString();
+						String projectTownLeader = ptl.getText().toString();
+						String projectReferrer = pr.getText().toString();
+						String projectWorkers = pw.getText().toString();
+						List<Investor> iList = project.getInvestors();
+						List<Contact> cList = project.getContacts();
+
+						StringBuffer sb = new StringBuffer();
+						if (projectWorkers == null
+								|| projectWorkers.length() < 1) {
+							sb.append(getString(R.string.check_workers))
+									.append("  ");
+						}
+						if (iList == null || iList.size() < 1) {
+							sb.append(getString(R.string.check_investor))
+									.append("  ");
+						}
+						if (cList == null || cList.size() < 1) {
+							sb.append(getString(R.string.check_contact))
+									.append("  ");
+						}
+						StringBuffer sb2 = new StringBuffer();
+						String colon = getString(R.string.colon);
+						if (projectName == null || projectName.length() < 1) {
+							sb2.append(getString(R.string.project_name)
+									.replace(colon, "  "));
+						}
+						if (projectStage == null || projectStage.length() < 1) {
+							sb2.append(getString(R.string.project_stage)
+									.replace(colon, "  "));
+						}
+						if (projectPlanningDate == null
+								|| projectPlanningDate.length() < 1) {
+							sb2.append(getString(R.string.project_planning_date)
+									.replace(colon, "  "));
+						}
+						if (projectIndustryType == null
+								|| projectIndustryType.length() < 1) {
+							sb2.append(getString(R.string.project_industry_type)
+									.replace(colon, "  "));
+						}
+						if (projectIndustryDetail == null
+								|| projectIndustryDetail.length() < 1) {
+							sb2.append(getString(
+									R.string.project_industry_detail).replace(
+									colon, "  "));
+						}
+						if (projectPolicy == null || projectPolicy.length() < 1) {
+							sb2.append(getString(R.string.project_policy)
+									.replace(colon, "  "));
+						}
+						if (projectEnviroment == null
+								|| projectEnviroment.length() < 1) {
+							sb2.append(getString(R.string.project_enviroment)
+									.replace(colon, "  "));
+						}
+						if (projectCase == null || projectCase.length() < 1) {
+							sb2.append(getString(R.string.project_case)
+									.replace(colon, "  "));
+						}
+						if (projectScale == null || projectScale.length() < 1) {
+							sb2.append(getString(R.string.project_scale)
+									.replace(colon, "  "));
+						}
+						if (projectScaleUnit == null
+								|| projectScaleUnit.length() < 1) {
+							sb2.append(getString(R.string.project_scale_unit)
+									.replace(colon, "  "));
+						}
+						if (projectLand == null || projectLand.length() < 1) {
+							sb2.append(getString(R.string.project_land)
+									.replace(colon, "  "));
+						}
+						if (projectBuildTime == null
+								|| projectBuildTime.length() < 1) {
+							sb2.append(getString(R.string.project_build_time)
+									.replace(colon, "  "));
+						}
+						if (projectTotalAmount == null
+								|| projectTotalAmount.length() < 1) {
+							sb2.append(getString(R.string.project_total_amount)
+									.replace(colon, "  "));
+						}
+						if (projectTotalTax == null
+								|| projectTotalTax.length() < 1) {
+							sb2.append(getString(R.string.project_total_tax)
+									.replace(colon, "  "));
+						}
+						if (projectPrjplan == null
+								|| projectPrjplan.length() < 1) {
+							sb2.append(getString(R.string.project_prjplan)
+									.replace(colon, "  "));
+						}
+						if (projectResponsibler == null
+								|| projectResponsibler.length() < 1) {
+							sb2.append(getString(
+									R.string.project_responsible_id).replace(
+									colon, "  "));
+						}
+						if (projectCityLeader == null
+								|| projectCityLeader.length() < 1) {
+							sb2.append(getString(R.string.project_city_leader)
+									.replace(colon, "  "));
+						}
+						if (projectTownLeader == null
+								|| projectTownLeader.length() < 1) {
+							sb2.append(getString(R.string.project_town_leader)
+									.replace(colon, "  "));
+						}
+						if (projectReferrer == null
+								|| projectReferrer.length() < 1) {
+							sb2.append(getString(R.string.project_referrer)
+									.replace(colon, "  "));
+						}
+						if (sb2.length() > 0) {
+							sb2.append(getString(R.string.can_not_be_empty));
+						}
+						sb.append(sb2);
+						if (sb.length() > 0) {
+							getBaseActivity().showToast(sb.toString());
+							return;
+						}
+
+						project.setProjectName(projectName);
+						project.setCase(projectCase);
 						try {
-							project.setScale(Double.valueOf(pst.getText()
-									.toString()));
+							project.setScale(Double.valueOf(projectScale));
 						} catch (Exception e) {
 							project.setScale(null);
 						}
-						project.setLandRequire(pl.getText().toString());
-						project.setBuildTime(pbt.getText().toString());
+						project.setLandRequire(projectLand);
+						project.setBuildTime(projectBuildTime);
 						try {
-							project.setTotalAmount(Long.valueOf(pta.getText()
-									.toString()));
+							project.setTotalAmount(Long
+									.valueOf(projectTotalAmount));
 						} catch (Exception e) {
 							project.setTotalAmount(null);
 						}
 						try {
-							project.setTotalTax(Double.valueOf(ptt.getText()
-									.toString()));
+							project.setTotalTax(Double.valueOf(projectTotalTax));
 						} catch (Exception e) {
 							project.setTotalTax(null);
 						}
-						project.setProjectPlan(ppp.getText().toString());
-						project.setCityLeader(pcl.getText().toString());
-						project.setTownLeader(ptl.getText().toString());
-						project.setReferrer(pr.getText().toString());
+						project.setProjectPlan(projectPrjplan);
+						project.setCityLeader(projectCityLeader);
+						project.setResponsibler(projectResponsibler);
+						project.setTownLeader(projectTownLeader);
+						project.setReferrer(projectReferrer);
 
 						titleRightButtonAction();
 					}
@@ -155,6 +309,16 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 	@Override
 	public void onResume() {
 		super.onResume();
+		Log.d(TAG, "onResume");
+		if (index != 0 && sv != null) {
+			Log.d(TAG, "index: " + index);
+			sv.post(new Runnable() {
+				@Override
+				public void run() {
+					sv.scrollTo(0, index);
+				}
+			});
+		}
 		pn.setText(project.getProjectName());
 		ps.setText(project.getStageIdDisplay());
 		ppd.setText(project.getPlanningDate());
@@ -181,14 +345,16 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				|| project.getTotalTax() == -1 ? "" : project.getTotalTax()));
 		ppp.setText(project.getProjectPlan() == null ? "" : project
 				.getProjectPlan());
-		pri.setText(project.getResponsibleIdDisplay() == null ? "" : project
-				.getResponsibleIdDisplay());
+		pri.setText(project.getResponsibler() == null ? "" : project
+				.getResponsibler());
 		pcl.setText(project.getCityLeader() == null ? "" : project
 				.getCityLeader());
 		ptl.setText(project.getTownLeader() == null ? "" : project
 				.getTownLeader());
 		pr.setText(project.getReferrer() == null ? "" : project.getReferrer());
 		pw.setText(project.getWorkersDisplay());
+		piText.setText(project.getInvestorsDisplay());
+		pcsText.setText(project.getContactsDisplay());
 	}
 
 	private void initListeners(View projectDetailLayout) {
@@ -305,7 +471,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (cf.isAdded()) {
 					t.show(cf);
 				} else {
-					t.add(R.id.content, cf);
+					t.replace(R.id.content, cf);
 					t.addToBackStack(null);
 					t.commit();
 				}
@@ -352,7 +518,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (cf.isAdded()) {
 					t.show(cf);
 				} else {
-					t.add(R.id.content, cf);
+					t.replace(R.id.content, cf);
 					t.addToBackStack(null);
 					t.commit();
 				}
@@ -380,7 +546,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (cf.isAdded()) {
 					t.show(cf);
 				} else {
-					t.add(R.id.content, cf);
+					t.replace(R.id.content, cf);
 					t.addToBackStack(null);
 					t.commit();
 				}
@@ -414,7 +580,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (cf.isAdded()) {
 					t.show(cf);
 				} else {
-					t.add(R.id.content, cf);
+					t.replace(R.id.content, cf);
 					t.addToBackStack(null);
 					t.commit();
 				}
@@ -449,7 +615,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (cf.isAdded()) {
 					t.show(cf);
 				} else {
-					t.add(R.id.content, cf);
+					t.replace(R.id.content, cf);
 					t.addToBackStack(null);
 					t.commit();
 				}
@@ -479,47 +645,47 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (cf.isAdded()) {
 					t.show(cf);
 				} else {
-					t.add(R.id.content, cf);
+					t.replace(R.id.content, cf);
 					t.addToBackStack(null);
 					t.commit();
 				}
 			}
 		});
-		pri.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
-				if (cf == null) {
-					cf = new ChooseFragment();
-				}
-				final List<ValueBean> data = getMyApplication()
-						.getProjectManager();
-				cf.setData(data);
-				cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
-					@Override
-					public void onItemClick(int position) {
-						project.setResponsibleIdDisplay(data.get(position)
-								.getValue());
-						try {
-							project.setResponsibleId(Integer.valueOf(data.get(
-									position).getKey()));
-						} catch (Exception e) {
-							project.setResponsibleId(-1);
-						}
-						pri.setText(project.getResponsibleIdDisplay() == null ? ""
-								: project.getResponsibleIdDisplay());
-					}
-				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.add(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
-			}
-		});
+		// pri.setOnClickListener(new OnClickListener() {
+		// @Override
+		// public void onClick(View v) {
+		// FragmentTransaction t = getActivity()
+		// .getSupportFragmentManager().beginTransaction();
+		// if (cf == null) {
+		// cf = new ChooseFragment();
+		// }
+		// final List<ValueBean> data = getMyApplication()
+		// .getProjectManager();
+		// cf.setData(data);
+		// cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
+		// @Override
+		// public void onItemClick(int position) {
+		// project.setResponsibleIdDisplay(data.get(position)
+		// .getValue());
+		// try {
+		// project.setResponsibleId(Integer.valueOf(data.get(
+		// position).getKey()));
+		// } catch (Exception e) {
+		// project.setResponsibleId(-1);
+		// }
+		// pri.setText(project.getResponsibleIdDisplay() == null ? ""
+		// : project.getResponsibleIdDisplay());
+		// }
+		// });
+		// if (cf.isAdded()) {
+		// t.show(cf);
+		// } else {
+		// t.add(R.id.content, cf);
+		// t.addToBackStack(null);
+		// t.commit();
+		// }
+		// }
+		// });
 		pw.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -530,7 +696,8 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				}
 				// df.setProject(project);
 				df.setData(project.getWorkersDisplay().split(","), project
-						.getWorkers().split(","));
+						.getWorkers().split(","),
+						DisplayFragment.PROJECT_WORKERS);
 				df.setDisplayFragmentListener(new DisplayFragmentListener() {
 					@Override
 					public void onItemDelete(int position,
@@ -558,7 +725,8 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 							project.setWorkersDisplay("");
 						}
 						df.setData(project.getWorkersDisplay().split(","),
-								project.getWorkers().split(","));
+								project.getWorkers().split(","),
+								DisplayFragment.PROJECT_WORKERS);
 						pw.setText(project.getWorkersDisplay());
 					}
 
@@ -587,14 +755,15 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 							project.setWorkersDisplay("");
 						}
 						df.setData(project.getWorkersDisplay().split(","),
-								project.getWorkers().split(","));
+								project.getWorkers().split(","),
+								DisplayFragment.PROJECT_WORKERS);
 						pw.setText(project.getWorkersDisplay());
 					}
 				});
 				if (df.isAdded()) {
 					t.show(df);
 				} else {
-					t.add(R.id.content, df);
+					t.replace(R.id.content, df);
 					t.addToBackStack(null);
 					t.commit();
 				}
@@ -613,7 +782,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (idf.isAdded()) {
 					t.show(idf);
 				} else {
-					t.add(R.id.content, idf);
+					t.replace(R.id.content, idf);
 					t.addToBackStack(null);
 					t.commit();
 				}
@@ -631,12 +800,22 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				if (cdf.isAdded()) {
 					t.show(cdf);
 				} else {
-					t.add(R.id.content, cdf);
+					t.replace(R.id.content, cdf);
 					t.addToBackStack(null);
 					t.commit();
 				}
 			}
 		});
+	}
+
+	@Override
+	public void onDestroyView() {
+		Log.d(TAG, "onDestroyView");
+		if (sv != null) {
+			index = sv.getScrollY();
+			Log.d(TAG, "index: " + index);
+		}
+		super.onDestroyView();
 	}
 
 	@Override

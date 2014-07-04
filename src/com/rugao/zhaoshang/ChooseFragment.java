@@ -5,8 +5,8 @@ import java.util.List;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -26,8 +26,8 @@ public class ChooseFragment extends BaseFragment {
 				false);
 		ListView lv = (ListView) chooseLayout
 				.findViewById(R.id.choose_listview);
-		lv.setAdapter(new ArrayAdapter<ValueBean>(this.getActivity(), R.layout.ax,
-				android.R.id.text1, data));
+		lv.setAdapter(new ArrayAdapter<ValueBean>(this.getActivity(),
+				R.layout.ax, android.R.id.text1, data));
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -38,12 +38,14 @@ public class ChooseFragment extends BaseFragment {
 				getActivity().getSupportFragmentManager().popBackStack();
 			}
 		});
-		chooseLayout.findViewById(R.id.tl).setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				getActivity().getSupportFragmentManager().popBackStack();
-			}
-		});
+		chooseLayout.findViewById(R.id.tl).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						getActivity().getSupportFragmentManager()
+								.popBackStack();
+					}
+				});
 		return chooseLayout;
 	}
 

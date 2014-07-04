@@ -48,10 +48,10 @@ public class ContactDisplayFragment extends BaseFragment {
 				}
 				cdf.setProject(p);
 				cdf.setIndex(-1);
-				if(cdf.isAdded()){
+				if (cdf.isAdded()) {
 					t.show(cdf);
-				}else{
-					t.add(R.id.content, cdf);
+				} else {
+					t.replace(R.id.content, cdf);
 					t.addToBackStack(null);
 					t.commit();
 				}
@@ -59,8 +59,8 @@ public class ContactDisplayFragment extends BaseFragment {
 		});
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, final View arg1,
-					final int arg2, long arg3) {
+			public boolean onItemLongClick(AdapterView<?> arg0,
+					final View arg1, final int arg2, long arg3) {
 				AlertDialog.Builder builder = new Builder(dLayout.getContext());
 				builder.setMessage(getString(R.string.are_you_sure_delete));
 				builder.setTitle(getString(R.string.info));
@@ -69,7 +69,7 @@ public class ContactDisplayFragment extends BaseFragment {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								ViewHolder holder = (ViewHolder)arg1.getTag();
+								ViewHolder holder = (ViewHolder) arg1.getTag();
 								p.getContacts().remove(holder.contact);
 								reflash();
 								dialog.dismiss();
@@ -99,9 +99,9 @@ public class ContactDisplayFragment extends BaseFragment {
 				}
 				cdf.setProject(p);
 				cdf.setIndex(arg2);
-				if(cdf.isAdded()){
+				if (cdf.isAdded()) {
 					t.show(cdf);
-				}else{
+				} else {
 					t.add(R.id.content, cdf);
 					t.addToBackStack(null);
 					t.commit();

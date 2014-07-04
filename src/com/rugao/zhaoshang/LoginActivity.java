@@ -19,6 +19,7 @@ import com.rugao.zhaoshang.utils.Utils;
 
 public class LoginActivity extends BaseActivity implements DataView {
 	private boolean isRemember = false;
+	private boolean isDemo = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class LoginActivity extends BaseActivity implements DataView {
 		final EditText name = (EditText) findViewById(R.id.login_name);
 		final EditText pwd = (EditText) findViewById(R.id.login_pwd);
 		CheckBox cb = (CheckBox) findViewById(R.id.remember_me);
+		CheckBox st = (CheckBox) findViewById(R.id.server_type);
 		String un = Utils.getUsername(this);
 		if (un == null) {
 			cb.setChecked(false);
@@ -37,6 +39,9 @@ public class LoginActivity extends BaseActivity implements DataView {
 			name.setText(un);
 			isRemember = true;
 		}
+		isDemo = Utils.getIsDemo(this);
+		st.setChecked(isDemo);
+		updateDomain();
 		cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
@@ -44,12 +49,20 @@ public class LoginActivity extends BaseActivity implements DataView {
 				isRemember = isChecked;
 			}
 		});
+		st.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				isDemo = isChecked;
+				updateDomain();
+			}
+		});
 		findViewById(R.id.login_login).setOnClickListener(
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						String n = name.getText().toString();
-//						n = "yanghui";
+						 n = "Admin";
 						if (n.length() < 1) {
 							Toast.makeText(
 									LoginActivity.this,
@@ -58,7 +71,7 @@ public class LoginActivity extends BaseActivity implements DataView {
 							return;
 						}
 						String p = pwd.getText().toString();
-//						p = "yanghui";
+						 p = "Admin";
 						if (p.length() < 1) {
 							Toast.makeText(LoginActivity.this,
 									getString(R.string.pwd_cannot_be_empty),
@@ -74,6 +87,7 @@ public class LoginActivity extends BaseActivity implements DataView {
 						} else {
 							Utils.putUsername(LoginActivity.this, null);
 						}
+						Utils.putIsDemo(LoginActivity.this, isDemo);
 					}
 				});
 	}
@@ -94,5 +108,13 @@ public class LoginActivity extends BaseActivity implements DataView {
 			showDataBeanNullToast();
 		}
 
+	}
+
+	private void updateDomain() {
+		if (isDemo) {
+			Constants.DOMAIN = Constants.DOMAIN_DEV;
+		} else {
+			Constants.DOMAIN = Constants.DOMAIN_RELEASE;
+		}
 	}
 }

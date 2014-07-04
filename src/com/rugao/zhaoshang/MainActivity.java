@@ -159,4 +159,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		fragmentManager.popBackStack(null,
 				FragmentManager.POP_BACK_STACK_INCLUSIVE);
 	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+	    super.onSaveInstanceState(outState);
+	}
 }

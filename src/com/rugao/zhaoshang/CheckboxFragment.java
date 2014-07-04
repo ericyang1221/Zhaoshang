@@ -43,6 +43,9 @@ public class CheckboxFragment extends BaseFragment {
 				checked.add(s);
 			}
 		}
+		if(it == null){
+			it = new ArrayList<ValueBean>();
+		}
 		lv.setAdapter(new CheckboxAdapter(it));
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -109,19 +112,16 @@ public class CheckboxFragment extends BaseFragment {
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return workers.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 

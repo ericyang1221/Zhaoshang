@@ -40,6 +40,7 @@
     </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/project_detail_sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ebebf2" >
@@ -361,10 +362,10 @@
                     android:id="@+id/project_scale"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:inputType="numberDecimal"
                     android:layout_weight="1"
                     android:background="#ffffff"
                     android:gravity="center_vertical|right"
+                    android:inputType="numberDecimal"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -440,6 +441,7 @@
                     android:layout_weight="1"
                     android:background="#ffffff"
                     android:gravity="center_vertical|right"
+                    android:inputType="numberDecimal"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -478,6 +480,7 @@
                     android:layout_weight="1"
                     android:background="#ffffff"
                     android:gravity="center_vertical|right"
+                    android:inputType="numberDecimal"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -511,12 +514,12 @@
 
                 <EditText
                     android:id="@+id/project_total_amount"
-                    android:inputType="numberDecimal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
                     android:gravity="center_vertical|right"
+                    android:inputType="numberDecimal"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -550,12 +553,12 @@
 
                 <EditText
                     android:id="@+id/project_total_tax"
-                    android:inputType="numberDecimal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#ffffff"
                     android:gravity="center_vertical|right"
+                    android:inputType="numberDecimal"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:textSize="18dp" />
@@ -616,7 +619,7 @@
                     android:textColor="#000000"
                     android:textSize="18dp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/project_responsible_id"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -633,7 +636,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="2dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/arrow" />
+                    android:src="@drawable/arrow"
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <LinearLayout
@@ -798,11 +802,21 @@
                 android:paddingTop="15dp" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/project_contacts"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+                
+                <TextView
+                    android:id="@+id/project_contacts_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:text="@string/project_contacts"
+                    android:singleLine="true"
+                    android:gravity="center_vertical|right"
                     android:textColor="#000000"
                     android:textSize="18dp" />
 
@@ -826,11 +840,21 @@
                 android:paddingTop="15dp" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/project_investors"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+                
+                <TextView
+                    android:id="@+id/project_investors_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:text="@string/project_investors"
+                    android:singleLine="true"
+                    android:gravity="center_vertical|right"
                     android:textColor="#000000"
                     android:textSize="18dp" />
 

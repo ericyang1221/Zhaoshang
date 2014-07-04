@@ -4,11 +4,13 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import com.rugao.zhaoshang.beans.ValueBean;
 import com.rugao.zhaoshang.utils.Constants;
 
 public class ActivityDetailFragment extends BaseFragment implements DataView {
+	private final String TAG = "ActivityDetailFragment";
 	protected ActivityItem activityItem;
 	protected EditText an;
 	protected TextView pn;
@@ -38,12 +41,16 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 
 	protected boolean isClEnable;
 
+	protected ScrollView sv;
+	protected int index = 0;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View layout = inflater.inflate(R.layout.activity_detail_layout,
 				container, false);
+		sv = (ScrollView) layout.findViewById(R.id.activity_detail_sv);
 		an = (EditText) layout.findViewById(R.id.activity_name);
 		pn = (TextView) layout.findViewById(R.id.project_name);
 		ps = (TextView) layout.findViewById(R.id.project_stage);
@@ -63,16 +70,48 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 			@Override
 			public void onClick(View v) {
 				String activityName = an.getText().toString();
+				String projectName = pn.getText().toString();
+				String projectStage = ps.getText().toString();
+				String activityCase = ac.getText().toString();
+				String requestContent = rc.getText().toString();
+				String leaders = activityItem.getLeaderIdsDisplay();
+
+				StringBuffer sb = new StringBuffer();
+				String colon = getString(R.string.colon);
 				if (activityName == null || activityName.length() < 1) {
-					getBaseActivity().showToast(
-							R.string.pls_input_activity_name);
-					return;
-				} else {
-					activityItem.setActivityIdDisplay(activityName);
+					sb.append(getString(R.string.activity_name).replace(colon,
+							"  "));
 				}
+				if (projectName == null || projectName.length() < 1) {
+					sb.append(getString(R.string.project_name).replace(colon,
+							"  "));
+				}
+				if (projectStage == null || projectStage.length() < 1) {
+					sb.append(getString(R.string.project_stage).replace(colon,
+							"  "));
+				}
+				if (activityCase == null || activityCase.length() < 1) {
+					sb.append(getString(R.string.activity_case).replace(colon,
+							"  "));
+				}
+				if (requestContent == null || requestContent.length() < 1) {
+					sb.append(getString(R.string.request_content).replace(
+							colon, "  "));
+				}
+				if (leaders == null || leaders.length() < 1) {
+					sb.append(getString(R.string.choose_leaders).replace(colon,
+							"  "));
+				}
+				if (sb.length() > 0) {
+					sb.append(getString(R.string.can_not_be_empty));
+					getBaseActivity().showToast(sb.toString());
+					return;
+				}
+
+				activityItem.setActivityIdDisplay(activityName);
 				activityItem.setDate(selectedDate);
-				activityItem.setActiMemo(ac.getText().toString());
-				activityItem.setProblems(rc.getText().toString());
+				activityItem.setActiMemo(activityCase);
+				activityItem.setProblems(requestContent);
 
 				titleRightButtonAction();
 			}
@@ -96,6 +135,16 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 	@Override
 	public void onResume() {
 		super.onResume();
+		Log.d(TAG, "onResume");
+		if (index != 0 && sv != null) {
+			Log.d(TAG, "index: " + index);
+			sv.post(new Runnable() {
+				@Override
+				public void run() {
+					sv.scrollTo(0, index);
+				}
+			});
+		}
 		an.setText(activityItem.getActivityIdDisplay());
 		pn.setText(activityItem.getProjectIdDisplay());
 		ps.setText(activityItem.getStageIdDisplay());
@@ -140,7 +189,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				if (cf.isAdded()) {
 					t.show(cf);
 				} else {
-					t.add(R.id.content, cf);
+					t.replace(R.id.content, cf);
 					t.addToBackStack(null);
 					t.commit();
 				}
@@ -176,7 +225,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				if (cf.isAdded()) {
 					t.show(cf);
 				} else {
-					t.add(R.id.content, cf);
+					t.replace(R.id.content, cf);
 					t.addToBackStack(null);
 					t.commit();
 				}
@@ -194,7 +243,8 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				}
 				df.isEditable(isClEnable);
 				df.setData(activityItem.getLeaderIdsDisplay().split(","),
-						activityItem.getLeaderIds().split(","));
+						activityItem.getLeaderIds().split(","),
+						DisplayFragment.ACTIVITY_LEADERS);
 				df.setDisplayFragmentListener(new DisplayFragmentListener() {
 					@Override
 					public void onChooseConfirm(List<String> checked,
@@ -223,7 +273,8 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 						}
 						df.setData(activityItem.getLeaderIdsDisplay()
 								.split(","),
-								activityItem.getLeaderIds().split(","));
+								activityItem.getLeaderIds().split(","),
+								DisplayFragment.ACTIVITY_LEADERS);
 						cl.setText(activityItem.getLeaderIdsDisplay());
 					}
 
@@ -255,20 +306,30 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 						}
 						df.setData(activityItem.getLeaderIdsDisplay()
 								.split(","),
-								activityItem.getLeaderIds().split(","));
+								activityItem.getLeaderIds().split(","),
+								DisplayFragment.ACTIVITY_LEADERS);
 						cl.setText(activityItem.getLeaderIdsDisplay());
 					}
 				});
 				if (df.isAdded()) {
 					t.show(df);
 				} else {
-					t.add(R.id.content, df);
+					t.replace(R.id.content, df);
 					t.addToBackStack(null);
 					t.commit();
 				}
 			}
 		});
+	}
 
+	@Override
+	public void onDestroyView() {
+		Log.d(TAG, "onDestroyView");
+		if (sv != null) {
+			index = sv.getScrollY();
+			Log.d(TAG, "index: " + index);
+		}
+		super.onDestroyView();
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +23,9 @@ import com.rugao.zhaoshang.CheckboxFragment.OnConfirmClickListener;
 import com.rugao.zhaoshang.beans.ValueBean;
 
 public class DisplayFragment extends BaseFragment {
+	private final String TAG = "DisplayFragment";
+	public static int ACTIVITY_LEADERS = 1;
+	public static int PROJECT_WORKERS = 2;
 	private List<String> data = new ArrayList<String>();
 	private CheckboxFragment cf;
 	// private Project p;
@@ -31,6 +35,7 @@ public class DisplayFragment extends BaseFragment {
 	private List<String> wsdList;
 	private DisplayFragmentListener displayFragmentListener;
 	private boolean isEditable = true;
+	private int type;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +47,12 @@ public class DisplayFragment extends BaseFragment {
 		adapter = new ArrayAdapter<String>(this.getActivity(), R.layout.ax,
 				android.R.id.text1, data);
 		lv.setAdapter(adapter);
+		final List<ValueBean> allList ;
+		if(type == PROJECT_WORKERS){
+			allList = getMyApplication().getProjectWorker();
+		}else{
+			allList = getMyApplication().getActivityLeader();
+		}
 		dLayout.findViewById(R.id.tr).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -52,7 +63,7 @@ public class DisplayFragment extends BaseFragment {
 						cf = new CheckboxFragment();
 					}
 					// cf.setProject(p);
-					cf.setData(ws, getMyApplication().getProjectPeople());
+					cf.setData(ws, allList);
 					cf.setOnConfirmClickListener(new OnConfirmClickListener() {
 						@Override
 						public void onConfirmClick(List<String> checked,
@@ -74,7 +85,6 @@ public class DisplayFragment extends BaseFragment {
 				}
 			}
 		});
-		final List<ValueBean> it = getMyApplication().getProjectPeople();
 		if (isEditable) {
 			lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 				@Override
@@ -91,7 +101,7 @@ public class DisplayFragment extends BaseFragment {
 										int which) {
 									if (displayFragmentListener != null) {
 										displayFragmentListener.onItemDelete(
-												arg2, wsdList, it);
+												arg2, wsdList, allList);
 									}
 									reflash();
 									dialog.dismiss();
@@ -139,9 +149,11 @@ public class DisplayFragment extends BaseFragment {
 		adapter.notifyDataSetChanged();
 	}
 
-	public void setData(String[] wsd, String[] ws) {
+	public void setData(String[] wsd, String[] ws,int type) {
+		Log.d(TAG, "worksDisplay: " + wsd + "works: " + ws);
 		this.wsd = wsd;
 		this.ws = ws;
+		this.type = type;
 	}
 
 	public DisplayFragmentListener getDisplayFragmentListener() {
@@ -157,7 +169,7 @@ public class DisplayFragment extends BaseFragment {
 		public void onChooseConfirm(List<String> checked, List<ValueBean> all);
 
 		public void onItemDelete(int position, List<String> wsdList,
-				List<ValueBean> it);
+				List<ValueBean> allList);
 	}
 
 	public void isEditable(boolean isEditable) {
