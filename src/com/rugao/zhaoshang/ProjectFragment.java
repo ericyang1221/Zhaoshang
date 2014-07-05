@@ -3,6 +3,8 @@ package com.rugao.zhaoshang;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -88,8 +91,8 @@ public class ProjectFragment extends BaseFragment implements DataView,
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						SearchDialog dialog = new SearchDialog(getActivity(),
-								R.style.SearchDialog);
+						final SearchDialog dialog = new SearchDialog(
+								getActivity(), R.style.SearchDialog);
 						dialog.setOnSearchListener(new OnSearchListener() {
 							@Override
 							public void onSearchConfirm(String searchValue) {
@@ -111,6 +114,9 @@ public class ProjectFragment extends BaseFragment implements DataView,
 							}
 						});
 						dialog.show();
+						dialog.getWindow()
+								.setSoftInputMode(
+										WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 					}
 				});
 		showAll.setOnClickListener(new OnClickListener() {
@@ -119,17 +125,40 @@ public class ProjectFragment extends BaseFragment implements DataView,
 				onRefresh();
 			}
 		});
-
-		String newNotice = getMyApplication().getNewNotice();
-		if (newNotice != null && newNotice.length() > 0
-				&& !"null".equals(newNotice.trim())) {
-			// use search dialog style. not mistake.
-			NewNoticeDialog dialog = new NewNoticeDialog(getActivity(),
-					R.style.SearchDialog);
-			dialog.setContent(newNotice);
-			dialog.show();
-			getMyApplication().setNewNotice(null);
-		}
+		
+		new Thread(new Runnable(){
+			@Override
+			public void run() {
+				try {
+					UserBean userBean = getMyApplication().getUserBean();
+					String url = URLGenerater.makeUrl(Constants.NEW_NOTICE_GET,
+							new String[] {
+									String.valueOf(userBean.getUserId()),
+									userBean.getMemo() });
+					JSONObject jo = getMyApplication().getHttpRequestHelper()
+							.sendRequestAndReturnJson(url);
+					if (jo != null) {
+						final String newNotice = jo.optString("ResultData");
+						Log.d(TAG, "newNotice: "+newNotice);
+						if (newNotice != null && newNotice.length() > 0
+								&& !"null".equals(newNotice.trim())) {
+							getActivity().runOnUiThread(new Runnable(){
+								@Override
+								public void run() {
+									// use search dialog style. not mistake.
+									NewNoticeDialog dialog = new NewNoticeDialog(getActivity(),
+											R.style.SearchDialog);
+									dialog.setContent(newNotice);
+									dialog.show();
+								}
+							});
+						}
+					}
+				} catch (Exception e) {
+					Log.e(TAG, e.toString());
+				}
+			}
+		}).start();
 		return projectLayout;
 	}
 

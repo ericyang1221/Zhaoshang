@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 public class NewNoticeDialog extends Dialog {
-
-	private TextView content;
+	private TextView contentTv;
+	private String content;
 
 	public NewNoticeDialog(Context context) {
 		super(context);
@@ -22,7 +22,10 @@ public class NewNoticeDialog extends Dialog {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.newnotice_dialog);
-		content = (TextView) findViewById(R.id.new_notice_content);
+		contentTv = (TextView) findViewById(R.id.new_notice_content);
+		if (content != null && content.length() > 0) {
+			contentTv.setText(content);
+		}
 		findViewById(R.id.new_notice_close).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
@@ -32,9 +35,7 @@ public class NewNoticeDialog extends Dialog {
 				});
 	}
 
-	public void setContent(String contentStr) {
-		if (content != null) {
-			content.setText(contentStr);
-		}
+	public void setContent(String content) {
+		this.content = content;
 	}
 }
