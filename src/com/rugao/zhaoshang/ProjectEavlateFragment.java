@@ -3,7 +3,6 @@ package com.rugao.zhaoshang;
 import java.util.List;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,8 +76,6 @@ public class ProjectEavlateFragment extends BaseFragment implements DataView {
 		pt.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
@@ -98,20 +95,12 @@ public class ProjectEavlateFragment extends BaseFragment implements DataView {
 						pt.setText(project.getTypeDisplay());
 					}
 				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.replace(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cf);
 			}
 		});
 		ps.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
@@ -131,13 +120,7 @@ public class ProjectEavlateFragment extends BaseFragment implements DataView {
 						ps.setText(project.getStatusDisplay());
 					}
 				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.replace(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cf);
 			}
 		});
 	}

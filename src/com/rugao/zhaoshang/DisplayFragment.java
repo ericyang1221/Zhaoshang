@@ -8,7 +8,6 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,8 +56,6 @@ public class DisplayFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				if (isEditable) {
-					FragmentTransaction t = getActivity()
-							.getSupportFragmentManager().beginTransaction();
 					if (cf == null) {
 						cf = new CheckboxFragment();
 					}
@@ -75,13 +72,7 @@ public class DisplayFragment extends BaseFragment {
 							}
 						}
 					});
-					if (cf.isAdded()) {
-						t.show(cf);
-					} else {
-						t.add(R.id.content, cf);
-						t.addToBackStack(null);
-						t.commit();
-					}
+					go(cf);
 				}
 			}
 		});

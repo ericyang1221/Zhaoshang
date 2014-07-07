@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,11 +48,7 @@ public class NoticeFragment extends BaseFragment implements DataView {
 				NoticeDetailFragment noticeDetailFragment = new NoticeDetailFragment();
 				Notice n = ((ViewHolder) v.getTag()).notice;
 				noticeDetailFragment.setData(n);
-				FragmentTransaction transaction = getFragmentManager()
-						.beginTransaction();
-				transaction.replace(R.id.content, noticeDetailFragment);
-				transaction.addToBackStack(null);
-				transaction.commit();
+				go(noticeDetailFragment);
 			}
 		});
 		

@@ -3,7 +3,6 @@ package com.rugao.zhaoshang;
 import java.util.List;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,14 +43,10 @@ public class MessageFragment extends BaseFragment implements DataView {
 			public void onItemClick(AdapterView<?> arg0, View v, int arg2,
 					long arg3) {
 				MessageListFragment messageListFragment = new MessageListFragment();
-				ViewHolder holder = (ViewHolder)v.getTag();
+				ViewHolder holder = (ViewHolder) v.getTag();
 				int activityId = holder.message.getActivityId();
 				messageListFragment.setActivityId(activityId);
-				FragmentTransaction transaction = getFragmentManager()
-						.beginTransaction();
-				transaction.replace(R.id.content, messageListFragment);
-				transaction.addToBackStack(null);
-				transaction.commit();
+				go(messageListFragment);
 			}
 		});
 		return messageLayout;

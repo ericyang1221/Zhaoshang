@@ -6,7 +6,6 @@ import java.util.List;
 import org.json.JSONObject;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,11 +65,7 @@ public class ProjectFragment extends BaseFragment implements DataView,
 				Log.d(TAG, "listview onItemClick");
 				ProjectDetailFragment projectDetailFragment = new ProjectDetailFragment();
 				projectDetailFragment.setProjectBean(((ViewHolder) v.getTag()).project);
-				FragmentTransaction transaction = getFragmentManager()
-						.beginTransaction();
-				transaction.replace(R.id.content, projectDetailFragment);
-				transaction.addToBackStack(null);
-				transaction.commit();
+				go(projectDetailFragment);
 			}
 		});
 
@@ -80,11 +75,7 @@ public class ProjectFragment extends BaseFragment implements DataView,
 					public void onClick(View v) {
 						ProjectAddFragment projectAddFragment = new ProjectAddFragment();
 						projectAddFragment.setProjectBean(new Project());
-						FragmentTransaction transaction = getFragmentManager()
-								.beginTransaction();
-						transaction.replace(R.id.content, projectAddFragment);
-						transaction.addToBackStack(null);
-						transaction.commit();
+						go(projectAddFragment);
 					}
 				});
 		projectLayout.findViewById(R.id.search).setOnClickListener(
@@ -246,12 +237,7 @@ public class ProjectFragment extends BaseFragment implements DataView,
 						Log.d(TAG, "evaluat clicked");
 						ProjectEavlateFragment projectEavlateFragment = new ProjectEavlateFragment();
 						projectEavlateFragment.setProjectBean(p);
-						FragmentTransaction transaction = getFragmentManager()
-								.beginTransaction();
-						transaction.replace(R.id.content,
-								projectEavlateFragment);
-						transaction.addToBackStack(null);
-						transaction.commit();
+						go(projectEavlateFragment);
 					}
 				});
 			} else {

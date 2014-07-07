@@ -54,15 +54,7 @@ public class ActivityFragment extends BaseFragment {
 				ActivityDetailFragment activityDetailFragment = new ActivityDetailFragment();
 				activityDetailFragment.setActivityItem(ai);
 				activityDetailFragment.setSelectedDate(selectedDate);
-				FragmentTransaction transaction = getFragmentManager()
-						.beginTransaction();
-				if (activityDetailFragment.isAdded()) {
-					transaction.show(activityDetailFragment);
-				} else {
-					transaction.add(R.id.content, activityDetailFragment);
-					transaction.addToBackStack(null);
-					transaction.commit();
-				}
+				go(activityDetailFragment);
 			}
 		});
 
@@ -78,15 +70,7 @@ public class ActivityFragment extends BaseFragment {
 						activityAddFragment.setActivityItem(new ActivityItem());
 						activityAddFragment.setSelectedDate(selectedDate);
 						activityAddFragment.setCalendarView(cal);
-						FragmentTransaction transaction = getFragmentManager()
-								.beginTransaction();
-						if (activityAddFragment.isAdded()) {
-							transaction.show(activityAddFragment);
-						} else {
-							transaction.add(R.id.content, activityAddFragment);
-							transaction.addToBackStack(null);
-							transaction.commit();
-						}
+						go(activityAddFragment);
 					}
 				});
 

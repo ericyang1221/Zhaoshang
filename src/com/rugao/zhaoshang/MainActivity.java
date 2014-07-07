@@ -77,51 +77,30 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private void setTabSelection(int index) {
 		clearSelection();
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
-		hideFragments(transaction);
 		switch (index) {
 		case 0:
 			tab1.setImageResource(R.drawable.tabbaritem_1_selected);
 			tv1.setTextColor(Color.rgb(41, 158, 241));
-			// if (projectFragment == null) {
 			projectFragment = new ProjectFragment();
-			// transaction.add(R.id.content, projectFragment);
-			// } else {
-			// transaction.show(projectFragment);
-			// }
 			transaction.replace(R.id.content, projectFragment);
 			break;
 		case 1:
 			tab2.setImageResource(R.drawable.tabbaritem_2_selected);
 			tv2.setTextColor(Color.rgb(41, 158, 241));
-			// if (activityFragment == null) {
 			activityFragment = new ActivityFragment();
-			// transaction.add(R.id.content, activityFragment);
-			// } else {
-			// transaction.show(activityFragment);
-			// }
 			transaction.replace(R.id.content, activityFragment);
 			break;
 		case 2:
 			tab3.setImageResource(R.drawable.tabbaritem_3_selected);
 			tv3.setTextColor(Color.rgb(41, 158, 241));
-			// if (messageFragment == null) {
 			messageFragment = new MessageFragment();
-			// transaction.add(R.id.content, messageFragment);
-			// } else {
-			// transaction.show(messageFragment);
-			// }
 			transaction.replace(R.id.content, messageFragment);
 			break;
 		case 3:
 		default:
 			tab4.setImageResource(R.drawable.tabbaritem_4_selected);
 			tv4.setTextColor(Color.rgb(41, 158, 241));
-			// if (toolFragment == null) {
 			toolFragment = new NoticeFragment();
-			// transaction.add(R.id.content, toolFragment);
-			// } else {
-			// transaction.show(toolFragment);
-			// }
 			transaction.replace(R.id.content, toolFragment);
 			break;
 		}
@@ -138,21 +117,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		tv2.setTextColor(Color.WHITE);
 		tv3.setTextColor(Color.WHITE);
 		tv4.setTextColor(Color.WHITE);
-	}
-
-	private void hideFragments(FragmentTransaction transaction) {
-		if (messageFragment != null) {
-			transaction.hide(messageFragment);
-		}
-		if (activityFragment != null) {
-			transaction.hide(activityFragment);
-		}
-		if (projectFragment != null) {
-			transaction.hide(projectFragment);
-		}
-		if (toolFragment != null) {
-			transaction.hide(toolFragment);
-		}
 	}
 
 	private void clearStack() {

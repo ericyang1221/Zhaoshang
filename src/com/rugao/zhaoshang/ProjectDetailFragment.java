@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -447,8 +446,6 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 		ps.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
@@ -468,13 +465,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						ps.setText(project.getStageIdDisplay());
 					}
 				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.replace(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cf);
 			}
 		});
 		final DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
@@ -499,8 +490,6 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 		pit.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
@@ -515,20 +504,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 								: project.getIndustryType());
 					}
 				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.replace(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cf);
 			}
 		});
 		pid.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
@@ -543,20 +524,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 								: project.getIndustryDetail());
 					}
 				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.replace(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cf);
 			}
 		});
 		pp.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
@@ -577,20 +550,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 								: project.getPolicyDisplay());
 					}
 				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.replace(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cf);
 			}
 		});
 		pe.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
@@ -612,20 +577,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 								: project.getEnviromentDisplay());
 					}
 				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.replace(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cf);
 			}
 		});
 		psu.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
@@ -642,55 +599,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						psu.setText(project.getScaleUnitDisplay());
 					}
 				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.replace(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cf);
 			}
 		});
-		// pri.setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// FragmentTransaction t = getActivity()
-		// .getSupportFragmentManager().beginTransaction();
-		// if (cf == null) {
-		// cf = new ChooseFragment();
-		// }
-		// final List<ValueBean> data = getMyApplication()
-		// .getProjectManager();
-		// cf.setData(data);
-		// cf.setOnFragmentItemClickListener(new OnFragmentItemClickListener() {
-		// @Override
-		// public void onItemClick(int position) {
-		// project.setResponsibleIdDisplay(data.get(position)
-		// .getValue());
-		// try {
-		// project.setResponsibleId(Integer.valueOf(data.get(
-		// position).getKey()));
-		// } catch (Exception e) {
-		// project.setResponsibleId(-1);
-		// }
-		// pri.setText(project.getResponsibleIdDisplay() == null ? ""
-		// : project.getResponsibleIdDisplay());
-		// }
-		// });
-		// if (cf.isAdded()) {
-		// t.show(cf);
-		// } else {
-		// t.add(R.id.content, cf);
-		// t.addToBackStack(null);
-		// t.commit();
-		// }
-		// }
-		// });
 		pw.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (df == null) {
 					df = new DisplayFragment();
 				}
@@ -760,50 +674,28 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						pw.setText(project.getWorkersDisplay());
 					}
 				});
-				if (df.isAdded()) {
-					t.show(df);
-				} else {
-					t.replace(R.id.content, df);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(df);
 			}
 		});
 
 		pi.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (idf == null) {
 					idf = new InvestorDisplayFragment();
 				}
 				idf.setProject(project);
-				if (idf.isAdded()) {
-					t.show(idf);
-				} else {
-					t.replace(R.id.content, idf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(idf);
 			}
 		});
 		pcs.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cdf == null) {
 					cdf = new ContactDisplayFragment();
 				}
 				cdf.setProject(project);
-				if (cdf.isAdded()) {
-					t.show(cdf);
-				} else {
-					t.replace(R.id.content, cdf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cdf);
 			}
 		});
 	}

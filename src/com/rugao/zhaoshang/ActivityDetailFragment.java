@@ -3,7 +3,6 @@ package com.rugao.zhaoshang;
 import java.util.List;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -164,8 +163,6 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 			@Override
 			public void onClick(View v) {
 				save();
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
@@ -186,13 +183,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 						ActivityDetailFragment.this.onResume();
 					}
 				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.replace(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cf);
 			}
 		});
 
@@ -200,8 +191,6 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 			@Override
 			public void onClick(View v) {
 				save();
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (cf == null) {
 					cf = new ChooseFragment();
 				}
@@ -222,13 +211,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 						ActivityDetailFragment.this.onResume();
 					}
 				});
-				if (cf.isAdded()) {
-					t.show(cf);
-				} else {
-					t.replace(R.id.content, cf);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(cf);
 			}
 		});
 
@@ -236,8 +219,6 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 			@Override
 			public void onClick(View v) {
 				save();
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (df == null) {
 					df = new DisplayFragment();
 				}
@@ -311,13 +292,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 						cl.setText(activityItem.getLeaderIdsDisplay());
 					}
 				});
-				if (df.isAdded()) {
-					t.show(df);
-				} else {
-					t.replace(R.id.content, df);
-					t.addToBackStack(null);
-					t.commit();
-				}
+				go(df);
 			}
 		});
 	}

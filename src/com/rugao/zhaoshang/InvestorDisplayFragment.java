@@ -7,7 +7,6 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,16 +40,12 @@ public class InvestorDisplayFragment extends BaseFragment {
 		dLayout.findViewById(R.id.tr).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (df == null) {
 					df = new InvestorDetailFragment();
 				}
 				df.setProject(p);
 				df.setIndex(-1);
-				t.replace(R.id.content, df);
-				t.addToBackStack(null);
-				t.commit();
+				go(df);
 			}
 		});
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -88,16 +83,12 @@ public class InvestorDisplayFragment extends BaseFragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				FragmentTransaction t = getActivity()
-						.getSupportFragmentManager().beginTransaction();
 				if (df == null) {
 					df = new InvestorDetailFragment();
 				}
 				df.setProject(p);
 				df.setIndex(arg2);
-				t.replace(R.id.content, df);
-				t.addToBackStack(null);
-				t.commit();
+				go(df);
 			}
 		});
 		dLayout.findViewById(R.id.tl).setOnClickListener(new OnClickListener() {
