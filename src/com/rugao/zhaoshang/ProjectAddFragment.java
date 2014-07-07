@@ -29,7 +29,7 @@ public class ProjectAddFragment extends ProjectDetailFragment {
 			Toast.makeText(getActivity(), R.string.create_fail,
 					Toast.LENGTH_SHORT).show();
 		}
-		getActivity().getSupportFragmentManager().popBackStack();
+		goBack();
 		System.out.println(db.getResultMsg());
 	}
 }

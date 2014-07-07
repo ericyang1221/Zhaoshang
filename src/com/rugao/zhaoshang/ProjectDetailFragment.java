@@ -115,8 +115,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						getActivity().getSupportFragmentManager()
-								.popBackStack();
+						goBack();
 					}
 				});
 		projectDetailLayout.findViewById(R.id.tr).setOnClickListener(
@@ -719,8 +718,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 			Toast.makeText(getActivity(), R.string.update_fail,
 					Toast.LENGTH_SHORT).show();
 		}
-		getActivity().getSupportFragmentManager().popBackStack();
-		System.out.println(db.getResultMsg());
+		goBack();
 	}
 
 	public void setProjectBean(Project project) {

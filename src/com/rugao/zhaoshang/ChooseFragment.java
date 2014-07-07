@@ -35,15 +35,14 @@ public class ChooseFragment extends BaseFragment {
 				if (onFragmentItemClickListener != null) {
 					onFragmentItemClickListener.onItemClick(arg2);
 				}
-				getActivity().getSupportFragmentManager().popBackStack();
+				goBack();
 			}
 		});
 		chooseLayout.findViewById(R.id.tl).setOnClickListener(
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						getActivity().getSupportFragmentManager()
-								.popBackStack();
+						goBack();
 					}
 				});
 		return chooseLayout;

@@ -23,7 +23,7 @@ public class NoticeDetailFragment extends BaseFragment {
 		layout.findViewById(R.id.tl).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getActivity().getSupportFragmentManager().popBackStack();
+				goBack();
 			}
 		});
 		return layout;

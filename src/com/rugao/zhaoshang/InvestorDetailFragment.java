@@ -34,7 +34,7 @@ public class InvestorDetailFragment extends BaseFragment {
 		layout.findViewById(R.id.tr).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getActivity().getSupportFragmentManager().popBackStack();
+				goBack();
 				if (name.getText().length() > 0) {
 					if (index < 0) {
 						i = new Investor();
@@ -52,7 +52,7 @@ public class InvestorDetailFragment extends BaseFragment {
 		layout.findViewById(R.id.tl).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getActivity().getSupportFragmentManager().popBackStack();
+				goBack();
 			}
 		});
 		return layout;

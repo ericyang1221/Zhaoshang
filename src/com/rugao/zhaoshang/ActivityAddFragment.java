@@ -32,7 +32,7 @@ public class ActivityAddFragment extends ActivityDetailFragment {
 			Toast.makeText(getActivity(), R.string.create_fail,
 					Toast.LENGTH_SHORT).show();
 		}
-		getActivity().getSupportFragmentManager().popBackStack();
+		goBack();
 		calendarView.updateCurrentMonth();
 	}
 

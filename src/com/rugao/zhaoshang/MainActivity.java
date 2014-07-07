@@ -27,15 +27,13 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private TextView tv3;
 	private TextView tv4;
 
-	private FragmentManager fragmentManager;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		initViews();
-		fragmentManager = this.getSupportFragmentManager();
+		fragmentManager = getTheFragmentManager();
 		setTabSelection(0);
 	}
 
@@ -76,6 +74,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	private void setTabSelection(int index) {
 		clearSelection();
+		clearStack();
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
 		switch (index) {
 		case 0:
@@ -105,7 +104,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 		transaction.commit();
-		clearStack();
+		fragmentManager.executePendingTransactions();
 	}
 
 	private void clearSelection() {

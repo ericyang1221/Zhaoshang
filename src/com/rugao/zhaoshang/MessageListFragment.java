@@ -107,8 +107,7 @@ public class MessageListFragment extends BaseFragment implements DataView {
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						getActivity().getSupportFragmentManager()
-								.popBackStack();
+						goBack();
 					}
 				});
 		return messageLayout;

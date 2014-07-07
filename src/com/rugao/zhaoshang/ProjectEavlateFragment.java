@@ -40,7 +40,7 @@ public class ProjectEavlateFragment extends BaseFragment implements DataView {
 		layout.findViewById(R.id.tl).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getActivity().getSupportFragmentManager().popBackStack();
+				goBack();
 			}
 		});
 		layout.findViewById(R.id.tr).setOnClickListener(new OnClickListener() {
@@ -140,7 +140,7 @@ public class ProjectEavlateFragment extends BaseFragment implements DataView {
 			Toast.makeText(getActivity(), R.string.update_fail,
 					Toast.LENGTH_SHORT).show();
 		}
-		getActivity().getSupportFragmentManager().popBackStack();
+		goBack();
 	}
 
 	public void setProjectBean(Project project) {

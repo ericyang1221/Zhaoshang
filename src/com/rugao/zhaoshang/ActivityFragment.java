@@ -33,8 +33,8 @@ public class ActivityFragment extends BaseFragment {
 		lv = (ListView) activityLayout.findViewById(R.id.cal_lv);
 		cal = new CalendarView();
 		cal.setActivityFragment(this);
-		FragmentTransaction transaction = getChildFragmentManager()
-				.beginTransaction();
+		FragmentTransaction transaction = getBaseActivity()
+				.getTheFragmentManager().beginTransaction();
 		transaction.add(R.id.cal_cal, cal).commit();
 
 		cal.setOnCalendarDateClickListener(new OnCalendarDateClickListener() {

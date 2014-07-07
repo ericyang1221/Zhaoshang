@@ -4,12 +4,14 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
 
 public class BaseActivity extends FragmentActivity {
 	public static final int LOGIN_DIALOG = 1;
 	public static final int LOADING_DIALOG = 2;
 	private MyApplication myApp;
+	protected FragmentManager fragmentManager;
 
 	public void showDataBeanNullToast() {
 		showToast(R.string.network_error);
@@ -57,5 +59,12 @@ public class BaseActivity extends FragmentActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public FragmentManager getTheFragmentManager(){
+		if(fragmentManager == null){
+			fragmentManager = this.getSupportFragmentManager();
+		}
+		return fragmentManager;
 	}
 }

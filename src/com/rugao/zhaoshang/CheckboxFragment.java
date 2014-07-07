@@ -67,7 +67,7 @@ public class CheckboxFragment extends BaseFragment {
 		dLayout.findViewById(R.id.tr).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getActivity().getSupportFragmentManager().popBackStack();
+				goBack();
 				if (onConfirmClickListener != null) {
 					onConfirmClickListener.onConfirmClick(checked, it);
 				}
@@ -97,7 +97,7 @@ public class CheckboxFragment extends BaseFragment {
 		dLayout.findViewById(R.id.tl).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getActivity().getSupportFragmentManager().popBackStack();
+				goBack();
 			}
 		});
 		return dLayout;
