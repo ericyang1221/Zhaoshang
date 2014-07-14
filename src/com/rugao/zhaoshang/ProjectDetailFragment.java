@@ -46,7 +46,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 	protected EditText pta;
 	protected EditText ptt;
 	protected EditText ppp;
-	protected TextView pri;
+	protected EditText pri;
 	protected EditText pcl;
 	protected EditText ptl;
 	protected EditText pr;
@@ -95,7 +95,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 		ptt = (EditText) projectDetailLayout
 				.findViewById(R.id.project_total_tax);
 		ppp = (EditText) projectDetailLayout.findViewById(R.id.project_prjplan);
-		pri = (TextView) projectDetailLayout
+		pri = (EditText) projectDetailLayout
 				.findViewById(R.id.project_responsible_id);
 		pcl = (EditText) projectDetailLayout
 				.findViewById(R.id.project_city_leader);
@@ -422,6 +422,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				project.setProjectPlan(ppp.getText().toString());
+			}
+		});
+		pri.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				project.setResponsibler(pri.getText().toString());
 			}
 		});
 		pcl.setOnFocusChangeListener(new OnFocusChangeListener() {
