@@ -150,6 +150,13 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 		ac.setText(activityItem.getActiMemo());
 		rc.setText(activityItem.getProblems());
 		cl.setText(activityItem.getLeaderIdsDisplay());
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				getMyApplication().updateActivityProject();
+			}
+		}).start();
 	}
 
 	private void save() {

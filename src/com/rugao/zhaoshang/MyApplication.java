@@ -88,23 +88,25 @@ public class MyApplication extends Application {
 					projectWorker = Utils.convertJAStr2SA(Utils
 							.getProjectWorker(MyApplication.this));
 				}
-
-				try {
-					String url = URLGenerater.makeUrl(
-							Constants.ACTIVITY_GETPROJECT, new String[] {
-									String.valueOf(userBean.getUserId()),
-									userBean.getMemo() });
-					JSONObject jo = getHttpRequestHelper()
-							.sendRequestAndReturnJson(url);
-					JSONArray ja = jo.getJSONArray("ResultData");
-					Utils.putActivityProject(MyApplication.this, ja.toString());
-					activityProject = Utils.convertJA2SA(ja);
-				} catch (Exception e) {
-					activityProject = Utils.convertJAStr2SA(Utils
-							.getActivityProject(MyApplication.this));
-				}
+				updateActivityProject();
 			}
 		}).start();
+	}
+
+	public void updateActivityProject() {
+		try {
+			String url = URLGenerater.makeUrl(Constants.ACTIVITY_GETPROJECT,
+					new String[] { String.valueOf(userBean.getUserId()),
+							userBean.getMemo() });
+			JSONObject jo = getHttpRequestHelper()
+					.sendRequestAndReturnJson(url);
+			JSONArray ja = jo.getJSONArray("ResultData");
+			Utils.putActivityProject(MyApplication.this, ja.toString());
+			activityProject = Utils.convertJA2SA(ja);
+		} catch (Exception e) {
+			activityProject = Utils.convertJAStr2SA(Utils
+					.getActivityProject(MyApplication.this));
+		}
 	}
 
 	public List<ValueBean> getProjectStage() {

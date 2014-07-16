@@ -1,17 +1,29 @@
 package com.rugao.zhaoshang;
 
+import java.util.List;
+
+import com.rugao.zhaoshang.asynctask.MessageTask;
+import com.rugao.zhaoshang.beans.DataBean;
+import com.rugao.zhaoshang.beans.Message;
+import com.rugao.zhaoshang.beans.MessageBean;
+import com.rugao.zhaoshang.beans.UserBean;
+import com.rugao.zhaoshang.utils.Constants;
+import com.rugao.zhaoshang.utils.URLGenerater;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends BaseActivity implements OnClickListener {
-
+public class MainActivity extends BaseActivity implements OnClickListener,
+		DataView {
+	private final String TAG = "MainActivity";
 	private MessageFragment messageFragment;
 	private ProjectFragment projectFragment;
 	private ActivityFragment activityFragment;
@@ -21,6 +33,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private ImageView tab2;
 	private ImageView tab3;
 	private ImageView tab4;
+
+	private ImageView reddot;
 
 	private TextView tv1;
 	private TextView tv2;
@@ -42,6 +56,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		tab2 = (ImageView) findViewById(R.id.tab2);
 		tab3 = (ImageView) findViewById(R.id.tab3);
 		tab4 = (ImageView) findViewById(R.id.tab4);
+		reddot = (ImageView) findViewById(R.id.reddot);
 		tv1 = (TextView) findViewById(R.id.tab1_txt);
 		tv2 = (TextView) findViewById(R.id.tab2_txt);
 		tv3 = (TextView) findViewById(R.id.tab3_txt);
@@ -124,7 +139,52 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		UserBean ub = getMyApplication().getUserBean();
+		new MessageTask(this).execute(
+				this,
+				URLGenerater.makeUrl(Constants.MESSAGE_GET, new String[] {
+						String.valueOf(ub.getUserId()), ub.getMemo() }));
+	}
+
+	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		// super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void setData(DataBean db) {
+		boolean hasDot = false;
+		if (db != null) {
+			MessageBean mb = (MessageBean) db;
+			if (mb.getResult()) {
+				List<Message> ml = mb.getMessages();
+				for (Message m : ml) {
+					String count = m.getCount();
+					if (count != null && count.length() > 0) {
+						int unread = Integer.valueOf(count.substring(0, 1));
+						Log.d(TAG, "unread: " + unread);
+						if (unread > 0) {
+							hasDot = true;
+							break;
+						} else {
+							hasDot = false;
+						}
+					} else {
+						hasDot = false;
+					}
+				}
+			} else {
+				hasDot = false;
+			}
+		} else {
+			hasDot = false;
+		}
+		if (hasDot) {
+			reddot.setVisibility(View.VISIBLE);
+		} else {
+			reddot.setVisibility(View.GONE);
+		}
 	}
 }

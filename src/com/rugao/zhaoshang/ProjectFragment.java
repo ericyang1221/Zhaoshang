@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -116,8 +117,8 @@ public class ProjectFragment extends BaseFragment implements DataView,
 				onRefresh();
 			}
 		});
-		
-		new Thread(new Runnable(){
+
+		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -130,15 +131,15 @@ public class ProjectFragment extends BaseFragment implements DataView,
 							.sendRequestAndReturnJson(url);
 					if (jo != null) {
 						final String newNotice = jo.optString("ResultData");
-						Log.d(TAG, "newNotice: "+newNotice);
+						Log.d(TAG, "newNotice: " + newNotice);
 						if (newNotice != null && newNotice.length() > 0
 								&& !"null".equals(newNotice.trim())) {
-							getActivity().runOnUiThread(new Runnable(){
+							getActivity().runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
 									// use search dialog style. not mistake.
-									NewNoticeDialog dialog = new NewNoticeDialog(getActivity(),
-											R.style.SearchDialog);
+									NewNoticeDialog dialog = new NewNoticeDialog(
+											getActivity(), R.style.SearchDialog);
 									dialog.setContent(newNotice);
 									dialog.show();
 								}
@@ -319,6 +320,9 @@ public class ProjectFragment extends BaseFragment implements DataView,
 	private void onLoad() {
 		lv.stopRefresh();
 		lv.stopLoadMore();
-		lv.setRefreshTime(getActivity().getString(R.string.just_now));
+		Activity activity = getActivity();
+		if (activity != null) {
+			lv.setRefreshTime(getActivity().getString(R.string.just_now));
+		}
 	}
 }

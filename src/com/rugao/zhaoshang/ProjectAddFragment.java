@@ -30,6 +30,10 @@ public class ProjectAddFragment extends ProjectDetailFragment {
 					Toast.LENGTH_SHORT).show();
 		}
 		goBack();
-		System.out.println(db.getResultMsg());
+		
+		MainActivity activity = (MainActivity)getActivity();
+		if(activity!=null){
+			activity.onResume();
+		}
 	}
 }
