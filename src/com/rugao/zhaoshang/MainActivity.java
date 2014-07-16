@@ -9,6 +9,7 @@ import com.rugao.zhaoshang.beans.MessageBean;
 import com.rugao.zhaoshang.beans.UserBean;
 import com.rugao.zhaoshang.utils.Constants;
 import com.rugao.zhaoshang.utils.URLGenerater;
+import com.rugao.zhaoshang.utils.Utils;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -158,26 +159,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		boolean hasDot = false;
 		if (db != null) {
 			MessageBean mb = (MessageBean) db;
-			if (mb.getResult()) {
-				List<Message> ml = mb.getMessages();
-				for (Message m : ml) {
-					String count = m.getCount();
-					if (count != null && count.length() > 0) {
-						int unread = Integer.valueOf(count.substring(0, 1));
-						Log.d(TAG, "unread: " + unread);
-						if (unread > 0) {
-							hasDot = true;
-							break;
-						} else {
-							hasDot = false;
-						}
-					} else {
-						hasDot = false;
-					}
-				}
-			} else {
-				hasDot = false;
-			}
+			hasDot = Utils.checkNewMessage(mb);
 		} else {
 			hasDot = false;
 		}

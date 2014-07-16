@@ -8,10 +8,15 @@ import org.json.JSONException;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
+import com.rugao.zhaoshang.beans.Message;
+import com.rugao.zhaoshang.beans.MessageBean;
 import com.rugao.zhaoshang.beans.ValueBean;
 
 public class Utils {
+	private static final String TAG = "Utils";
+
 	public static List<ValueBean> convertJA2SA(JSONArray ja) {
 		List<ValueBean> ret = null;
 		if (ja != null) {
@@ -125,7 +130,7 @@ public class Utils {
 	public static String getProjectUnit(Context context) {
 		return getSharedPreferences(context).getString("PROJECT_UNIT", null);
 	}
-	
+
 	public static void putProjectType(Context context, String str) {
 		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
 		editor.putString("PROJECT_TYPE", str);
@@ -135,7 +140,7 @@ public class Utils {
 	public static String getProjectType(Context context) {
 		return getSharedPreferences(context).getString("PROJECT_TYPE", null);
 	}
-	
+
 	public static void putProjectStatus(Context context, String str) {
 		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
 		editor.putString("PROJECT_STATUS", str);
@@ -151,19 +156,20 @@ public class Utils {
 		editor.putString("PROJECT_WORKER", str);
 		editor.commit();
 	}
-	
+
 	public static String getProjectWorker(Context context) {
 		return getSharedPreferences(context).getString("PROJECT_WORKER", null);
 	}
-	
+
 	public static void putActivityLeaders(Context context, String str) {
 		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
 		editor.putString("ACTIVITY_LEADERS", str);
 		editor.commit();
 	}
-	
+
 	public static String getActivityLeaders(Context context) {
-		return getSharedPreferences(context).getString("ACTIVITY_LEADERS", null);
+		return getSharedPreferences(context)
+				.getString("ACTIVITY_LEADERS", null);
 	}
 
 	public static void putProjectManager(Context context, String str) {
@@ -171,38 +177,68 @@ public class Utils {
 		editor.putString("PROJECT_MANAGER", str);
 		editor.commit();
 	}
-	
+
 	public static String getProjectManager(Context context) {
 		return getSharedPreferences(context).getString("PROJECT_MANAGER", null);
 	}
-	
+
 	public static void putActivityProject(Context context, String str) {
 		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
 		editor.putString("ACTIVITY_PROJECT", str);
 		editor.commit();
 	}
-	
+
 	public static String getActivityProject(Context context) {
-		return getSharedPreferences(context).getString("ACTIVITY_PROJECT", null);
+		return getSharedPreferences(context)
+				.getString("ACTIVITY_PROJECT", null);
 	}
-	
+
 	public static void putUsername(Context context, String str) {
 		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
 		editor.putString("USER_NAME", str);
 		editor.commit();
 	}
-	
+
 	public static String getUsername(Context context) {
 		return getSharedPreferences(context).getString("USER_NAME", null);
 	}
-	
+
 	public static void putIsDemo(Context context, boolean isDemo) {
 		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
 		editor.putBoolean("ISDEMO", isDemo);
 		editor.commit();
 	}
-	
+
 	public static boolean getIsDemo(Context context) {
 		return getSharedPreferences(context).getBoolean("ISDEMO", false);
+	}
+
+	public static boolean checkNewMessage(MessageBean mb) {
+		boolean hasDot = false;
+		if (mb != null) {
+			if (mb.getResult()) {
+				List<Message> ml = mb.getMessages();
+				for (Message m : ml) {
+					String count = m.getCount();
+					if (count != null && count.length() > 0) {
+						int unread = Integer.valueOf(count.substring(0, 1));
+						Log.d(TAG, "unread: " + unread);
+						if (unread > 0) {
+							hasDot = true;
+							break;
+						} else {
+							hasDot = false;
+						}
+					} else {
+						hasDot = false;
+					}
+				}
+			} else {
+				hasDot = false;
+			}
+		} else {
+			hasDot = false;
+		}
+		return hasDot;
 	}
 }

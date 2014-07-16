@@ -19,6 +19,7 @@ import com.rugao.zhaoshang.beans.MessageBean;
 import com.rugao.zhaoshang.beans.UserBean;
 import com.rugao.zhaoshang.utils.Constants;
 import com.rugao.zhaoshang.utils.URLGenerater;
+import com.rugao.zhaoshang.utils.Utils;
 
 public class MessageFragment extends BaseFragment implements DataView {
 	private LayoutInflater mInflater;
@@ -118,6 +119,7 @@ public class MessageFragment extends BaseFragment implements DataView {
 
 	@Override
 	public void setData(DataBean db) {
+		boolean hasDot = false;
 		if (db != null) {
 			MessageBean mb = (MessageBean) db;
 			if (mb.getResult()) {
@@ -129,8 +131,16 @@ public class MessageFragment extends BaseFragment implements DataView {
 				tv.setVisibility(View.VISIBLE);
 				this.getBaseActivity().showToast(mb.getResultMsg());
 			}
+			hasDot = Utils.checkNewMessage(mb);
 		} else {
 			getBaseActivity().showDataBeanNullToast();
+			hasDot = false;
+		}
+		View reddot = getActivity().findViewById(R.id.reddot);
+		if (hasDot) {
+			reddot.setVisibility(View.VISIBLE);
+		} else {
+			reddot.setVisibility(View.GONE);
 		}
 	}
 }
