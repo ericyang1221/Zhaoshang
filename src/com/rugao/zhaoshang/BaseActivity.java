@@ -60,7 +60,7 @@ public class BaseActivity extends FragmentActivity {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public FragmentManager getTheFragmentManager(){
 		if(fragmentManager == null){
 			fragmentManager = this.getSupportFragmentManager();

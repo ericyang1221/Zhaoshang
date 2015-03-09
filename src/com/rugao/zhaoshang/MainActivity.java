@@ -1,26 +1,22 @@
 package com.rugao.zhaoshang;
 
-import java.util.List;
-
-import com.rugao.zhaoshang.asynctask.MessageTask;
-import com.rugao.zhaoshang.beans.DataBean;
-import com.rugao.zhaoshang.beans.Message;
-import com.rugao.zhaoshang.beans.MessageBean;
-import com.rugao.zhaoshang.beans.UserBean;
-import com.rugao.zhaoshang.utils.Constants;
-import com.rugao.zhaoshang.utils.URLGenerater;
-import com.rugao.zhaoshang.utils.Utils;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.rugao.zhaoshang.asynctask.MessageTask;
+import com.rugao.zhaoshang.beans.DataBean;
+import com.rugao.zhaoshang.beans.MessageBean;
+import com.rugao.zhaoshang.beans.UserBean;
+import com.rugao.zhaoshang.utils.Constants;
+import com.rugao.zhaoshang.utils.URLGenerater;
+import com.rugao.zhaoshang.utils.Utils;
 
 public class MainActivity extends BaseActivity implements OnClickListener,
 		DataView {

@@ -81,10 +81,10 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 					sb.append(getString(R.string.activity_name).replace(colon,
 							"  "));
 				}
-				if (projectName == null || projectName.length() < 1) {
-					sb.append(getString(R.string.project_name).replace(colon,
-							"  "));
-				}
+//				if (projectName == null || projectName.length() < 1) {
+//					sb.append(getString(R.string.project_name).replace(colon,
+//							"  "));
+//				}
 				if (projectStage == null || projectStage.length() < 1) {
 					sb.append(getString(R.string.project_stage).replace(colon,
 							"  "));
