@@ -146,11 +146,11 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						List<Contact> cList = project.getContacts();
 
 						StringBuffer sb = new StringBuffer();
-						if (projectWorkers == null
-								|| projectWorkers.length() < 1) {
-							sb.append(getString(R.string.check_workers))
-									.append("  ");
-						}
+//						if (projectWorkers == null
+//								|| projectWorkers.length() < 1) {
+//							sb.append(getString(R.string.check_workers))
+//									.append("  ");
+//						}
 						if (iList == null || iList.size() < 1) {
 							sb.append(getString(R.string.check_investor))
 									.append("  ");
@@ -194,7 +194,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 							sb2.append(getString(R.string.project_enviroment)
 									.replace(colon, "  "));
 						}
-						if (projectCase == null || projectCase.length() < 1) {
+						if (projectCase == null || projectCase.length() > 100) {
 							sb2.append(getString(R.string.project_case)
 									.replace(colon, "  "));
 						}
@@ -227,7 +227,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 									.replace(colon, "  "));
 						}
 						if (projectPrjplan == null
-								|| projectPrjplan.length() < 1) {
+								|| projectPrjplan.length() < 30 || projectPrjplan.length() > 100) {
 							sb2.append(getString(R.string.project_prjplan)
 									.replace(colon, "  "));
 						}
@@ -253,7 +253,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 									.replace(colon, "  "));
 						}
 						if (sb2.length() > 0) {
-							sb2.append(getString(R.string.can_not_be_empty));
+							sb2.append(getString(R.string.not_meet_requirement));
 						}
 						sb.append(sb2);
 						if (sb.length() > 0) {
