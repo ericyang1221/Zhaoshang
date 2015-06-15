@@ -438,7 +438,7 @@ public class Project {
 		} else {
 			p.add(new BasicNameValuePair("ProjectId", String.valueOf(projectId)));
 		}
-		p.add(new BasicNameValuePair("BuildTime", buildTime == null ? ""
+		p.add(new BasicNameValuePair("WorkRequire", buildTime == null ? ""
 				: buildTime));
 		p.add(new BasicNameValuePair("Case", this.casse));
 		p.add(new BasicNameValuePair("CityLeader", this.cityLeader));
@@ -468,6 +468,7 @@ public class Project {
 		// p.add(new BasicNameValuePair("UpdateDate", updateDate == null ? ""
 		// : updateDate));
 		// p.add(new BasicNameValuePair("UpdateId", String.valueOf(updateId)));
+		p.add(new BasicNameValuePair("PrjMemo", projectMemo == null ? "" : projectMemo));
 		p.add(new BasicNameValuePair("Workers", workers == null ? "" : workers));
 		p.add(new BasicNameValuePair("WorkersTable", workers == null ? ""
 				: workers));

@@ -30,8 +30,9 @@
     <string name="project_case">成功案例：</string>
     <string name="project_scale">投资规模：</string>
     <string name="project_scale_unit">投资规模单位：</string>
+    <string name="project_content">项目内容：</string>
     <string name="project_land">用地需求(亩)：</string>
-    <string name="project_build_time">建设周期(月)：</string>
+    <string name="project_build_time">用工需求：</string>
     <string name="project_total_amount">年销售收入(万人民币)：</string>
     <string name="project_total_tax">预期税收(万人民币)：</string>
     <string name="project_prjplan">投资实施计划：</string>
@@ -40,6 +41,7 @@
     <string name="project_town_leader">分管领导：</string>
     <string name="project_referrer">项目创建人：</string>
     <string name="project_workers">工作人员：</string>
+    <string name="project_iscompany">是否为单位：</string>
     <string name="project_investors">投资方：</string>
     <string name="project_contacts">投资方项目联系人：</string>
     <string name="please_choose">请选择</string>
@@ -67,6 +69,7 @@
     <string name="create_fail">创建失败</string>
     <string name="activity_name">活动主题：</string>
     <string name="activity_case">活动内容：</string>
+    <string name="activity_address">活动地点：</string>
     <string name="image_upload">照片上传：</string>
     <string name="choose_leaders">选择领导：</string>
     <string name="request_content">请求内容：</string>

@@ -6,19 +6,25 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.rugao.zhaoshang.beans.Contact;
 import com.rugao.zhaoshang.beans.Project;
+import com.rugao.zhaoshang.beans.ValueBean;
+
+import java.util.List;
 
 public class ContactDetailFragment extends BaseFragment {
 	private Project p;
 	private int index = -1;
 	private Contact c;
 	private EditText name;
-	private EditText role;
+	private TextView role;
 	private EditText mobile;
 	private EditText phone;
 	private EditText companyName;
+	private ChooseFragment cf;
+	private String roleTxt = "";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,7 +33,25 @@ public class ContactDetailFragment extends BaseFragment {
 		View layout = inflater.inflate(R.layout.contact_detail_layout,
 				container, false);
 		name = (EditText) layout.findViewById(R.id.contact_name);
-		role = (EditText) layout.findViewById(R.id.contact_role);
+		role = (TextView) layout.findViewById(R.id.contact_role);
+		role.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (cf == null) {
+					cf = new ChooseFragment();
+				}
+				final List<ValueBean> data = getMyApplication()
+						.getProjectTitle();
+				cf.setData(data);
+				cf.setOnFragmentItemClickListener(new ChooseFragment.OnFragmentItemClickListener() {
+					@Override
+					public void onItemClick(int position) {
+						roleTxt = data.get(position).getValue();
+					}
+				});
+				go(cf);
+			}
+		});
 		mobile = (EditText) layout.findViewById(R.id.contact_telephone);
 		phone = (EditText) layout.findViewById(R.id.contact_phone);
 		companyName = (EditText) layout.findViewById(R.id.contact_memo);
@@ -70,7 +94,7 @@ public class ContactDetailFragment extends BaseFragment {
 			companyName.setText(c.getMemo());
 		} else {
 			name.setText("");
-			role.setText("");
+			role.setText(roleTxt);
 			mobile.setText("");
 			phone.setText("");
 			companyName.setText("");

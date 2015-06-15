@@ -28,6 +28,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 	protected EditText an;
 	protected TextView pn;
 	protected TextView ps;
+	protected EditText aa;
 	protected EditText ac;
 	protected TextView cl;
 	protected EditText rc;
@@ -53,6 +54,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 		an = (EditText) layout.findViewById(R.id.activity_name);
 		pn = (TextView) layout.findViewById(R.id.project_name);
 		ps = (TextView) layout.findViewById(R.id.project_stage);
+		aa = (EditText) layout.findViewById(R.id.activity_address);
 		ac = (EditText) layout.findViewById(R.id.activity_case);
 		cl = (TextView) layout.findViewById(R.id.choose_leaders);
 		rc = (EditText) layout.findViewById(R.id.request_content);
@@ -71,6 +73,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				String activityName = an.getText().toString();
 				String projectName = pn.getText().toString();
 				String projectStage = ps.getText().toString();
+				String activityAddress = aa.getText().toString();
 				String activityCase = ac.getText().toString();
 				String requestContent = rc.getText().toString();
 				String leaders = activityItem.getLeaderIdsDisplay();
@@ -111,6 +114,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				activityItem.setDate(selectedDate);
 				activityItem.setActiMemo(activityCase);
 				activityItem.setProblems(requestContent);
+				activityItem.setAddress(activityAddress);
 
 				titleRightButtonAction();
 			}
@@ -147,6 +151,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 		an.setText(activityItem.getActivityIdDisplay());
 		pn.setText(activityItem.getProjectIdDisplay());
 		ps.setText(activityItem.getStageIdDisplay());
+		aa.setText(activityItem.getAddress());
 		ac.setText(activityItem.getActiMemo());
 		rc.setText(activityItem.getProblems());
 		cl.setText(activityItem.getLeaderIdsDisplay());

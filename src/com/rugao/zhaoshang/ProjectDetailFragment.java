@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -51,6 +53,8 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 	protected EditText ptl;
 	protected EditText pr;
 	protected TextView pw;
+	protected EditText pm;
+	protected CheckBox isCompany;
 	protected View pi;
 	protected View pcs;
 	protected TextView piText;
@@ -103,6 +107,8 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				.findViewById(R.id.project_town_leader);
 		pr = (EditText) projectDetailLayout.findViewById(R.id.project_referrer);
 		pw = (TextView) projectDetailLayout.findViewById(R.id.project_workers);
+		pm = (EditText) projectDetailLayout.findViewById(R.id.project_content);
+		isCompany = (CheckBox) projectDetailLayout.findViewById(R.id.project_iscompany);
 		pi = projectDetailLayout.findViewById(R.id.project_investors);
 		pcs = projectDetailLayout.findViewById(R.id.project_contacts);
 		piText = (TextView) projectDetailLayout
@@ -142,6 +148,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						String projectTownLeader = ptl.getText().toString();
 						String projectReferrer = pr.getText().toString();
 						String projectWorkers = pw.getText().toString();
+						String projectMemo = pm.getText().toString();
 						List<Investor> iList = project.getInvestors();
 						List<Contact> cList = project.getContacts();
 
@@ -286,6 +293,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						project.setResponsibler(projectResponsibler);
 						project.setTownLeader(projectTownLeader);
 						project.setReferrer(projectReferrer);
+						project.setProjectMemo(projectMemo);
 
 						titleRightButtonAction();
 					}
@@ -351,7 +359,11 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				.getTownLeader());
 		pr.setText(project.getReferrer() == null ? "" : project.getReferrer());
 		pw.setText(project.getWorkersDisplay());
-		piText.setText(project.getInvestorsDisplay());
+		String piTxt = project.getInvestorsDisplay();
+		piText.setText(piTxt);
+		if(piTxt == null||piTxt.length()<1){
+			isCompany.setChecked(true);
+		}
 		pcsText.setText(project.getContactsDisplay());
 	}
 
@@ -620,7 +632,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				df.setDisplayFragmentListener(new DisplayFragmentListener() {
 					@Override
 					public void onItemDelete(int position,
-							List<String> wsdList, List<ValueBean> it) {
+											 List<String> wsdList, List<ValueBean> it) {
 						wsdList.remove(position);
 						StringBuffer sbd = new StringBuffer();
 						StringBuffer sb = new StringBuffer();
@@ -651,7 +663,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 
 					@Override
 					public void onChooseConfirm(List<String> checked,
-							List<ValueBean> all) {
+												List<ValueBean> all) {
 						StringBuffer sb = new StringBuffer();
 						StringBuffer sbw = new StringBuffer();
 						for (String s : checked) {
@@ -701,6 +713,18 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 				}
 				cdf.setProject(project);
 				go(cdf);
+			}
+		});
+		isCompany.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(pi != null){
+					if(!isChecked){
+						pi.setVisibility(View.GONE);
+					}else{
+						pi.setVisibility(View.VISIBLE);
+					}
+				}
 			}
 		});
 	}

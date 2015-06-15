@@ -17,6 +17,7 @@ public class Constants {
 	public static final String PROJECT_GETSTATUS = "Project/GetStatus";
 //	public static final String PROJECT_GETPEOPLEINFO = "Project/GetPeopleInfo?type=?&UserId=?&Memo=?";
 	public static final String PROJECT_GETWORKERS = "project/GetWorkers?userId=?&memo=?&projectId=0";
+	public static final String PROJECT_GETTITLE = "Project/GetTitle?userId=?&memo=?&projectId=0";
 	public static final String PROJECT_CREATE = "project/create";
 	public static final String PROJECT_EDIT = "project/Edit";
 	public static final String PROJECT_UPDATE_EAVLATE = "project/Evaluat?userId=?&memo=?&projectId=?&type=?&status=?";

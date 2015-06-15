@@ -157,8 +157,18 @@ public class Utils {
 		editor.commit();
 	}
 
+	public static void putProjectTitle(Context context, String str) {
+		SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+		editor.putString("PROJECT_TITLE", str);
+		editor.commit();
+	}
+
 	public static String getProjectWorker(Context context) {
 		return getSharedPreferences(context).getString("PROJECT_WORKER", null);
+	}
+
+	public static String getProjectTitle(Context context) {
+		return getSharedPreferences(context).getString("PROJECT_TITLE", null);
 	}
 
 	public static void putActivityLeaders(Context context, String str) {
