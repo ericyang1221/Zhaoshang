@@ -82,7 +82,7 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 				String colon = getString(R.string.colon);
 				if (activityName == null || activityName.length() < 1) {
 					sb.append(getString(R.string.activity_name).replace(colon,
-							"  "));
+							" "+getString(R.string.can_not_be_empty)+" "));
 				}
 //				if (projectName == null || projectName.length() < 1) {
 //					sb.append(getString(R.string.project_name).replace(colon,
@@ -90,22 +90,22 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 //				}
 				if (projectStage == null || projectStage.length() < 1) {
 					sb.append(getString(R.string.project_stage).replace(colon,
-							"  "));
+							" "+getString(R.string.can_not_be_empty)+" "));
 				}
 				if (activityCase == null || activityCase.length() < 30) {
 					sb.append(getString(R.string.activity_case).replace(colon,
-							"  "));
+							" 应大于30字 "));
 				}
 				if (requestContent == null || requestContent.length() < 1) {
 					sb.append(getString(R.string.request_content).replace(
-							colon, "  "));
+							colon, " "+getString(R.string.can_not_be_empty)+" "));
 				}
 				if (leaders == null || leaders.length() < 1) {
 					sb.append(getString(R.string.choose_leaders).replace(colon,
 							"  "));
 				}
 				if (sb.length() > 0) {
-					sb.append(getString(R.string.can_not_be_empty));
+//					sb.append(getString(R.string.can_not_be_empty));
 					getBaseActivity().showToast(sb.toString());
 					return;
 				}

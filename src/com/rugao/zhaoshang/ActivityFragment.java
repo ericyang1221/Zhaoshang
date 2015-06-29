@@ -1,5 +1,7 @@
 package com.rugao.zhaoshang;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,8 +14,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.rugao.zhaoshang.beans.ActivityItem;
+import com.rugao.zhaoshang.beans.UserBean;
 import com.rugao.zhaoshang.calendar.CalendarView;
 import com.rugao.zhaoshang.calendar.CalendarView.OnCalendarDateClickListener;
+import com.rugao.zhaoshang.utils.Constants;
+import com.rugao.zhaoshang.utils.URLGenerater;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,6 +86,22 @@ public class ActivityFragment extends BaseFragment {
                         }
                     }
                 });
+        activityLayout.findViewById(R.id.tl).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserBean ub = getMyApplication().getUserBean();
+                String param;
+                if (ub.isAdmin()){
+                    param = "all";
+                }else{
+                    param = String.valueOf(ub.getUserId());
+                }
+                String url = URLGenerater.makeUrl(Constants.JIFEN_REDIRECT,param);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
 
         return activityLayout;
     }

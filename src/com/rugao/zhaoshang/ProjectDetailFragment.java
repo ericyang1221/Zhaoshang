@@ -174,95 +174,95 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						}
 						if (projectStage == null || projectStage.length() < 1) {
 							sb2.append(getString(R.string.project_stage)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectPlanningDate == null
 								|| projectPlanningDate.length() < 1) {
 							sb2.append(getString(R.string.project_planning_date)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectIndustryType == null
 								|| projectIndustryType.length() < 1) {
 							sb2.append(getString(R.string.project_industry_type)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectIndustryDetail == null
 								|| projectIndustryDetail.length() < 1) {
 							sb2.append(getString(
 									R.string.project_industry_detail).replace(
-									colon, "  "));
+									colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectPolicy == null || projectPolicy.length() < 1) {
 							sb2.append(getString(R.string.project_policy)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectEnviroment == null
 								|| projectEnviroment.length() < 1) {
 							sb2.append(getString(R.string.project_enviroment)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectCase == null || projectCase.length() > 100) {
 							sb2.append(getString(R.string.project_case)
-									.replace(colon, "  "));
+									.replace(colon, " 投资方成功案例应小于100字 "));
 						}
 						if (projectScale == null || projectScale.length() < 1) {
 							sb2.append(getString(R.string.project_scale)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectScaleUnit == null
 								|| projectScaleUnit.length() < 1) {
 							sb2.append(getString(R.string.project_scale_unit)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectLand == null || projectLand.length() < 1) {
 							sb2.append(getString(R.string.project_land)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectBuildTime == null
 								|| projectBuildTime.length() < 1) {
 							sb2.append(getString(R.string.project_build_time)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectTotalAmount == null
 								|| projectTotalAmount.length() < 1) {
 							sb2.append(getString(R.string.project_total_amount)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectTotalTax == null
 								|| projectTotalTax.length() < 1) {
 							sb2.append(getString(R.string.project_total_tax)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectPrjplan == null
 								|| projectPrjplan.length() < 30 || projectPrjplan.length() > 100) {
 							sb2.append(getString(R.string.project_prjplan)
-									.replace(colon, "  "));
+									.replace(colon, " 投资实施计划字数应为30-100字 "));
 						}
 						if (projectResponsibler == null
 								|| projectResponsibler.length() < 1) {
 							sb2.append(getString(
 									R.string.project_responsible_id).replace(
-									colon, "  "));
+									colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectCityLeader == null
 								|| projectCityLeader.length() < 1) {
 							sb2.append(getString(R.string.project_city_leader)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
 						if (projectTownLeader == null
 								|| projectTownLeader.length() < 1) {
 							sb2.append(getString(R.string.project_town_leader)
-									.replace(colon, "  "));
+									.replace(colon, " "+getString(R.string.can_not_be_empty)+" "));
 						}
-						if (projectReferrer == null
-								|| projectReferrer.length() < 1) {
-							sb2.append(getString(R.string.project_referrer)
-									.replace(colon, "  "));
-						}
-						if (sb2.length() > 0) {
-							sb2.append(getString(R.string.not_meet_requirement));
-						}
-						sb.append(sb2);
+//						if (projectReferrer == null
+//								|| projectReferrer.length() < 1) {
+//							sb2.append(getString(R.string.project_referrer)
+//									.replace(colon, "  "));
+//						}
+//						if (sb2.length() > 0) {
+//							sb2.append(getString(R.string.not_meet_requirement));
+//						}
+//						sb.append(sb2);
 						if (sb.length() > 0) {
 							getBaseActivity().showToast(sb.toString());
 							return;

@@ -32,6 +32,7 @@ public class Constants {
 	public static final String ACTIVITY_EDIT = "Activity/edit";
 	public static final String NOTICE_GET = "notice/get?userid=?&memo=?&pageIndex=0&pageSize=999999999";
 	public static final String NEW_NOTICE_GET = "notice/getnotice?userid=?&memo=?";
+	public static final String JIFEN_REDIRECT = "activity/score2?id=?";
 	
 	public static String DOMAIN = DOMAIN_RELEASE;
 }
