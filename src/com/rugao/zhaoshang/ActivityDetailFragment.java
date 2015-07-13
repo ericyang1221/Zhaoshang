@@ -88,18 +88,18 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 //					sb.append(getString(R.string.project_name).replace(colon,
 //							"  "));
 //				}
-				if (projectStage == null || projectStage.length() < 1) {
-					sb.append(getString(R.string.project_stage).replace(colon,
-							" "+getString(R.string.can_not_be_empty)+" "));
-				}
+//				if (projectStage == null || projectStage.length() < 1) {
+//					sb.append(getString(R.string.project_stage).replace(colon,
+//							" "+getString(R.string.can_not_be_empty)+" "));
+//				}
 				if (activityCase == null || activityCase.length() < 30) {
 					sb.append(getString(R.string.activity_case).replace(colon,
 							" 应大于30字 "));
 				}
-				if (requestContent == null || requestContent.length() < 1) {
-					sb.append(getString(R.string.request_content).replace(
-							colon, " "+getString(R.string.can_not_be_empty)+" "));
-				}
+//				if (requestContent == null || requestContent.length() < 1) {
+//					sb.append(getString(R.string.request_content).replace(
+//							colon, " "+getString(R.string.can_not_be_empty)+" "));
+//				}
 				if (leaders == null || leaders.length() < 1) {
 					sb.append(getString(R.string.choose_leaders).replace(colon,
 							"  "));

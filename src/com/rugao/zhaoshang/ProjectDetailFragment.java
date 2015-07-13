@@ -2,6 +2,8 @@ package com.rugao.zhaoshang;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -723,6 +725,12 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 						pi.setVisibility(View.GONE);
 					}else{
 						pi.setVisibility(View.VISIBLE);
+//						new android.os.Handler().post(new Runnable() {
+//							@Override
+//							public void run() {
+//								sv.fullScroll(ScrollView.FOCUS_DOWN);
+//							}
+//						});
 					}
 				}
 			}
