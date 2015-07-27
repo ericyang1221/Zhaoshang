@@ -100,10 +100,10 @@ public class ActivityDetailFragment extends BaseFragment implements DataView {
 //					sb.append(getString(R.string.request_content).replace(
 //							colon, " "+getString(R.string.can_not_be_empty)+" "));
 //				}
-				if (leaders == null || leaders.length() < 1) {
-					sb.append(getString(R.string.choose_leaders).replace(colon,
-							"  "));
-				}
+//				if (leaders == null || leaders.length() < 1) {
+//					sb.append(getString(R.string.choose_leaders).replace(colon,
+//							"  "));
+//				}
 				if (sb.length() > 0) {
 //					sb.append(getString(R.string.can_not_be_empty));
 					getBaseActivity().showToast(sb.toString());

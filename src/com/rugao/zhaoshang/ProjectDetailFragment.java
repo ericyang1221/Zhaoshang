@@ -264,7 +264,7 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 //						if (sb2.length() > 0) {
 //							sb2.append(getString(R.string.not_meet_requirement));
 //						}
-//						sb.append(sb2);
+						sb.append(sb2);
 						if (sb.length() > 0) {
 							getBaseActivity().showToast(sb.toString());
 							return;
@@ -363,9 +363,16 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 		pw.setText(project.getWorkersDisplay());
 		String piTxt = project.getInvestorsDisplay();
 		piText.setText(piTxt);
-		if(piTxt == null||piTxt.length()<1){
-			isCompany.setChecked(true);
+		isCompany.setTag(false);
+		isCompany.setChecked(getMyApplication().isCompany());
+		if(pi != null){
+			if(getMyApplication().isCompany()){
+				pi.setVisibility(View.VISIBLE);
+			}else{
+				pi.setVisibility(View.GONE);
+			}
 		}
+		isCompany.setTag(true);
 		pcsText.setText(project.getContactsDisplay());
 	}
 
@@ -720,17 +727,20 @@ public class ProjectDetailFragment extends BaseFragment implements DataView {
 		isCompany.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if(pi != null){
-					if(!isChecked){
+				getMyApplication().setIsCompany(isChecked);
+				if (pi != null) {
+					if (!isChecked) {
 						pi.setVisibility(View.GONE);
-					}else{
+					} else {
 						pi.setVisibility(View.VISIBLE);
-//						new android.os.Handler().post(new Runnable() {
-//							@Override
-//							public void run() {
-//								sv.fullScroll(ScrollView.FOCUS_DOWN);
-//							}
-//						});
+						if ((Boolean) buttonView.getTag()) {
+							new android.os.Handler().post(new Runnable() {
+								@Override
+								public void run() {
+									sv.fullScroll(ScrollView.FOCUS_DOWN);
+								}
+							});
+						}
 					}
 				}
 			}

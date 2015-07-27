@@ -32,6 +32,7 @@ public class MyApplication extends Application {
     private List<ValueBean> activityProject;
     private List<ValueBean> projectWorker;
     private List<ValueBean> projectTitle;
+    private boolean isCompany;
 
     @Override
     public void onCreate() {
@@ -181,6 +182,14 @@ public class MyApplication extends Application {
 
     public List<ValueBean> getProjectTitle() {
         return projectTitle;
+    }
+
+    public boolean isCompany() {
+        return isCompany;
+    }
+
+    public void setIsCompany(boolean isCompany) {
+        this.isCompany = isCompany;
     }
 
     private void initData() {
